@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 04:34:49 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/09 04:39:56 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/29 16:43:44 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:30:13 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,11 @@
 void	ft_putendl_fd(char *s, int fd)
 {
 	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
+	ft_putchar_fd('\n', fd);
 }
+
+/*int	main(int c, char **v)
+{
+	if (c == 2)
+		ft_putendl_fd(v[1], 1);
+}*/

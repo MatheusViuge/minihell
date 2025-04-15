@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 19:50:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/11 18:44:12 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/25 15:23:41 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:28:04 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,30 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	index;
-	char	*substr;
-	size_t	s_len;
+	char	*str;
+	size_t	size;
 
-	index = 0;
-	s_len = ft_strlen(s);
-	if (start > s_len)
-		return (ft_strdup(""));
-	if (start + len > s_len)
-		len = s_len - start;
-	substr = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!substr)
+	size = ft_strlen(s);
+	if (len > size - start)
+		len = size - start;
+	len++;
+	if (start >= size)
+		len = 1;
+	str = (char *)ft_calloc(sizeof(char), len);
+	if (!str)
 		return (NULL);
-	while (index < len)
-	{
-		substr[index] = s[start + index];
-		index++;
-	}
-	return (substr);
+	if (start < size)
+		ft_strlcpy(str, &s[start], len);
+	return (str);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	if (c > 3)
+		printf("str:%s \nstart: %d \t len: %d\nres: %s\n\n", v[1], 
+		ft_atoi(v[2]), ft_atoi(v[3]), 
+		ft_substr(v[1], ft_atoi(v[2]), ft_atoi(v[3])));
+	return (0);
+}*/

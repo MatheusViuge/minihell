@@ -3,36 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 15:13:41 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/11 19:01:32 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/29 22:10:01 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:30:54 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, void const *src, size_t n)
 {
-	size_t	index;
+	unsigned char	*d;
+	unsigned char	*s;
 
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	if (!dest && !src)
+		return (NULL);
 	if (dest <= src)
-	{
-		index = 0;
-		while (index < n)
-		{
-			((char *)dest)[index] = ((unsigned char *)src)[index];
-			index++;
-		}
-	}
+		ft_memcpy(dest, src, n);
 	else
 	{
-		index = n;
-		while (index > 0)
+		while (n > 0)
 		{
-			((char *)dest)[index - 1] = ((unsigned char *)src)[index - 1];
-			index--;
+			d[n - 1] = s[n - 1];
+			n--;
 		}
 	}
 	return (dest);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	if (c == 2)
+	{
+		void	*d;
+		void	*s;
+		int	len;
+
+		len = ft_strlen(v[1]) + 1;
+		d = malloc(sizeof(char) + len);
+		s = malloc(sizeof(char) + len);
+		ft_strlcpy(s, v[1], len);
+		ft_memmove(d, (const void *)s, len);
+		printf("src:  %s\ndest: %s\n", (char *)s, (char *)d);
+	}
+	return (0);
+}*/

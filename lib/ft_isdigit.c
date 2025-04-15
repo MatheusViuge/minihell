@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 21:09:46 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/14 18:39:44 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/23 18:40:28 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:30:34 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
-	return ((c >= '0' && c <= '9'));
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	int	i;
+
+	if (c > 1)
+	{
+		while (v[1][i])
+			printf("%c => %d\n", v[1][i++], ft_isdigit(v[1][i++]));
+	}
+	return (0);
+}*/

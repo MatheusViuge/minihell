@@ -3,27 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 16:00:02 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/11 22:16:02 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/28 20:21:55 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:28:47 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(char const *s, int c)
 {
-	int	index;
+	int	i;
 
-	if (!ft_isascii(c))
-		return ((char *)s);
-	index = ft_strlen(s);
-	while (index >= 0)
+	i = (int)ft_strlen(s);
+	while (i >= 0)
 	{
-		if (s[index] == c)
-			return ((char *)&s[index]);
-		index--;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i--;
 	}
-	return (0);
+	return (NULL);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	if (c > 2)
+		printf("%s => %s\n%s\n\n", v[2][0], v[1], ft_strrchr(v[1], v[2][0]));
+	return (0);
+}*/

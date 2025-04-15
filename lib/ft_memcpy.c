@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 14:47:58 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/09/30 15:03:11 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/29 21:16:19 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:30:49 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,32 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t	index;
-	char	*temp_dest;
-	char	*temp_src;
+	size_t	i;
 
-	index = 0;
-	temp_dest = dest;
-	temp_src = (char *)src;
-	while (index < n)
+	if (!dest && !src)
+		return (NULL);
+	i = 0;
+	while (i < n)
 	{
-		temp_dest[index] = temp_src[index];
-		index++;
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
 	}
 	return (dest);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	void	*d;
+	const void	*s;
+
+	if (c == 3)
+	{
+		s = malloc(sizeof(char) * (ft_strlen(v[1]) + 1));
+		ft_strlcpy((char *)s, v[1], ft_strlen(v[1]) + 1);
+		printf("src: %s\n", s);
+		printf("dest: %s\n", (char *)ft_memcpy(d, s, ft_atoi(v[2])));
+	}
+	return (0);
+}*/

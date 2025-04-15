@@ -3,60 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 17:15:03 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/11 18:08:25 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/10/02 15:49:01 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:30:45 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	int_len(long n)
-{
-	size_t	i;
-
-	i = 0;
-	if (n < 0)
-		n *= -1;
-	while (n >= 10)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i + 1);
-}
-
-static void	ft_putnbr(char *str, size_t index, long num, size_t size)
-{
-	if (num > 9)
-		ft_putnbr(str, index + 1, num / 10, size);
-	str[size - index] = (num % 10) + '0';
-}
+static int	calc_len_int(int n);
 
 char	*ft_itoa(int n)
 {
-	size_t	len;
-	long	i;
-	long	num;
-	char	*result;
+	int		len;
+	int		i;
+	long	nb;
+	char	*str;
 
-	len = int_len(n);
-	num = n;
-	if (num >= 0)
-	{
-		result = (char *)ft_calloc(len + 1, sizeof(char));
-		i = 1;
-	}
-	else
-	{
-		result = (char *)ft_calloc(len + 2, sizeof(char));
-		num *= -1;
-		i = 0;
-		result[0] = '-';
-	}
-	if (!result)
+	len = calc_len_int(n);
+	str = (char *)ft_calloc(sizeof(char), len + 1);
+	if (!str)
 		return (NULL);
-	ft_putnbr(result, i, num, len);
-	return (result);
+	nb = (long)n;
+	if (nb < 0)
+	{
+		str[0] = '-';
+		nb *= -1;
+	}
+	if (nb == 0)
+		str[0] = '0';
+	i = len - 1;
+	while (nb > 0)
+	{
+		str[i] = (nb % 10) + '0';
+		nb /= 10;
+		i--;
+	}
+	return (str);
 }
+
+static int	calc_len_int(int n)
+{
+	int		c;
+	long	nb;
+
+	nb = (long)n;
+	c = 0;
+	if (nb < 0)
+	{
+		c++;
+		nb *= -1;
+	}
+	if (nb == 0)
+		c++;
+	while (nb > 0)
+	{
+		nb /= 10;
+		c++;
+	}
+	return (c);
+}
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	if (c == 2) 
+		printf("%s\n", ft_itoa(ft_atoi(v[1])));
+	printf("%s\n", ft_itoa(-2147483648));
+	printf("%s\n", ft_itoa(2147483647));
+	return (0);
+}*/

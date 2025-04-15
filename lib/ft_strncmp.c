@@ -3,33 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 18:23:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/14 21:34:17 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/25 14:57:44 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:28:56 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(char const *s1, char const *s2, size_t n)
 {
 	size_t			i;
 	unsigned char	*str1;
 	unsigned char	*str2;
 
-	i = 0;
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
-	while ((str1[i] != '\0' || str2[i] != '\0') && (i < n))
+	i = 0;
+	while (i < n && (str1[i] || str2[i]))
 	{
-		if (str1[i] < str2[i])
-			return (-1);
-		else if (str1[i] > str2[i])
-			return (1);
-		else if (*str1 == '\0' && *str2 == '\0')
-			return (0);
+		if ((str1[i] - str2[i]) != 0)
+			return (str1[i] - str2[i]);
 		i++;
 	}
 	return (0);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+
+{
+	if (c > 3)
+		printf("%s \n%s \n%d\n\n", v[1], v[2], 
+		ft_strncmp(v[1], v[2], ft_atoi(v[3])));
+	return (0);
+}*/

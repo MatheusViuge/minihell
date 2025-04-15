@@ -3,50 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 17:10:14 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/14 21:19:48 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/25 18:47:55 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:28:41 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	to_find(const char *set, char c)
+static int	start_index(char const *s1, char const *set);
+static int	end_index(char const *s1, char const *set);
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int		start;
+	int		end;
+	int		size;
+	char	*str;
+
+	start = start_index(s1, set);
+	end = end_index(s1, set);
+	size = end - start + 2;
+	str = ft_substr(s1, start, size);
+	return (str);
+}
+
+static int	start_index(char const *s1, char const *set)
 {
 	int	i;
 
 	i = 0;
-	while (set[i])
-	{
-		if (c == set[i])
-			return (1);
+	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
+	return (i);
+}
+
+static int	end_index(char const *s1, char const *set)
+{
+	int	i;
+
+	i = (int)ft_strlen(s1) - 1;
+	while (s1[i] && ft_strchr(set, s1[i]))
+		i--;
+	return (i - 1);
+}
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	const char	*str;
+	const char	*set;
+
+	if (c == 3)
+	{
+		str = v[1];
+		set = v[2];
+		printf("str: %s \nset: %s \nres: %s\n", str, set, ft_strtrim(str, set));
 	}
 	return (0);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	char	*str;
-	size_t	start;
-	size_t	end;
-	size_t	len;
-	size_t	s1_len;
-
-	start = 0;
-	s1_len = ft_strlen(s1);
-	end = s1_len - 1;
-	while (to_find(set, s1[start]))
-		start++;
-	while (to_find(set, s1[end]))
-		end--;
-	len = end - (start) + 1;
-	if (len <= 0 || start >= s1_len || s1_len == 0)
-		return (ft_strdup(""));
-	str = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!str)
-		return (NULL);
-	ft_memmove(str, s1 + start, len);
-	return (str);
-}
+}*/

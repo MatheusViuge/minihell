@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 01:55:55 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/09 04:14:10 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/29 18:52:04 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:29:00 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,40 @@
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	unsigned int	i;
-	size_t			len;
-	char			*result;
+	int				len;
+	char			*str;
 
-	i = 0;
-	len = ft_strlen(s);
-	result = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!result)
+	if (!s)
 		return (NULL);
-	while (i < len)
+	len = (int)ft_strlen(s) + 1;
+	str = (char *)ft_calloc(sizeof(char), len);
+	i = 0;
+	while (s[i])
 	{
-		result[i] = f(i, s[i]);
+		str[i] = f(i, s[i]);
 		i++;
 	}
-	result[i] = '\0';
-	return (result);
+	str[i] = '\0';
+	return (str);
 }
+
+/*char	f(unsigned int i, char c)
+{
+	if (i >= 0)
+		return (ft_toupper(c));
+	return (c);
+}
+
+int	main(int c, char **v)
+{
+	char	result;
+
+	if (c == 2)
+	{
+		result = ft_strmapi(v[1], &f);
+		ft_putstr_fd(v[1], 1);
+		ft_putchar_fd('\t', 1);
+		ft_putendl_fd(result);
+	}
+	return (0);
+}*/

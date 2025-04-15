@@ -3,42 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 20:06:02 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/02 19:24:04 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/10/02 14:58:07 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:26:45 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(int c)
-{
-	return ((c >= 9 && c <= 13) || c == 32);
-}
-
 int	ft_atoi(const char *nptr)
 {
-	long	num;
-	int		neg;
-	int		index;
+	int	i;
+	int	nb;
+	int	neg;
 
-	num = 0;
 	neg = 1;
-	index = 0;
-	while (ft_isspace(nptr[index]))
-		index++;
-	if (nptr[index] == '-')
+	nb = 0;
+	i = 0;
+	while (ft_isspace(nptr[i]))
+		i++;
+	if (nptr[i] == '-')
 	{
-		neg *= -1;
-		index++;
+		neg = -1;
+		i++;
 	}
-	else if (nptr[index] == '+')
-		index++;
-	while (ft_isdigit(nptr[index]))
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] && ft_isdigit(nptr[i]))
 	{
-		num = num * 10 + (nptr[index] - '0');
-		index++;
+		nb = (nb * 10) + (nptr[i] - '0');
+		i++;
 	}
-	return (num * neg);
+	return (nb * neg);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	if (c == 2)
+		printf("%s \n%d\n\n", v[1], ft_atoi(v[1]));
+	return (0);
+}*/

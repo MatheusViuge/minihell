@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 14:13:22 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/11 22:43:36 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/10/02 19:19:06 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:27:51 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,39 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*any;
+	void	*ptr;
 
-	if (nmemb <= 0 || size == 0)
-	{
-		nmemb = 1;
-		size = 1;
-	}
-	if ((nmemb * size) / size != nmemb)
+	if (nmemb > 0 && ((nmemb * size) / nmemb) != size)
 		return (NULL);
-	any = malloc(nmemb * size);
-	if (!any)
+	ptr = malloc(nmemb * size);
+	if (!ptr)
 		return (NULL);
-	ft_bzero(any, nmemb * size);
-	return (any);
+	ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	int		i;
+	size_t	nmemb, size, len;
+	void	*p;
+
+	if (c > 2)
+	{
+		nmemb = ft_atoi(v[1]);
+		size = ft_atoi(v[2]);
+		p = calloc(ft_atoi(v[1]), ft_atoi(v[2]));
+
+		// TESTE
+		if (nmemb > 0 && ((nmemb * size) / nmemb) != size)
+			len = 0;
+		else
+			len = nmemb * size;
+		i = 0;
+		while (i < len)
+			printf("%d, ", p[i++]);
+	}
+	return (0);
+}*/

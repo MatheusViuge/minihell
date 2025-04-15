@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 19:56:41 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/11 22:13:01 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/28 16:29:08 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:29:57 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char const *s, int c)
 {
-	size_t	index;
+	int	i;
+	int	len;
 
-	index = 0;
-	if (!ft_isascii(c))
-		return ((char *)s);
-	if (c == 0 || c == '\0')
-		return ((char *)s + ft_strlen(s));
-	while (s[index])
+	if (!s || !*s)
+		return (NULL);
+	len = (int)ft_strlen(s);
+	i = 0;
+	while (i <= len)
 	{
-		if (s[index] == c)
-			return ((char *)&s[index]);
-		index++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

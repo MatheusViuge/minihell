@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 04:40:10 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/10/11 21:39:48 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/29 17:02:23 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:29:43 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,28 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	print;
 	long	nb;
+	char	c;
 
-	nb = n;
+	nb = (long)n;
 	if (nb < 0)
 	{
 		ft_putchar_fd('-', fd);
-		nb = -nb;
+		nb *= -1;
 	}
-	if (nb > 9)
+	if (nb >= 10)
 	{
-		ft_putnbr_fd(nb / 10, fd);
-		nb = nb % 10;
+		ft_putnbr_fd((nb / 10), fd);
+		ft_putnbr_fd((nb % 10), fd);
+		return ;
 	}
-	print = nb + 48;
-	ft_putchar_fd(print, fd);
+	c = nb + '0';
+	ft_putchar_fd(c, fd);
 }
+
+/*int	main(int c, char **v)
+{
+	if (c == 2)
+		ft_putnbr_fd(ft_atoi(v[1]), 1);
+	return (0);
+}*/

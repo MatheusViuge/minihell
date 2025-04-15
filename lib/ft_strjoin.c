@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 16:06:07 by mviana-v          #+#    #+#             */
-/*   Updated: 2024/09/24 16:59:28 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/25 16:40:05 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:29:19 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,32 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		index_dest;
-	int		index;
-	int		counter;
-	char	*dest;
+	int		size_s1;
+	int		size_s2;
+	char	*str;
 
-	index_dest = 0;
-	index = 0;
-	counter = ft_strlen(s1) + ft_strlen(s2);
-	dest = malloc(sizeof(char) * (counter + 1));
-	if (!dest)
+	size_s1 = (int)ft_strlen(s1);
+	size_s2 = (int)ft_strlen(s2);
+	str = (char *)ft_calloc(sizeof (char), (size_s1 + size_s2 + 1));
+	if (!str)
 		return (NULL);
-	while (s1[index] != '\0')
-	{
-		dest[index_dest] = s1[index];
-		index++;
-		index_dest++;
-	}
-	index = 0;
-	while (s2[index] != '\0')
-	{
-		dest[index_dest + index] = s2[index];
-		index++;
-	}
-	dest[index_dest + index] = '\0';
-	return (dest);
+	ft_strlcpy(str, s1, size_s1 + 1);
+	ft_strlcat(str, s2, size_s1 + size_s2 + 1);
+	return (str);
 }
+
+/*#include <stdio.h>
+
+int	main(int c, char **v)
+{
+	const char	*s1;
+	const char	*s2;
+
+	if (c == 3)
+	{
+		s1 = v[1];
+		s2 = v[2];
+		printf("s1: %s\ns2: %s\nres: %s\n", s1, s2, ft_strjoin(s1, s2));
+	}
+	return (0);
+}*/
