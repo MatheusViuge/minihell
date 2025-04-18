@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini.h                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 12:46:53 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/16 21:35:28 by mviana-v         ###   ########.fr       */
+/*   Created: 2025/04/15 15:25:04 by mviana-v          #+#    #+#             */
+/*   Updated: 2025/04/17 22:45:12 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_H
-# define MINI_H
-/* # include "./libft/libft.h" */
+#include "mini.h"
+#include <stdio.h>
 
-// Structs and typedefs
-typedef struct s_env
+int	main(int ac, char **av, char **env)
 {
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-	struct s_env	*prev;
-}	t_env;
-
-// Function prototypes
-t_env	*create_env(char **env);
-
-#endif
+	t_env	*env_list;
+	(void)ac;
+	(void)av;
+	
+	create_env_list(env, &env_list);
+}
