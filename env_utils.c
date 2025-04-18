@@ -6,25 +6,25 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/17 22:45:25 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:33:18 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	add_env_node(t_env *new_node, t_env *head)
+static void	add_env_node(t_env *new_node, t_env **head)
 {
 	t_env	*current;
 	t_env	*last;
 
 	if (!new_node)
 		return ;
-	if (!head)
+	if (!*head)
 	{
-		head = new_node;
+		*head = new_node;
 		return ;
 	}
-	current = head;
+	current = *head;
 	if (current->next == NULL)
 	{
 		current->next = new_node;
@@ -40,6 +40,63 @@ static void	add_env_node(t_env *new_node, t_env *head)
 	last->next = new_node;
 }
 
+static t_env	*new_node(char *str)
+{
+	t_env	*new;
+	int		i;
+
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	new->key = ft_substr(str, 0, i);
+	if (!new->key)
+	{
+		free(new);
+		return (NULL);
+	}
+	if (str[i])
+		new->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
+	else
+		new->value = NULL;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
+
+void	print_env(t_env *head)
+{
+	if (head)
+	{
+		t_env	*current = head;
+		while (current->next != head)
+		{
+			printf("%s=%s\n", current->key, current->value);
+			current = current->next;
+		}
+			printf("%s=%s\n", current->key, current->value);
+	}
+}
+
+void	free_env(t_env *head)
+{
+	t_env	*current;
+
+	current = head;
+	while (current)
+	{
+		free(current->key);
+		free(current->value);
+		if (current->next == head)
+			break ;
+		current = current->next;
+		free(current->prev);
+	}
+	free(current);
+}
+
 void	create_env(char **env, t_env **head)
 {
 	int		i;
@@ -50,5 +107,4 @@ void	create_env(char **env, t_env **head)
 		add_env_node(new_node(env[i]), head);
 		i++;
 	}
-	return (head);
 }

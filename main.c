@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:25:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/17 23:02:01 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:27:18 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	
 	env_list = NULL;
-	create_env_list(env, &env_list);
+	create_env(env, &env_list);
+	print_env(env_list);
+	free_env(env_list);
 }
