@@ -6,13 +6,13 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:46:53 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/17 23:28:00 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:04:20 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_H
 # define MINI_H
-# include "./libft/libft.h"
+# include "./lib/libft.h"
 # include <stdio.h>
 
 // Structs and typedefs
