@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/18 00:32:34 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/10/09 04:28:12 by mviana-v          #+#    #+#             */
+/*   Updated: 2024/10/09 04:30:28 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+void	ft_putchar_fd(char c, int fd)
 {
-	t_env	*env_list;
-	(void)ac;
-	(void)av;
-	
-	env_list = NULL;
-	create_env(env, &env_list);
-	print_env(env_list);
-	free_env(env_list);
+	write(fd, &c, 1);
 }

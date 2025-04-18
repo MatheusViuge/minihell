@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/18 00:32:34 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/27 21:57:55 by mviana-v          #+#    #+#             */
+/*   Updated: 2024/10/14 18:41:39 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_isalnum(int c)
 {
-	t_env	*env_list;
-	(void)ac;
-	(void)av;
-	
-	env_list = NULL;
-	create_env(env, &env_list);
-	print_env(env_list);
-	free_env(env_list);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

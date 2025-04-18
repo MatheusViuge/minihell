@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/18 00:32:34 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/27 22:28:43 by mviana-v          #+#    #+#             */
+/*   Updated: 2024/10/18 17:02:10 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini.h"
-#include <stdio.h>
-
-int	main(int ac, char **av, char **env)
+int	ft_tolower(int c)
 {
-	t_env	*env_list;
-	(void)ac;
-	(void)av;
-	
-	env_list = NULL;
-	create_env(env, &env_list);
-	print_env(env_list);
-	free_env(env_list);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }
