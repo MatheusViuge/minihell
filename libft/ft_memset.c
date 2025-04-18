@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 15:25:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/17 23:02:01 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/30 13:02:05 by mviana-v          #+#    #+#             */
+/*   Updated: 2024/09/30 13:34:46 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	t_env	*env_list;
-	(void)ac;
-	(void)av;
-	
-	env_list = NULL;
-	create_env_list(env, &env_list);
+	size_t	i;
+	char	*mem;
+
+	i = 0;
+	mem = s;
+	while (i < n)
+	{
+		mem[i] = c;
+		i++;
+	}
+	return (s);
 }

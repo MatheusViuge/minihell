@@ -6,13 +6,13 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:46:53 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/16 21:35:28 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:07:03 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_H
 # define MINI_H
-/* # include "./libft/libft.h" */
+# include "./libft/libft.h"
 
 // Structs and typedefs
 typedef struct s_env
@@ -24,6 +24,6 @@ typedef struct s_env
 }	t_env;
 
 // Function prototypes
-t_env	*create_env(char **env);
+void	create_env(char **env, t_env **head);
 
 #endif
