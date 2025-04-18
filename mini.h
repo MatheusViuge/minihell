@@ -6,15 +6,26 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:46:53 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/18 00:34:59 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/04/18 01:26:13 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_H
 # define MINI_H
-# include "./lib/libft.h"
+# include <readline/readline.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <stdio.h>
-
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/resource.h>
+# include <signal.h>
+# include <sys/stat.h>
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <dirent.h>
+# include "./lib/libft.h"
+# include "types.h"
 // Structs and typedefs
 typedef struct s_env
 {

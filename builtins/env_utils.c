@@ -6,11 +6,12 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/18 00:33:56 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/04/18 01:28:28 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini.h"
+#include "../mini.h"
+#include "../lib/libft.h"
 
 static void	add_env_node(t_env *new_node, t_env **head)
 {

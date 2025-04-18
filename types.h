@@ -1,27 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/18 01:19:10 by mviana-v         ###   ########.fr       */
+/*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 01:20:36 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini.h"
-#include <stdio.h>
+#ifndef TYPES_H
+# define TYPES_H
 
-int	main(int ac, char **av, char **env)
-{
-	t_env	*env_list;
-	(void)ac;
-	(void)av;
-	
-	env_list = NULL;
-	create_env(env, &env_list);
-	print_env(env_list);
-	readline("prompt> ");
-	free_env(env_list);
-}
+
+#endif
