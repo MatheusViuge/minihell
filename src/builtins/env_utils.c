@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mini.h"
-#include "../lib/libft.h"
+#include "../../include/minishell.h"
 
 static void	add_env_node(t_env *new_node, t_env **head)
 {
@@ -49,9 +48,7 @@ static t_env	*new_node(char *str)
 	new = malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != '=')
-		i++;
+	i = ft_strchr_nbr(str, '=');
 	new->key = ft_substr(str, 0, i);
 	if (!new->key)
 	{

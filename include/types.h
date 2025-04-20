@@ -13,5 +13,12 @@
 #ifndef TYPES_H
 # define TYPES_H
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
 
 #endif

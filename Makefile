@@ -1,8 +1,10 @@
 NAME = minishell
 
-SRC = main.c
-
 LIBFT = libft.a
+
+DIR_BUILTINS = src/builtins
+
+SRC = main.c $(DIR_BUILTINS)/env_utils.c
 
 OBJ_DIR = obj
 
@@ -13,13 +15,12 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C lib
 	cp lib/$(LIBFT) .
-	cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) 
+	cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
-	@ mkdir -p $(OBJ_DIR)/src
-	@ mkdir -p $(OBJ_DIR)/src/utils
-	cc -Wall -Wextra -Werror -c $< -o $@
+	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
+	cc -Wall -Wextra -Werror -g -c $< -o $@ -lreadline
 
 clean:
 	rm -rf $(OBJ_DIR)
