@@ -66,16 +66,17 @@ static t_env	*new_node(char *str)
 
 void	print_env(t_env *head)
 {
-	if (head)
+	t_env	*current;
+
+	current = head;
+	if (!head)
+		return ;
+	while (current->next != head)
 	{
-		t_env	*current = head;
-		while (current->next != head)
-		{
-			printf("%s=%s\n", current->key, current->value);
-			current = current->next;
-		}
-			printf("%s=%s\n", current->key, current->value);
+		printf("%s=%s\n", current->key, current->value);
+		current = current->next;
 	}
+	printf("%s=%s\n", current->key, current->value);
 }
 
 void	free_env(t_env *head)
