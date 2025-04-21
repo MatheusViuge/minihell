@@ -15,9 +15,9 @@
 int	main(int ac, char **av, char **env)
 {
 	t_env	*env_list;
+
 	(void)ac;
 	(void)av;
-	
 	env_list = NULL;
 	create_env(env, &env_list);
 	print_env(env_list);
