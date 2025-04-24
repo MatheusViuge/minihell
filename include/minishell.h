@@ -34,4 +34,7 @@ void	create_env(char **env, t_env **head);
 void	print_env(t_env *head);
 void	free_env(t_env *head);
 
+/*  token functions  */
+void	token(char *prompt);
+
 #endif

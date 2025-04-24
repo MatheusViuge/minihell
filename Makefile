@@ -4,7 +4,9 @@ LIBFT = libft.a
 
 DIR_BUILTINS = src/builtins
 
-SRC = main.c $(DIR_BUILTINS)/env_utils.c
+DIR_TOKEN = src/token
+
+SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c
 
 OBJ_DIR = obj
 
@@ -20,6 +22,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
+	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
 	cc -Wall -Wextra -Werror -g -c $< -o $@ -lreadline
 
 clean:
@@ -32,7 +35,8 @@ fclean:
 
 re: fclean all
 
-run: all clean
+run: all
+	rm -rf $(OBJ_DIR)
 	clear
 
 .PHONY: all clean fclean re run

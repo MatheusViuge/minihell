@@ -15,12 +15,20 @@
 int	main(int ac, char **av, char **env)
 {
 	t_env	*env_list;
+	char	*prompt;
 
 	(void)ac;
 	(void)av;
 	env_list = NULL;
 	create_env(env, &env_list);
-	print_env(env_list);
-	readline("prompt> ");
+	while (1)
+	{
+		prompt = readline("prompt> ");
+		if (!prompt)
+			continue ;
+		add_history(prompt);
+		token(prompt);
+		free(prompt);
+	}
 	free_env(env_list);
 }
