@@ -12,13 +12,23 @@
 
 #include "../../include/minishell.h"
 
+void	*print_error(void)
+{
+	printf("ERROR\n");
+	return (NULL);
+}
+
+void	print_erro(void)
+{
+	printf("ERROR\n");
+}
+
 void	token(char *prompt, t_token **tokens)
 {
 	int		i;
 	size_t	len;
 	char	*curr;
 	char	*end;
-	char	*str;
 	t_token	*token;
 
 	i = 0;
@@ -27,45 +37,49 @@ void	token(char *prompt, t_token **tokens)
 		curr = prompt + i;
 		end = end_token(curr);
 		if (!end)
-		{
-			free_tokens(tokens);
-			return ;
-		}
-		len = (unsigned long)end - (unsigned long)curr + 1;
+			return (print_erro());
+		token = create_token(prompt, curr, end, &len);
 		if (!len)
 		{
 			i++;
 			continue ;
 		}
-		str = ft_substr(prompt, curr - prompt, len);
-		if (!str)
-		{
-			printf("ERROR\n");
-			free_tokens(tokens);
-			return ;
-		}
-		token = new_token(str);
+		if (!token)
+			return (print_erro());
 		add_token(tokens, token);
 		i += len;
 	}
 }
 
+t_token	*create_token(char *prompt, char *start, char *end, size_t *size)
+{
+	char	*str;
+	t_token	*token;
+
+	*size = end - start + 1;
+	if (!*size)
+		return (NULL);
+	str = ft_substr(prompt, start - prompt, *size);
+	if (!str)
+		return (NULL);
+	token = new_token(str);
+	if (!token)
+		*size = -1;
+	return (token);
+}
+
 char	*end_token(char *str)
 {
-	int		i;
-	char	*end;
+	int			i;
+	int			res;
+	char		*end;
 	const char	*meta_char = "|<>\'\"";
 
-	if (str[0] == '\'' || str[0] == '\"')
-	{
-		end = ft_strchr(str+1, (int)str[0]);
-		if (!end)
-		{
-			ft_printf("ERROR\n");
-			return (NULL);
-		}
+	res = token_quote(str, &end);
+	if (res == -1)
+		return (NULL);
+	else if (res == 1)
 		return (end);
-	}
 	i = -1;
 	while (str[++i])
 	{
@@ -75,11 +89,30 @@ char	*end_token(char *str)
 		if (ft_isspace(*end) || i > 0)
 			end--;
 		else
-		{
-			while (end && ft_strchr(meta_char, *end))
-				end++;
-		}
+			end = token_meta_char(meta_char, &end);
 		break ;
 	}
 	return (end);
+}
+
+int	token_quote(char *str, char **end)
+{
+	char	*c;
+
+	if (str[0] == '\'' || str[0] == '\"')
+	{
+		c = ft_strchr(str + 1, (int)str[0]);
+		if (!c)
+			return (-1);
+		*end = c;
+		return (1);
+	}
+	return (0);
+}
+
+char	*token_meta_char(const char *meta_char, char **end)
+{
+	while (*end && ft_strchr(meta_char, **end))
+		*end = *end + 1;
+	return (*end);
 }
