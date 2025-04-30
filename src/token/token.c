@@ -76,7 +76,7 @@ char	*end_token(char *str)
 			end--;
 		else
 		{
-			while (ft_strchr(meta_char, *end))
+			while (end && ft_strchr(meta_char, *end))
 				end++;
 		}
 		break ;
