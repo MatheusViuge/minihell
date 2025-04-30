@@ -32,8 +32,11 @@ int	main(int ac, char **av, char **env)
 		token(prompt, &tokens);
 		free(prompt);
 		print_tokens(tokens);
+		if (size_tokens(tokens) == 1 && !ft_strncmp(tokens->value, "exit", 5))
+			break ;
 		free_tokens(&tokens);
 	}
+	free_tokens(&tokens);
 	free_env(env_list);
 	clear_history();
 	return (0);
