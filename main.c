@@ -16,10 +16,12 @@ int	main(int ac, char **av, char **env)
 {
 	t_env	*env_list;
 	char	*prompt;
+	t_token	*tokens;
 
 	(void)ac;
 	(void)av;
 	env_list = NULL;
+	tokens = NULL;
 	create_env(env, &env_list);
 	while (1)
 	{
@@ -27,8 +29,12 @@ int	main(int ac, char **av, char **env)
 		if (!prompt)
 			continue ;
 		add_history(prompt);
-		token(prompt);
+		token(prompt, &tokens);
 		free(prompt);
+		print_tokens(tokens);
+		free_tokens(&tokens);
 	}
 	free_env(env_list);
+	clear_history();
+	return (0);
 }

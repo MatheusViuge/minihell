@@ -24,15 +24,17 @@ typedef struct s_env
 typedef enum e_type_token
 {
 	word,
-	pipe,
-	red_out,
+	pipes,
 	red_in,
+	red_out,
 }	t_type_token;
 
 typedef struct s_token
 {
-	char		*value;
-	t_type_token	s;
+	char			*value;
+	t_type_token	type;
+	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 #endif

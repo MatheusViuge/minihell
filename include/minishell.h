@@ -35,6 +35,16 @@ void	print_env(t_env *head);
 void	free_env(t_env *head);
 
 /*  token functions  */
-void	token(char *prompt);
+void			token(char *prompt, t_token **tokens);
+char			*end_token(char *str);
+t_type_token	type_token(char *token);
+t_token			*new_token(char *str);
+int				size_tokens(t_token *tokens);
+t_token			*last_token(t_token *tokens);
+void			add_token(t_token **tokens, t_token *new);
+
+/*  para apagar      */
+void	print_tokens(t_token *tokens);
+void	free_tokens(t_token **tokens);
 
 #endif
