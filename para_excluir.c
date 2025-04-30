@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   para_excluir.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 15:56:25 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/30 15:56:28 by jesda-si         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "include/minishell.h"
 
@@ -19,7 +30,8 @@ void	free_tokens(t_token **tokens)
 
 void	print_tokens(t_token *tokens)
 {
-	const char	*types[4] = {"word", "pipe", "redirect input", "redirect output"};
+	const char	*types[4] = {"word", "pipe", "redirect input",
+		"redirect output"};
 
 	if (!tokens)
 		return ;
