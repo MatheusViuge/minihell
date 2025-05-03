@@ -112,7 +112,9 @@ int	token_quote(char *str, char **end)
 
 char	*token_meta_char(const char *meta_char, char **end)
 {
-	while (*end && ft_strchr(meta_char, **end))
+	while (**end && ft_strchr(meta_char, *(*end + 1)))
 		*end = *end + 1;
+	if (!**end)
+		*end = *end - 1;
 	return (*end);
 }
