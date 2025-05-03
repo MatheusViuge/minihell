@@ -30,8 +30,8 @@ void	free_tokens(t_token **tokens)
 
 void	print_tokens(t_token *tokens)
 {
-	const char	*types[4] = {"word", "pipe", "redirect input",
-		"redirect output"};
+	const char	*types[6] = {"word", "pipe", "redirect input",
+		"redirect output", "heredoc", "append"};
 
 	if (!tokens)
 		return ;

@@ -16,13 +16,17 @@ t_type_token	type_token(char *token)
 {
 	const char	*meta_char = "|<>";
 
-	if (!ft_strchr(meta_char, *token))
-		return (word);
 	if (*token == meta_char[0])
-		return (pipes);
-	if (*token == meta_char[1])
-		return (red_in);
-	return (red_out);
+		return (PIPE);
+	if (token[0] == meta_char[1] && (token[1] && token[1] == meta_char[1]))
+		return (HEREDOC);
+	if (token[0] == meta_char[1])
+		return (REDIR_IN);
+	if (token[0] == meta_char[2] && (token[1] && token[1] == meta_char[2]))
+		return (APPEND);
+	if (token[0] == meta_char[2])
+		return (REDIR_OUT);
+	return (WORD);
 }
 
 t_token	*new_token(char *str)
