@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		token(prompt, &tokens);
 		free(prompt);
+		expand_variables(&tokens, env_list);
 		print_tokens(tokens);
 		if (size_tokens(tokens) == 1 && !ft_strncmp(tokens->value, "exit", 5))
 			break ;
