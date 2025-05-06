@@ -24,7 +24,7 @@ $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
-	cc -Wall -Wextra -Werror -g -c $< -o $@ -lreadline
+	cc -Wall -Wextra -Werror -g -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)
