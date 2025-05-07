@@ -46,7 +46,10 @@ t_token			*create_token(char *prompt, char *start, char *end, size_t *size);
 int				token_quote(char *str, char **end);
 char			*token_meta_char(const char *meta_char, char **end);
 
-void	expand_variables(t_token **tokens, t_env *env);
+void			expand_variables(t_token **tokens, t_env *env);
+void			replace_variable(char **value, int *index, t_env *env);
+char			*find_key(char *variable, t_env *env);
+int				keycmp(char *variable, char **str, t_env env);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
