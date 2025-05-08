@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-void		replace_variable(char **value, int *index, t_env *env);
 static int	join_variable(char **value, char *prev, char *variable, char *next);
 
 void	expand_variables(t_token **tokens, t_env *env)
@@ -35,8 +34,7 @@ void	expand_variables(t_token **tokens, t_env *env)
 		{
 			if (node->value[i] != '$')
 				continue ;
-			if (node->value[i + 1] && !ft_isspace((int)value[i + 1]))
-				replace_variable(&node->value, &i, env);
+			replace_variable(&node->value, &i, env);
 			if (!node->value[i])
 				break ;
 		}
@@ -46,24 +44,41 @@ void	expand_variables(t_token **tokens, t_env *env)
 
 void	replace_variable(char **value, int *index, t_env *env)
 {
-	int		i;
-	char	*variable;
+	int			i;
+	int			start;
+	char		*variable;
+	const char	*meta_char = "_?";
+
+	start = *index + 1;
+	if ((*value)[start] && ((*value)[start] == '(' || (*value)[start] == '{'))
+		start++;
+	if ((*value)[start] && !(ft_isalpha((*value)[start])
+		|| ft_strchr(meta_char, (*value)[start])))
+		return ;
+	i = start;
+	while ((*value)[i] && (ft_isalnum((int)(*value)[i]) || (*value)[i] == '_'))
+		i++;
+	i--;
+	variable = ft_substr(*value, start, i - start + 1);
+	if (!variable)
+		return ;
+	token_recreate(value, variable, index, env);
+}
+
+void	token_recreate(char **value, char *variable, int *index, t_env *env)
+{
 	char	*prev;
 	char	*next;
 	char	*str;
+	int		start;
 
-	i = *index + 1;
-	while ((*value)[i] && !ft_isalnum((int)(*value)[i]))
-		i++;
-	if (!(*value)[i])
-		i--;
-	variable = ft_substr(*value, *index + 1, i - *index);
-	if (!variable)
-		return ;
 	prev = NULL;
 	if (*index > 0)
 		prev = ft_substr(*value, 0, *index);
-	next = ft_substr(*value, *index + ft_strlen(variable) + 1,
+	start = *index + 1;
+	if ((*value)[start] == '(' || (*value)[start] == '{')
+		start += 2;
+	next = ft_substr(*value, start + ft_strlen(variable),
 			ft_strlen(*value));
 	str = find_key(variable, env);
 	if (!str)

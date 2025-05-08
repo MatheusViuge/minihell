@@ -28,6 +28,7 @@ int	main(int ac, char **av, char **env)
 		prompt = readline("prompt> ");
 		if (!prompt)
 			continue ;
+		add_history(prompt);
 		token(prompt, &tokens);
 		free(prompt);
 		expand_variables(&tokens, env_list);
@@ -36,6 +37,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		free_tokens(&tokens);
 	}
+	rl_clear_history();
 	free_tokens(&tokens);
 	free_env(env_list);
 	return (0);
