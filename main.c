@@ -16,12 +16,10 @@ int	main(int ac, char **av, char **env)
 {
 	t_env	*env_list;
 	char	*prompt;
-	t_token	*tokens;
 
 	(void)ac;
 	(void)av;
 	env_list = NULL;
-	tokens = NULL;
 	create_env(env, &env_list);
 	while (1)
 	{
@@ -29,16 +27,10 @@ int	main(int ac, char **av, char **env)
 		if (!prompt)
 			continue ;
 		add_history(prompt);
-		token(prompt, &tokens);
+		prompt = exec_command(&prompt, env_list);
 		free(prompt);
-		expand_variables(&tokens, env_list);
-		print_tokens(tokens);
-		if (size_tokens(tokens) == 1 && !ft_strncmp(tokens->value, "exit", 5))
-			break ;
-		free_tokens(&tokens);
 	}
 	rl_clear_history();
-	free_tokens(&tokens);
 	free_env(env_list);
 	return (0);
 }

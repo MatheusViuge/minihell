@@ -29,6 +29,8 @@
 # include "../lib/libft.h"
 # include "types.h"
 
+char			*exec_command(char **command, t_env *env);
+
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
 void			print_env(t_env *head);
@@ -47,6 +49,7 @@ t_token			*create_token(char *prompt, char *start, char *end,
 int				token_quote(char *str, char **end);
 char			*token_meta_char(const char *meta_char, char **end);
 
+/*  expanding variables */
 void			expand_variables(t_token **tokens, t_env *env);
 void			replace_variable(char **value, int *index, t_env *env);
 void			token_recreate(char **value, char *variable, int *index,
