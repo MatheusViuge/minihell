@@ -26,6 +26,7 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <dirent.h>
+# include <stdbool.h>
 # include "../lib/libft.h"
 # include "types.h"
 
@@ -42,7 +43,8 @@ t_token			*new_token(char *str);
 int				size_tokens(t_token *tokens);
 t_token			*last_token(t_token *tokens);
 void			add_token(t_token **tokens, t_token *new);
-t_token			*create_token(char *prompt, char *start, char *end, size_t *size);
+t_token			*create_token(char *prompt, char *start, char *end,
+					size_t *size);
 int				token_quote(char *str, char **end);
 char			*token_meta_char(const char *meta_char, char **end);
 
