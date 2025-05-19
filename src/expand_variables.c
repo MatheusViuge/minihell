@@ -58,14 +58,12 @@ void	replace_variable(char **value, int *index, t_env *env)
 	i = start;
 	while ((*value)[i] && (ft_isalnum((int)(*value)[i]) || (*value)[i] == '_'))
 		i++;
-	if ((*value)[i] && !(ft_isalnum((int)(*value)[i]) || (*value)[i] == '_')
-		&& (*value)[start - 1] == '{')
+	if ((*value)[start - 1] == '{' && (*value)[i] != '}')
 	{
 		ft_printf("ERROR\n");
 		return ;
 	}
-	i--;
-	variable = ft_substr(*value, start, i - start + 1);
+	variable = ft_substr(*value, start, i - start);
 	if (!variable)
 		return ;
 	token_recreate(value, variable, index, env);
