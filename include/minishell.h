@@ -49,6 +49,8 @@ t_token			*create_token(char *prompt, char *start, char *end,
 int				token_quote(char *str, char **end);
 char			*token_meta_char(const char *meta_char, char **end);
 
+void	expand_variables(t_token **tokens, t_env *env);
+
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
 void			free_tokens(t_token **tokens);
