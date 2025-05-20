@@ -44,12 +44,6 @@ bool	replace_variable(char **value, int *index, t_data *data)
 	const char	*meta_char = "_?";
 
 	start = *index + 1;
-	if ((*value)[start] && (*value)[start] == '{')
-	{
-		start++;
-		if ((*value)[start] && (*value)[start] == '}')
-			return (return_erro("${}: bad substitution", 2, data));
-	}
 	if ((*value)[start] && !(ft_isalpha((*value)[start])
 		|| ft_strchr(meta_char, (*value)[start])))
 		return (true);
@@ -62,8 +56,6 @@ bool	replace_variable(char **value, int *index, t_data *data)
 				&& (ft_isalnum((int)(*value)[i]) || (*value)[i] == '_'))
 			i++;
 	}
-	if ((*value)[start - 1] == '{' && (*value)[i] && (*value)[i] != '}')
-		return (return_erro("Error", 2, data));
 	variable = ft_substr(*value, start, i - start);
 	if (!variable)
 		return (return_erro("Error", 2, data));
@@ -83,8 +75,6 @@ bool	token_recreate(char **value, char *variable, int *index, t_data *data)
 	if (*index > 0 && !prev)
 		return (return_erro("Error", 2, data));
 	start = *index + 1;
-	if ((*value)[start] == '{')
-		start += 2;
 	next = ft_substr(*value, start + ft_strlen(variable),
 			ft_strlen(*value));
 	if (!next)
