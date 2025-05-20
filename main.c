@@ -17,6 +17,7 @@ int	main(int ac, char **av, char **env)
 	t_data	data;
 	char	*prompt;
 	bool	loop;
+	bool	res;
 
 	(void)ac;
 	(void)av;
@@ -30,9 +31,10 @@ int	main(int ac, char **av, char **env)
 		prompt = readline("prompt> ");
 		if (!prompt)
 			continue ;
-		token(prompt, &data.tokens);
+		res = token(&data, prompt, &data.tokens);
 		free(prompt);
-		print_tokens(data.tokens);
+		if (res)
+			print_tokens(data.tokens);
 		if (size_tokens(data.tokens) == 1
 			&& !ft_strncmp(data.tokens->value, "exit", 5))
 			loop = false;
@@ -41,4 +43,11 @@ int	main(int ac, char **av, char **env)
 	free_tokens(&data.tokens);
 	free_env(data.env);
 	return (data.exit_code);
+}
+
+bool	return_erro(char *message, int code, t_data *data)
+{
+	data->exit_code = code;
+	ft_putendl_fd(message, 2);
+	return (false);
 }
