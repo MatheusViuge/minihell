@@ -14,35 +14,29 @@
 
 static int	join_variable(char **value, char *prev, char *variable, char *next);
 
-void	expand_variables(t_token **tokens, t_env *env)
+bool	expand_variable(t_token *token, t_data *data)
 {
-	t_token	*node;
 	char	*value;
 	int		i;
+	bool	res;
 
-	node = *tokens;
-	while (node)
+	value = token->value;
+	if (*value == '\'')
+		return (true);
+	res = true;
+	i = -1;
+	while (token->value[++i])
 	{
-		value = node->value;
-		if (*value == '\'')
-		{
-			node = node->next;
+		if (token->value[i] != '$')
 			continue ;
-		}
-		i = -1;
-		while (node->value[++i])
-		{
-			if (node->value[i] != '$')
-				continue ;
-			replace_variable(&node->value, &i, env);
-			if (!node->value[i])
-				break ;
-		}
-		node = node->next;
+		res = replace_variable(&token->value, &i, data);
+		if (!token->value[i] || !res)
+			break ;
 	}
+	return (res);
 }
 
-void	replace_variable(char **value, int *index, t_env *env)
+bool	replace_variable(char **value, int *index, t_data *data)
 {
 	int			i;
 	int			start;
@@ -51,25 +45,32 @@ void	replace_variable(char **value, int *index, t_env *env)
 
 	start = *index + 1;
 	if ((*value)[start] && (*value)[start] == '{')
+	{
 		start++;
+		if ((*value)[start] && (*value)[start] == '}')
+			return (return_erro("${}: bad substitution", 2, data));
+	}
 	if ((*value)[start] && !(ft_isalpha((*value)[start])
 		|| ft_strchr(meta_char, (*value)[start])))
-		return ;
+		return (true);
 	i = start;
-	while ((*value)[i] && (ft_isalnum((int)(*value)[i]) || (*value)[i] == '_'))
+	if ((*value)[i] && (*value)[i] == '?')
 		i++;
-	if ((*value)[start - 1] == '{' && (*value)[i] != '}')
+	else
 	{
-		ft_printf("ERROR\n");
-		return ;
+		while ((*value)[i]
+				&& (ft_isalnum((int)(*value)[i]) || (*value)[i] == '_'))
+			i++;
 	}
+	if ((*value)[start - 1] == '{' && (*value)[i] && (*value)[i] != '}')
+		return (return_erro("Error", 2, data));
 	variable = ft_substr(*value, start, i - start);
 	if (!variable)
-		return ;
-	token_recreate(value, variable, index, env);
+		return (return_erro("Error", 2, data));
+	return (token_recreate(value, variable, index, data));
 }
 
-void	token_recreate(char **value, char *variable, int *index, t_env *env)
+bool	token_recreate(char **value, char *variable, int *index, t_data *data)
 {
 	char	*prev;
 	char	*next;
@@ -79,18 +80,30 @@ void	token_recreate(char **value, char *variable, int *index, t_env *env)
 	prev = NULL;
 	if (*index > 0)
 		prev = ft_substr(*value, 0, *index);
+	if (*index > 0 && !prev)
+		return (return_erro("Error", 2, data));
 	start = *index + 1;
 	if ((*value)[start] == '{')
 		start += 2;
 	next = ft_substr(*value, start + ft_strlen(variable),
 			ft_strlen(*value));
-	str = find_key(variable, env);
+	if (!next)
+	{
+		free(prev);
+		return (return_erro("Error", 2, data));
+	}
+	str = find_key(variable, data->env);
 	free(variable);
 	if (!str)
-		return ;
+	{
+		free(prev);
+		free(next);
+		return (return_erro("Error", 2, data));
+	}
 	*index = join_variable(value, prev, str, next);
-	free(str);
-	free(next);
+	if (*index == -1)
+		return (return_erro("Error", 2, data));
+	return (true);
 }
 
 char	*find_key(char *variable, t_env *env)
@@ -132,7 +145,6 @@ static int	join_variable(char **value, char *prev, char *variable, char *next)
 	int		len;
 
 	str = ft_strjoin(prev, variable);
-	free(prev);
 	if (!str)
 		return (-1);
 	tmp = str;
@@ -141,6 +153,9 @@ static int	join_variable(char **value, char *prev, char *variable, char *next)
 	if (!str)
 		return (-1);
 	free(*value);
+	free(prev);
+	free(variable);
+	free(next);
 	*value = str;
 	len = ft_strlen(*value);
 	return (len);

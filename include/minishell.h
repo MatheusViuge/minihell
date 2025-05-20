@@ -52,10 +52,10 @@ char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
 
 /*  expanding variables */
-void			expand_variables(t_token **tokens, t_env *env);
-void			replace_variable(char **value, int *index, t_env *env);
-void			token_recreate(char **value, char *variable, int *index,
-					t_env *env);
+bool			expand_variable(t_token *token, t_data *data);
+bool			replace_variable(char **value, int *index, t_data *data);
+bool			token_recreate(char **value, char *variable, int *index,
+					t_data *data);
 char			*find_key(char *variable, t_env *env);
 int				keycmp(char *variable, char **str, t_env env);
 

@@ -16,14 +16,25 @@ bool	exec_command(t_data *data, char *command)
 {
 	char	*str;
 	bool	res;
+	t_token	*node;
 
 	str = NULL;
 	res = token(data, command);
 	if (res)
 	{
-		expand_variables(&data->tokens, data->env);
+		node = data->tokens;
+		while (node)
+		{
+			if (node->type == WORD)
+			{
+				if (!expand_variable(node, data))
+					return (true);
+			}
+			node = node->next;
+		}
 		print_tokens(data->tokens);
 	}
+	// SOMENTE PARA TESTE
 	if (size_tokens(data->tokens) == 1
 		&& !ft_strncmp(data->tokens->value, "exit", 5))
 	{
