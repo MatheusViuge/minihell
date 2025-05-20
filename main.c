@@ -14,28 +14,31 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_env	*env_list;
+	t_data	data;
 	char	*prompt;
-	t_token	*tokens;
+	bool	loop;
 
 	(void)ac;
 	(void)av;
-	env_list = NULL;
-	tokens = NULL;
-	create_env(env, &env_list);
-	while (1)
+	loop = true;
+	data.exit_code = 0;
+	data.env = NULL;
+	data.tokens = NULL;
+	create_env(env, &data.env);
+	while (loop)
 	{
 		prompt = readline("prompt> ");
 		if (!prompt)
 			continue ;
-		token(prompt, &tokens);
+		token(prompt, &data.tokens);
 		free(prompt);
-		print_tokens(tokens);
-		if (size_tokens(tokens) == 1 && !ft_strncmp(tokens->value, "exit", 5))
-			break ;
-		free_tokens(&tokens);
+		print_tokens(data.tokens);
+		if (size_tokens(data.tokens) == 1
+			&& !ft_strncmp(data.tokens->value, "exit", 5))
+			loop = false;
+		free_tokens(&data.tokens);
 	}
-	free_tokens(&tokens);
-	free_env(env_list);
-	return (0);
+	free_tokens(&data.tokens);
+	free_env(data.env);
+	return (data.exit_code);
 }
