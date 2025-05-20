@@ -6,7 +6,7 @@ DIR_BUILTINS = src/builtins
 
 DIR_TOKEN = src/token
 
-SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c \
+SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
 		para_excluir.c
 
 OBJ_DIR = obj
