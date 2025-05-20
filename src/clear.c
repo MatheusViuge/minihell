@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   para_excluir.c                                     :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 15:56:25 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/30 15:56:28 by jesda-si         ###   ########.fr       */
+/*   Created: 2025/05/20 18:32:33 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/05/20 18:32:35 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/minishell.h"
 
-void	print_tokens(t_token *tokens)
+void	free_tokens(t_token **tokens)
 {
-	const char	*types[6] = {"word", "pipe", "redirect input",
-		"redirect output", "heredoc", "append"};
+	t_token	*tmp;
+	t_token	*next;
 
-	if (!tokens)
-		return ;
-	while (tokens)
+	tmp = *tokens;
+	while (tmp)
 	{
-		printf("token: %s\ntipo: %s\n\n", tokens->value, types[tokens->type]);
-		tokens = tokens->next;
+		next = tmp->next;
+		free(tmp->value);
+		free(tmp);
+		tmp = next;
 	}
+	*tokens = NULL;
 }
