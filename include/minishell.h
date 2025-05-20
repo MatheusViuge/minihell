@@ -26,6 +26,7 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <dirent.h>
+# include <stdbool.h>
 # include "../lib/libft.h"
 # include "types.h"
 

@@ -40,4 +40,11 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+typedef struct s_data
+{
+	t_env	*env;
+	t_token	*tokens;
+	int		exit_code;
+}	t_data;
+
 #endif
