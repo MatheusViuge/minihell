@@ -30,7 +30,7 @@
 # include "../lib/libft.h"
 # include "types.h"
 
-char			*exec_command(char **command, t_env *env);
+bool			exec_command(t_data *data, char *command);
 
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
@@ -38,7 +38,7 @@ void			print_env(t_env *head);
 void			free_env(t_env *head);
 
 /*  token functions  */
-bool			token(t_data *data, char *prompt, t_token **tokens);
+bool			token(t_data *data, char *prompt);
 char			*end_token(char *str);
 t_type_token	type_token(char *token);
 t_token			*new_token(char *str);

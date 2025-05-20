@@ -80,17 +80,12 @@ void	token_recreate(char **value, char *variable, int *index, t_env *env)
 	if (*index > 0)
 		prev = ft_substr(*value, 0, *index);
 	start = *index + 1;
-	if ((*value)[start] == '(' || (*value)[start] == '{')
+	if ((*value)[start] == '{')
 		start += 2;
 	next = ft_substr(*value, start + ft_strlen(variable),
 			ft_strlen(*value));
-	if ((*value)[start - 2] == '(')
-		str = exec_command(&variable, env);
-	else
-	{
-		str = find_key(variable, env);
-		free(variable);
-	}
+	str = find_key(variable, env);
+	free(variable);
 	if (!str)
 		return ;
 	*index = join_variable(value, prev, str, next);

@@ -12,24 +12,24 @@
 
 #include "../include/minishell.h"
 
-char	*exec_command(char **command, t_env *env)
+bool	exec_command(t_data *data, char *command)
 {
-	t_token	*tokens;
 	char	*str;
+	bool	res;
 
 	str = NULL;
-	tokens = NULL;
-	token(*command, &tokens);
-	expand_variables(&tokens, env);
-	print_tokens(tokens);
-	if (size_tokens(tokens) == 1 && !ft_strncmp(tokens->value, "exit", 5))
+	res = token(data, command);
+	if (res)
 	{
-		free_tokens(&tokens);
-		free_env(env);
-		exit(EXIT_SUCCESS);
+		expand_variables(&data->tokens, data->env);
+		print_tokens(data->tokens);
 	}
-	free_tokens(&tokens);
-	str = ft_strdup(*command);
-	free(*command);
-	return (str);
+	if (size_tokens(data->tokens) == 1
+		&& !ft_strncmp(data->tokens->value, "exit", 5))
+	{
+		free_tokens(&data->tokens);
+		return (false);
+	}
+	free_tokens(&data->tokens);
+	return (true);
 }
