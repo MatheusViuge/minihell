@@ -27,21 +27,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-/*#include <stdio.h>
-
-int     main(int c, char **v)
-{
-	char *s;
-	int	len;
-
-	if (c == 3)
-	{
-		len = ft_strlen(v[1]);
-		s = malloc(sizeof(char) * len + 1);
-		ft_strlcpy(s, v[1], len + 1);
-
-		printf("%s\n", (const char *)ft_memchr(s, v[1][0], len));
-	}
-	return (0);
-}*/

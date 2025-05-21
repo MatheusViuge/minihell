@@ -16,10 +16,3 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-/*int	main(int c, char **v)
-{
-	if (c == 2)
-		ft_putchar_fd(v[1][0], 1);
-	return (0);
-}*/

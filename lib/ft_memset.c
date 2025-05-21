@@ -26,20 +26,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	void	*s;
-	int	len;
-	if (c == 3)
-	{
-		len = ft_strlen(v[1]) + 1;
-		s = malloc(sizeof(char) + len);
-		ft_strlcpy((char *)s, v[1], len);
-		printf("%s\n", (char *)s);
-		printf("%s\n", (char *)ft_memset(s, v[2][0], 3));
-	}
-	return (0);
-}*/

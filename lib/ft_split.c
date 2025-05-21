@@ -93,23 +93,3 @@ static void	free_strs(char **strs, int i)
 		free(strs[j++]);
 	free(strs);
 }
-
-/*int	main(int c, char **v)
-{
-	int	i;
-	char	**strs;
-
-	if (c > 2)
-	{
-		ft_putendl_fd(v[1], 1);
-		ft_putchar_fd(v[2][0], 1);
-		ft_putstr_fd("\n\n", 1);
-		strs = ft_split((const char *)v[1], v[2][0]);
-		i = 0;
-		while (strs[i])
-		{
-			ft_putendl_fd(strs[i], 1);
-			i++;
-		}
-	}
-}*/

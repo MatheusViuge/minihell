@@ -16,18 +16,3 @@ int	ft_tolower(int c)
 		return (c + ('a' - 'A'));
 	return (c);
 }
-
-/*#include <stdio.h>
-
-int	main(void)
-{
-	int	i;
-
-	if (c > 1)
-	{
-		i = 0;
-		while (v[1][i])
-			printf("%c\n", ft_tolower(v[1][i++]));
-	}
-	return (0);
-}*/

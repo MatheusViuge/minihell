@@ -29,14 +29,3 @@ int	ft_strncmp(char const *s1, char const *s2, size_t n)
 	}
 	return (0);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-
-{
-	if (c > 3)
-		printf("%s \n%s \n%d\n\n", v[1], v[2], 
-		ft_strncmp(v[1], v[2], ft_atoi(v[3])));
-	return (0);
-}*/

@@ -23,15 +23,3 @@ t_list	*ft_lstnew(void *content)
 	lst->next = NULL;
 	return (lst);
 }
-
-/*int	main(int argc, char **argv)
-{
-	t_list	*lst;
-
-	if (argc > 1)
-	{
-		lst = ft_lstnew(argv[1]);
-		ft_putstr_fd(lst->content, 1);
-	}
-	return (0);
-}*/

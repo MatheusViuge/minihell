@@ -21,21 +21,3 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 }
-
-/*void	f(unsigned int i, char *s)
-{
-	if (i >= 0)
-		ft_putchar_fd(*s, 1);
-}
-
-int	main(int c, char **v)
-{
-	char	*str;
-
-	if (c == 2)
-	{
-		str = v[1];
-		ft_striteri(str, &f);
-		ft_putendl(str, 1);
-	}
-}*/

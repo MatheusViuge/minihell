@@ -37,12 +37,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (nb * neg);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	if (c == 2)
-		printf("%s \n%d\n\n", v[1], ft_atoi(v[1]));
-	return (0);
-}*/

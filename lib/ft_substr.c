@@ -30,14 +30,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		ft_strlcpy(str, &s[start], len);
 	return (str);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	if (c > 3)
-		printf("str:%s \nstart: %d \t len: %d\nres: %s\n\n", v[1], 
-		ft_atoi(v[2]), ft_atoi(v[3]), 
-		ft_substr(v[1], ft_atoi(v[2]), ft_atoi(v[3])));
-	return (0);
-}*/
