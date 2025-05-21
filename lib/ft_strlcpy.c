@@ -16,6 +16,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 
+	if (!dst || !src)
+		return (-1);
 	i = 0;
 	if (size > 0)
 	{
@@ -28,19 +30,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	return ((int)ft_strlen(src));
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	char	*str;
-	size_t	len;
-
-	if (c > 1)
-	{
-		len = ft_strlen(v[1]) + 1;
-		str = calloc(len, sizeof(char));
-		printf("len: %d \nres: %zu \nstr: %s\n", len, 
-		ft_strlcpy(str, v[1], len), copy);
-	}
-}*/

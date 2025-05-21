@@ -25,12 +25,3 @@ char	*ft_strrchr(char const *s, int c)
 	}
 	return (NULL);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	if (c > 2)
-		printf("%s => %s\n%s\n\n", v[2][0], v[1], ft_strrchr(v[1], v[2][0]));
-	return (0);
-}*/

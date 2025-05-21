@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 19:12:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/18 00:36:56 by mviana-v         ###   ########.fr       */
+/*   Created: 2025/05/20 18:32:33 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/05/20 18:32:35 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include "../include/minishell.h"
+
+void	free_tokens(t_token **tokens)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - ('a' - 'A'));
-	return (c);
+	t_token	*tmp;
+	t_token	*next;
+
+	tmp = *tokens;
+	while (tmp)
+	{
+		next = tmp->next;
+		free(tmp->value);
+		free(tmp);
+		tmp = next;
+	}
+	*tokens = NULL;
 }

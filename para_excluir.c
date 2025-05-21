@@ -12,22 +12,6 @@
 
 #include "include/minishell.h"
 
-void	free_tokens(t_token **tokens)
-{
-	t_token	*tmp;
-	t_token	*next;
-
-	tmp = *tokens;
-	while (tmp)
-	{
-		next = tmp->next;
-		free(tmp->value);
-		free(tmp);
-		tmp = next;
-	}
-	*tokens = NULL;
-}
-
 void	print_tokens(t_token *tokens)
 {
 	const char	*types[6] = {"word", "pipe", "redirect input",

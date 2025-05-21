@@ -27,19 +27,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(str, s2, size_s1 + size_s2 + 1);
 	return (str);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	const char	*s1;
-	const char	*s2;
-
-	if (c == 3)
-	{
-		s1 = v[1];
-		s2 = v[2];
-		printf("s1: %s\ns2: %s\nres: %s\n", s1, s2, ft_strjoin(s1, s2));
-	}
-	return (0);
-}*/

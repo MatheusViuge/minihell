@@ -12,18 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	*print_error(void)
-{
-	printf("ERROR\n");
-	return (NULL);
-}
-
-void	print_erro(void)
-{
-	printf("ERROR\n");
-}
-
-void	token(char *prompt, t_token **tokens)
+bool	token(t_data *data, char *prompt, t_token **tokens)
 {
 	int		i;
 	size_t	len;
@@ -37,7 +26,7 @@ void	token(char *prompt, t_token **tokens)
 		curr = prompt + i;
 		end = end_token(curr);
 		if (!end)
-			return (print_erro());
+			return (return_erro("Error", -1, data));
 		token = create_token(prompt, curr, end, &len);
 		if (!len)
 		{
@@ -45,10 +34,11 @@ void	token(char *prompt, t_token **tokens)
 			continue ;
 		}
 		if (!token)
-			return (print_erro());
+			return (return_erro("Error", -1, data));
 		add_token(tokens, token);
 		i += len;
 	}
+	return (true);
 }
 
 t_token	*create_token(char *prompt, char *start, char *end, size_t *size)
@@ -89,7 +79,7 @@ char	*end_token(char *str)
 		if (ft_isspace(*end) || i > 0)
 			end--;
 		else
-			end = token_meta_char(meta_char, &end);
+			end = token_meta_char(end);
 		break ;
 	}
 	return (end);
@@ -110,11 +100,11 @@ int	token_quote(char *str, char **end)
 	return (0);
 }
 
-char	*token_meta_char(const char *meta_char, char **end)
+char	*token_meta_char(char *end)
 {
-	while (**end && ft_strchr(meta_char, *(*end + 1)))
-		*end = *end + 1;
-	if (!**end)
-		*end = *end - 1;
-	return (*end);
+	while (*end && *end == *(end + 1))
+		end = end + 1;
+	if (!*end)
+		end = end - 1;
+	return (end);
 }

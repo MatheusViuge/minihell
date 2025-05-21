@@ -17,22 +17,7 @@ size_t	ft_strlen(char const *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 		i++;
 	return (i);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	int	i;
-
-	if (c > 1)
-	{
-		i = 1;
-		while (i++ < c)
-			printf("len: %d - str: %s\n", ft_strlen(v[i]), v[i]);
-	}
-	return (0);
-}*/

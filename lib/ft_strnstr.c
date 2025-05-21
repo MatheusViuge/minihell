@@ -37,20 +37,3 @@ char	*ft_strnstr(char const *big, char const *little, size_t len)
 	}
 	return (NULL);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	const char	*big;
-	const char	*little;
-
-	if (c > 3)
-	{
-		big = v[1];
-		little = v[2];
-		printf("big: %s \nlittle: %s \nres: %s\n\n", 
-		big, little, ft_strnstr(big, little, ft_atoi(v[3])));
-	}
-	return (0);
-}*/

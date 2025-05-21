@@ -48,19 +48,3 @@ static int	end_index(char const *s1, char const *set)
 		i--;
 	return (i - 1);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	const char	*str;
-	const char	*set;
-
-	if (c == 3)
-	{
-		str = v[1];
-		set = v[2];
-		printf("str: %s \nset: %s \nres: %s\n", str, set, ft_strtrim(str, set));
-	}
-	return (0);
-}*/

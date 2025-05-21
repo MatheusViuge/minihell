@@ -31,24 +31,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
-
-/*char	f(unsigned int i, char c)
-{
-	if (i >= 0)
-		return (ft_toupper(c));
-	return (c);
-}
-
-int	main(int c, char **v)
-{
-	char	result;
-
-	if (c == 2)
-	{
-		result = ft_strmapi(v[1], &f);
-		ft_putstr_fd(v[1], 1);
-		ft_putchar_fd('\t', 1);
-		ft_putendl_fd(result);
-	}
-	return (0);
-}*/

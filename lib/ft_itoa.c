@@ -64,14 +64,3 @@ static int	calc_len_int(int n)
 	}
 	return (c);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	if (c == 2) 
-		printf("%s\n", ft_itoa(ft_atoi(v[1])));
-	printf("%s\n", ft_itoa(-2147483648));
-	printf("%s\n", ft_itoa(2147483647));
-	return (0);
-}*/

@@ -29,27 +29,3 @@ int	ft_memcmp(void const *s1, void const *s2, size_t n)
 	}
 	return (0);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	void const	*s1;
-	void const	*s2;
-	int	len1;
-	int	len2;
-
-	if (c == 3)
-	{
-		len1 = ft_strlen(v[1]) + 1;
-		len2 = ft_strlen(v[2]) + 1;
-		s1 = malloc(sizeof(char) * len1);
-		s2 = malloc(sizeof(char) * len2);
-		ft_strlcpy((char *)s1, v[1], len1);
-		printf("s1: %s\n", (char *)s1);
-		ft_strlcpy((char *)s2, v[2], len2);
-		printf("s2: %s\n", (char *)s2);
-		printf("res: %d\n", ft_memcmp(s1, s2, 10));
-	}
-	return (0);
-}*/

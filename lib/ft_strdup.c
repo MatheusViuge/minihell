@@ -24,12 +24,3 @@ char	*ft_strdup(const char *s)
 	ft_strlcpy(cpy, s, len);
 	return (cpy);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	if (c == 2)
-		printf("%s\n", ft_strdup((const char *)v[1]));
-	return (0);
-}*/

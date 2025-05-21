@@ -32,10 +32,3 @@ void	ft_putnbr_fd(int n, int fd)
 	c = nb + '0';
 	ft_putchar_fd(c, fd);
 }
-
-/*int	main(int c, char **v)
-{
-	if (c == 2)
-		ft_putnbr_fd(ft_atoi(v[1]), 1);
-	return (0);
-}*/

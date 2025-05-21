@@ -26,20 +26,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	void	*d;
-	const void	*s;
-
-	if (c == 3)
-	{
-		s = malloc(sizeof(char) * (ft_strlen(v[1]) + 1));
-		ft_strlcpy((char *)s, v[1], ft_strlen(v[1]) + 1);
-		printf("src: %s\n", s);
-		printf("dest: %s\n", (char *)ft_memcpy(d, s, ft_atoi(v[2])));
-	}
-	return (0);
-}*/

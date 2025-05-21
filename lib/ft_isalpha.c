@@ -16,17 +16,3 @@ int	ft_isalpha(int c)
 		return (1);
 	return (0);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	int	i;
-
-	if (c > 1)
-	{
-		while (v[1][i])
-			printf("%c => %d\n", v[1][i++], ft_isalpha(v[1][i++]));
-	}
-	return (0);
-}*/

@@ -37,7 +37,7 @@ void			print_env(t_env *head);
 void			free_env(t_env *head);
 
 /*  token functions  */
-void			token(char *prompt, t_token **tokens);
+bool			token(t_data *data, char *prompt, t_token **tokens);
 char			*end_token(char *str);
 t_type_token	type_token(char *token);
 t_token			*new_token(char *str);
@@ -47,12 +47,14 @@ void			add_token(t_token **tokens, t_token *new);
 t_token			*create_token(char *prompt, char *start, char *end,
 					size_t *size);
 int				token_quote(char *str, char **end);
-char			*token_meta_char(const char *meta_char, char **end);
+char			*token_meta_char(char *end);
+void			free_tokens(t_token **tokens);
 
 void	expand_variables(t_token **tokens, t_env *env);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
-void			free_tokens(t_token **tokens);
+
+bool			return_erro(char *message, int code, t_data *data);
 
 #endif
