@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **env)
 	create_env(env, &data.env);
 	while (loop)
 	{
-		prompt = readline("prompt> ");
+		prompt = readline("mini> ");
 		if (!prompt)
 			continue ;
 		loop = exec_command(&data, prompt);
