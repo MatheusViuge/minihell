@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/15 19:28:22 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:20:19 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
 
 void	expand_variables(t_token **tokens, t_env *env);
+
+ /* Lexer functions */
+bool			lexer(t_token **tokens, t_env **env);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
