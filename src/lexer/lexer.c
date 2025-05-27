@@ -6,18 +6,28 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:57:09 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/05/21 21:22:28 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:12:23 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-//static bool	verify_word(t_token *token, t_env **env);
-
 static void	print_error(char *msg, bool *is_valid)
 {
 	ft_putendl_fd(msg, 2);
 	*is_valid = false;
+}
+
+static void	verify_word(t_token *token, t_env **env, bool *is_valid)
+{
+	if (token->prev->type != HEREDOC && ft_strchr(token->value, '$'))
+	{
+		/* if (!expand_variables(token, env))
+		{
+			print_error("syntax error: unexpected token", is_valid);
+			return ;
+		} */
+	}
 }
 
 static void	verify_metas(t_token *token, bool *is_valid)
@@ -52,9 +62,9 @@ bool	lexer(t_token **token, t_env **env)
 	is_valid = true;
 	while (tmp && is_valid)
 	{
-		/* if (tmp->type == WORD) //TO DO: Trocar a funcao que verifica se o token é um word, pela de expansao de variaveis
-			is_valid = verify_word(tmp, env);
-		else */
+		if (tmp->type == WORD) //TO DO: Trocar a funcao que verifica se o token é um word, pela de expansao de variaveis
+			verify_word(tmp, env, &is_valid);
+		else
 			verify_metas(tmp, &is_valid);
 		tmp = tmp->next;
 	}
