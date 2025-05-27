@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-bool	token(t_data *data, char *prompt, t_token **tokens)
+bool	token(t_data *data, char *prompt)
 {
 	int		i;
 	size_t	len;
@@ -35,7 +35,7 @@ bool	token(t_data *data, char *prompt, t_token **tokens)
 		}
 		if (!token)
 			return (return_erro("Error", -1, data));
-		add_token(tokens, token);
+		add_token(&data->tokens, token);
 		i += len;
 	}
 	return (true);

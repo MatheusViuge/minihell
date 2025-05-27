@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/20 20:30:23 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:37:06 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int ac, char **av, char **env)
 	t_data	data;
 	char	*prompt;
 	bool	loop;
-	bool	res;
 
 	(void)ac;
 	(void)av;
@@ -31,7 +30,7 @@ int	main(int ac, char **av, char **env)
 		prompt = readline("mini> ");
 		if (!prompt)
 			continue ;
-		res = token(&data, prompt, &data.tokens);
+		loop = exec_command(&data, prompt);
 		free(prompt);
 		if (res)
 			print_tokens(data.tokens);
@@ -40,7 +39,6 @@ int	main(int ac, char **av, char **env)
 			loop = false;
 		free_tokens(&data.tokens);
 	}
-	free_tokens(&data.tokens);
 	free_env(data.env);
 	return (data.exit_code);
 }
