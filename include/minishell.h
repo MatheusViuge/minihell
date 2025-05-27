@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/21 20:20:19 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:42:37 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,13 @@ int				token_quote(char *str, char **end);
 char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
 
-void	expand_variables(t_token **tokens, t_env *env);
+/*  expanding variables */
+bool			expand_variable(t_token *token, t_data *data);
+bool			replace_variable(char **value, int *index, t_data *data);
+bool			token_recreate(char **value, char *variable, int *index,
+					t_data *data);
+char			*find_key(char *variable, t_env *env);
+int				keycmp(char *variable, char **str, t_env env);
 
  /* Lexer functions */
 bool			lexer(t_token **tokens, t_env **env);
