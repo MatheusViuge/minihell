@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   para_excluir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 18:08:05 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/09 18:18:57 by jesda-si         ###   ########.fr       */
+/*   Created: 2025/04/30 15:56:25 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/30 15:56:28 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	print_tokens(t_token *tokens)
 {
-	t_list	*p;
-	t_list	*next;
+	const char	*types[6] = {"word", "pipe", "redirect input",
+		"redirect output", "heredoc", "append"};
 
-	p = *lst;
-	while (p)
+	if (!tokens)
+		return ;
+	while (tokens)
 	{
-		next = (t_list *)((*p).next);
-		ft_lstdelone(p, del);
-		p = next;
+		printf("token: %s\ntipo: %s\n\n", tokens->value, types[tokens->type]);
+		tokens = tokens->next;
 	}
-	*lst = NULL;
 }

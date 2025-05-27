@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 21:59:47 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/05 19:49:57 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:38:33 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	void	*s;
-	int	len;
-	if (c == 3)
-	{
-		len = ft_strlen(v[1]) + 1;
-		s = malloc(sizeof(char) + len);
-		ft_strlcpy((char *)s, v[1], len);
-		printf("%s\n", (char *)s);
-		printf("%s\n", (char *)ft_memset(s, v[2][0], 3));
-	}
-	return (0);
-}*/

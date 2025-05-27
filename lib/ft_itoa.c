@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:01 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/05 19:44:49 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:38:50 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,3 @@ static int	calc_len_int(int n)
 	}
 	return (c);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	if (c == 2) 
-		printf("%s\n", ft_itoa(ft_atoi(v[1])));
-	printf("%s\n", ft_itoa(-2147483648));
-	printf("%s\n", ft_itoa(2147483647));
-	return (0);
-}*/

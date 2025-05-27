@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 18:47:55 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/05 16:35:42 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:37:29 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,3 @@ static int	end_index(char const *s1, char const *set)
 		i--;
 	return (i - 1);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	const char	*str;
-	const char	*set;
-
-	if (c == 3)
-	{
-		str = v[1];
-		set = v[2];
-		printf("str: %s \nset: %s \nres: %s\n", str, set, ft_strtrim(str, set));
-	}
-	return (0);
-}*/

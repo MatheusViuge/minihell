@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 18:08:05 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/09 18:18:57 by jesda-si         ###   ########.fr       */
+/*   Created: 2025/05/20 18:32:33 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/05/20 18:32:35 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	free_tokens(t_token **tokens)
 {
-	t_list	*p;
-	t_list	*next;
+	t_token	*tmp;
+	t_token	*next;
 
-	p = *lst;
-	while (p)
+	tmp = *tokens;
+	while (tmp)
 	{
-		next = (t_list *)((*p).next);
-		ft_lstdelone(p, del);
-		p = next;
+		next = tmp->next;
+		free(tmp->value);
+		free(tmp);
+		tmp = next;
 	}
-	*lst = NULL;
+	*tokens = NULL;
 }

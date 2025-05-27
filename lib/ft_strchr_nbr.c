@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strchr_n                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 14:58:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/18 00:35:28 by mviana-v         ###   ########.fr       */
+/*   Created: 2024/09/28 16:29:08 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/04/18 00:38:10 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+int	ft_strchr_nbr(char const *s, int c)
 {
 	int	i;
-	int	nb;
-	int	neg;
+	int	len;
 
-	neg = 1;
-	nb = 0;
+	if (!s || !*s)
+		return (-1);
+	len = (int)ft_strlen(s);
 	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-')
+	while (i <= len)
 	{
-		neg = -1;
+		if (s[i] == (char)c)
+			break ;
 		i++;
 	}
-	else if (nptr[i] == '+')
-		i++;
-	while (nptr[i] && ft_isdigit(nptr[i]))
-	{
-		nb = (nb * 10) + (nptr[i] - '0');
-		i++;
-	}
-	return (nb * neg);
+	return (i);
 }

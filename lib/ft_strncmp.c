@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:57:44 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/03 19:47:51 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:37:43 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,3 @@ int	ft_strncmp(char const *s1, char const *s2, size_t n)
 	}
 	return (0);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-
-{
-	if (c > 3)
-		printf("%s \n%s \n%d\n\n", v[1], v[2], 
-		ft_strncmp(v[1], v[2], ft_atoi(v[3])));
-	return (0);
-}*/

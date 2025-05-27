@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 21:16:19 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/03 18:13:55 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:38:40 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	void	*d;
-	const void	*s;
-
-	if (c == 3)
-	{
-		s = malloc(sizeof(char) * (ft_strlen(v[1]) + 1));
-		ft_strlcpy((char *)s, v[1], ft_strlen(v[1]) + 1);
-		printf("src: %s\n", s);
-		printf("dest: %s\n", (char *)ft_memcpy(d, s, ft_atoi(v[2])));
-	}
-	return (0);
-}*/

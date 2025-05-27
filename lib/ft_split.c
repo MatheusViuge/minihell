@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 23:22:38 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/06 21:04:33 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:38:14 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,3 @@ static void	free_strs(char **strs, int i)
 		free(strs[j++]);
 	free(strs);
 }
-
-/*int	main(int c, char **v)
-{
-	int	i;
-	char	**strs;
-
-	if (c > 2)
-	{
-		ft_putendl_fd(v[1], 1);
-		ft_putchar_fd(v[2][0], 1);
-		ft_putstr_fd("\n\n", 1);
-		strs = ft_split((const char *)v[1], v[2][0]);
-		i = 0;
-		while (strs[i])
-		{
-			ft_putendl_fd(strs[i], 1);
-			i++;
-		}
-	}
-}*/

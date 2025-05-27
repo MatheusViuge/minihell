@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:16:02 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/03 21:12:21 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:37:38 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,3 @@ char	*ft_strnstr(char const *big, char const *little, size_t len)
 	}
 	return (NULL);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	const char	*big;
-	const char	*little;
-
-	if (c > 3)
-	{
-		big = v[1];
-		little = v[2];
-		printf("big: %s \nlittle: %s \nres: %s\n\n", 
-		big, little, ft_strnstr(big, little, ft_atoi(v[3])));
-	}
-	return (0);
-}*/

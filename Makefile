@@ -1,8 +1,13 @@
 NAME = minishell
 
-SRC = main.c
-
 LIBFT = libft.a
+
+DIR_BUILTINS = src/builtins
+
+DIR_TOKEN = src/token
+
+SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
+		para_excluir.c
 
 OBJ_DIR = obj
 
@@ -13,13 +18,13 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C lib
 	cp lib/$(LIBFT) .
-	cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) 
+	cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
-	@ mkdir -p $(OBJ_DIR)/src
-	@ mkdir -p $(OBJ_DIR)/src/utils
-	cc -Wall -Wextra -Werror -c $< -o $@
+	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
+	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
+	cc -Wall -Wextra -Werror -g -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)
@@ -31,7 +36,9 @@ fclean:
 
 re: fclean all
 
-run: all clean
+run: all
+	rm -rf $(OBJ_DIR)
 	clear
+	./$(NAME)
 
 .PHONY: all clean fclean re run

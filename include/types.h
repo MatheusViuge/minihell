@@ -13,5 +13,38 @@
 #ifndef TYPES_H
 # define TYPES_H
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+
+typedef enum e_type_token
+{
+	WORD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	HEREDOC,
+	APPEND,
+	COMMAND,
+}	t_type_token;
+
+typedef struct s_token
+{
+	char			*value;
+	t_type_token	type;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
+
+typedef struct s_data
+{
+	t_env	*env;
+	t_token	*tokens;
+	int		exit_code;
+}	t_data;
 
 #endif

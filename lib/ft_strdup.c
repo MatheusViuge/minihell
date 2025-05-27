@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 22:44:18 by jesda-si          #+#    #+#             */
-/*   Updated: 2024/10/11 13:14:31 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:38:07 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,3 @@ char	*ft_strdup(const char *s)
 	ft_strlcpy(cpy, s, len);
 	return (cpy);
 }
-
-/*#include <stdio.h>
-
-int	main(int c, char **v)
-{
-	if (c == 2)
-		printf("%s\n", ft_strdup((const char *)v[1]));
-	return (0);
-}*/
