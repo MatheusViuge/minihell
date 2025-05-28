@@ -88,6 +88,7 @@ char	*end_token(char *str)
 int	token_quote(char *str, char **end)
 {
 	char	*c;
+	int		res;
 
 	if (str[0] == '\'' || str[0] == '\"')
 	{
@@ -95,6 +96,9 @@ int	token_quote(char *str, char **end)
 		if (!c)
 			return (-1);
 		*end = c;
+		res = token_quote((*end) + 1, end);
+		if (res == -1)
+			return (-1);
 		return (1);
 	}
 	return (0);
