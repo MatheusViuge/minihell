@@ -30,9 +30,11 @@ int	main(int ac, char **av, char **env)
 		prompt = readline("mini> ");
 		if (!prompt)
 			continue ;
+		add_history(prompt);
 		loop = exec_command(&data, prompt);
 		free(prompt);
 	}
+	clear_history();
 	free_env(data.env);
 	return (data.exit_code);
 }
