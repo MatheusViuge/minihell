@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/27 19:42:37 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/27 23:01:46 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char			*find_key(char *variable, t_env *env);
 int				keycmp(char *variable, char **str, t_env env);
 
  /* Lexer functions */
-bool			lexer(t_token **tokens, t_env **env);
+bool			lexer(t_token **tokens, t_data *data);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);

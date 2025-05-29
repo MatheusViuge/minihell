@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:57:09 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/05/27 19:12:23 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/27 23:26:36 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ static void	print_error(char *msg, bool *is_valid)
 	*is_valid = false;
 }
 
-static void	verify_word(t_token *token, t_env **env, bool *is_valid)
+static void	verify_word(t_token *token, t_data *data, bool *is_valid)
 {
-	if (token->prev->type != HEREDOC && ft_strchr(token->value, '$'))
+	
+	if (ft_strchr(token->value, '$') && (!token->prev || token->prev->type != HEREDOC))
 	{
-		/* if (!expand_variables(token, env))
+		if (!expand_variable(token, data))
 		{
 			print_error("syntax error: unexpected token", is_valid);
 			return ;
-		} */
+		}
 	}
 }
 
@@ -52,18 +53,17 @@ static void	verify_metas(t_token *token, bool *is_valid)
 	}
 }
 
-bool	lexer(t_token **token, t_env **env)
+bool	lexer(t_token **token, t_data *data)
 {
 	t_token *tmp;
 	bool	is_valid;
 
-	(void)env;
 	tmp = *token;
 	is_valid = true;
 	while (tmp && is_valid)
 	{
 		if (tmp->type == WORD) //TO DO: Trocar a funcao que verifica se o token é um word, pela de expansao de variaveis
-			verify_word(tmp, env, &is_valid);
+			verify_word(tmp, data, &is_valid);
 		else
 			verify_metas(tmp, &is_valid);
 		tmp = tmp->next;

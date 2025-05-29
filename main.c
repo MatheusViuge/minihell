@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/27 19:37:06 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/27 23:14:39 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		loop = exec_command(&data, prompt);
 		free(prompt);
-		if (res)
-			print_tokens(data.tokens);
 		if (size_tokens(data.tokens) == 1
 			&& !ft_strncmp(data.tokens->value, "exit", 5))
 			loop = false;
