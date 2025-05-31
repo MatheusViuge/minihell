@@ -143,10 +143,10 @@ static int	join_variable(char **value, char *prev, char *variable, char *next)
 	if (!str)
 		return (-1);
 	free(*value);
+	*value = str;
+	len = ft_strlen(*value) - ft_strlen(next);
 	free(prev);
 	free(variable);
 	free(next);
-	*value = str;
-	len = ft_strlen(*value);
 	return (len);
 }
