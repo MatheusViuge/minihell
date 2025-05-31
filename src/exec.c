@@ -14,11 +14,9 @@
 
 bool	exec_command(t_data *data, char *command)
 {
-	char	*str;
 	bool	res;
 	t_token	*node;
 
-	str = NULL;
 	res = token(data, command);
 	if (res)
 	{
