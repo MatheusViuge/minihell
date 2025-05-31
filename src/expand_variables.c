@@ -28,15 +28,17 @@ bool	expand_variable(t_token *token, t_data *data)
 		if (token->value[i] == '\'' || token->value[i] == '\"')
 		{
 			if (quote == -1)
-				quote = (token->value[i] - '\"') & 1;
-			else if (quote == ((token->value[i] - '\"') & 1))
+				quote = token->value[i] & 1;
+			else if (quote == (token->value[i] & 1))
 				quote = -1;
 		}
-		if (token->value[i] != '$' || quote == 1)
+		if (token->value[i] != '$' || (token->value[i] == '$' && quote == 1))
 			continue ;
 		res = replace_variable(&token->value, &i, data);
 		if (!token->value[i] || !res)
 			break ;
+		if (quote == (token->value[i] & 1))
+			quote = -1;
 	}
 	return (res);
 }
