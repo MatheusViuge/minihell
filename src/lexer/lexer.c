@@ -53,12 +53,12 @@ static void	verify_metas(t_token *token, bool *is_valid)
 	}
 }
 
-bool	lexer(t_token **token, t_data *data)
+bool	lexer(t_data *data)
 {
 	t_token *tmp;
 	bool	is_valid;
 
-	tmp = *token;
+	tmp = data->tokens;
 	is_valid = true;
 	while (tmp && is_valid)
 	{

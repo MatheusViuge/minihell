@@ -37,7 +37,7 @@ void			print_env(t_env *head);
 void			free_env(t_env *head);
 
 /*  token functions  */
-bool			token(t_data *data, char *prompt, t_token **tokens);
+bool			token(t_data *data, char *prompt);
 char			*end_token(char *str);
 t_type_token	type_token(char *token);
 t_token			*new_token(char *str);
@@ -59,11 +59,12 @@ char			*find_key(char *variable, t_env *env);
 int				keycmp(char *variable, char **str, t_env env);
 
  /* Lexer functions */
-bool			lexer(t_token **tokens, t_data *data);
+bool			lexer(t_data *data);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
 
 bool			return_erro(char *message, int code, t_data *data);
+bool			exec_command(t_data *data, char *command);
 
 #endif
