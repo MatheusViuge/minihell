@@ -18,19 +18,6 @@ static void	print_error(char *msg, bool *is_valid)
 	*is_valid = false;
 }
 
-static void	verify_word(t_token *token, t_data *data, bool *is_valid)
-{
-	
-	if (ft_strchr(token->value, '$') && (!token->prev || token->prev->type != HEREDOC))
-	{
-		if (!expand_variable(token, data))
-		{
-			print_error("syntax error: unexpected token", is_valid);
-			return ;
-		}
-	}
-}
-
 static void	verify_metas(t_token *token, bool *is_valid)
 {
 	if (token->type == REDIR_IN || token->type == REDIR_OUT)
@@ -62,8 +49,8 @@ bool	lexer(t_data *data)
 	is_valid = true;
 	while (tmp && is_valid)
 	{
-		if (tmp->type == WORD) //TO DO: Trocar a funcao que verifica se o token é um word, pela de expansao de variaveis
-			verify_word(tmp, data, &is_valid);
+		if (tmp->type == WORD && tmp->prev && tmp->prev->type != HEREDOC) // TO DO: Trocar a funcao que verifica se o token é um word, pela de expansao de variaveis
+			is_valid = expand_variable(tmp, data);
 		else
 			verify_metas(tmp, &is_valid);
 		tmp = tmp->next;
