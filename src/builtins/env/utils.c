@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -62,38 +62,6 @@ static t_env	*new_node(char *str)
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
-}
-
-void	print_env(t_env *head)
-{
-	t_env	*current;
-
-	current = head;
-	if (!head)
-		return ;
-	while (current->next != head)
-	{
-		printf("%s=%s\n", current->key, current->value);
-		current = current->next;
-	}
-	printf("%s=%s\n", current->key, current->value);
-}
-
-void	free_env(t_env *head)
-{
-	t_env	*current;
-
-	current = head;
-	while (current)
-	{
-		free(current->key);
-		free(current->value);
-		if (current->next == head)
-			break ;
-		current = current->next;
-		free(current->prev);
-	}
-	free(current);
 }
 
 void	create_env(char **env, t_env **head)
