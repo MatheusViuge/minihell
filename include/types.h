@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/14 23:21:18 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:52:27 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_type_token
 	HEREDOC,
 	APPEND,
 	COMMAND,
+	BUILTIN,
 }	t_type_token;
 
 typedef struct s_token
@@ -39,6 +40,16 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
+
+typedef struct s_args
+{
+	t_type_token	type;
+	char			**args;
+	int				fd_in;
+	int				fd_out;
+	struct s_args	*left;
+	struct s_args	*right;
+}	t_args;
 
 typedef struct s_data
 {

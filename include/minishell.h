@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/27 23:01:46 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:52:27 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ bool			token_recreate(char **value, char *variable, int *index,
 char			*find_key(char *variable, t_env *env);
 int				keycmp(char *variable, char **str, t_env env);
 
- /* Lexer functions */
+ /* lexer functions */
 bool			lexer(t_token **tokens, t_data *data);
+
+/*  parser functions */
+t_args			parser(t_token *tokens, t_data *data);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
