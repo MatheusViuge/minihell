@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/17 16:52:27 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:04:40 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
-typedef struct s_args
+typedef struct s_node
 {
 	t_type_token	type;
-	char			**args;
+	char			**cmd;
 	int				fd_in;
 	int				fd_out;
-	struct s_args	*left;
-	struct s_args	*right;
-}	t_args;
+	struct s_node	*left;
+	struct s_node	*right;
+}	t_node;
 
 typedef struct s_data
 {
