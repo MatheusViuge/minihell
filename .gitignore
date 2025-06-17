@@ -3,4 +3,7 @@
 .*.sw*
 obj/
 minishell
-.vscode
+.vscode/
+.editorconfig
+tester/
+test_lexer
