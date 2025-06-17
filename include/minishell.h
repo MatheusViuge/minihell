@@ -30,13 +30,15 @@
 # include "../lib/libft.h"
 # include "types.h"
 
+bool			exec_command(t_data *data, char *command);
+
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
 void			print_env(t_env *head);
 void			free_env(t_env *head);
 
 /*  token functions  */
-bool			token(t_data *data, char *prompt, t_token **tokens);
+bool			token(t_data *data, char *prompt);
 char			*end_token(char *str);
 t_type_token	type_token(char *token);
 t_token			*new_token(char *str);
@@ -48,6 +50,14 @@ t_token			*create_token(char *prompt, char *start, char *end,
 int				token_quote(char *str, char **end);
 char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
+
+/*  expanding variables */
+bool			expand_variable(t_token *token, t_data *data);
+bool			replace_variable(char **value, int *index, t_data *data);
+bool			token_recreate(char **value, char *variable, int *index,
+					t_data *data);
+char			*find_key(char *variable, t_env *env);
+int				keycmp(char *variable, char **str, t_env env);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
