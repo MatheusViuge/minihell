@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-bool	token(t_data *data, char *prompt, t_token **tokens)
+bool	token(t_data *data, char *prompt)
 {
 	int		i;
 	size_t	len;
@@ -35,7 +35,7 @@ bool	token(t_data *data, char *prompt, t_token **tokens)
 		}
 		if (!token)
 			return (return_erro("Error", -1, data));
-		add_token(tokens, token);
+		add_token(&data->tokens, token);
 		i += len;
 	}
 	return (true);
@@ -63,11 +63,13 @@ char	*end_token(char *str)
 	int			i;
 	int			res;
 	char		*end;
-	const char	*meta_char = "|<>\'\"";
+	const char	*meta_char = "|<>";
 
 	res = token_quote(str, &end);
 	if (res == -1)
 		return (NULL);
+	else if (res == 1 && !ft_strchr(meta_char, *(end + 1)))
+		return (end_token((end + 1)));
 	else if (res == 1)
 		return (end);
 	i = -1;
@@ -88,6 +90,7 @@ char	*end_token(char *str)
 int	token_quote(char *str, char **end)
 {
 	char	*c;
+	int		res;
 
 	if (str[0] == '\'' || str[0] == '\"')
 	{
@@ -95,6 +98,9 @@ int	token_quote(char *str, char **end)
 		if (!c)
 			return (-1);
 		*end = c;
+		res = token_quote((*end) + 1, end);
+		if (res == -1)
+			return (-1);
 		return (1);
 	}
 	return (0);
