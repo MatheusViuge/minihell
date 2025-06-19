@@ -7,7 +7,7 @@ DIR_BUILTINS = src/builtins
 DIR_TOKEN = src/token
 
 SRC = main.c $(DIR_BUILTINS)/env.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
-		para_excluir.c src/expand_variables.c src/exec.c
+		para_excluir.c src/expand_variables.c src/exec.c $(DIR_BUILTINS)/export/export.c
 
 OBJ_DIR = obj
 
@@ -23,6 +23,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
+	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)/export
 	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
 	cc -Wall -Wextra -Werror -g -c $< -o $@
 

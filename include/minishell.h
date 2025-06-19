@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/19 15:23:57 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:58:43 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ bool			exec_command(t_data *data, char *command);
 
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
-void			print_env(t_env *head);
+void			env(t_env *head);
 void			free_env(t_env *head);
-void 			print_env(t_env *head);
-int				len_env(t_env *head);
+
+/*  export functions */
+bool 			export(char **args, t_env *head);
+bool			print_env_export(t_env *head);
 
 /*  token functions  */
 bool			token(t_data *data, char *prompt);
@@ -53,7 +55,7 @@ int				token_quote(char *str, char **end);
 char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
 
-/*  expanding variables */
+/*  expanding variables funcrions */
 bool			expand_variable(t_token *token, t_data *data);
 bool			replace_variable(char **value, int *index, t_data *data);
 bool			token_recreate(char **value, char *variable, int *index,

@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/19 15:20:56 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:52:00 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void add_env_node(t_env *new_node, t_env **head);
 static t_env *new_node(char *str);
 
-void print_env(t_env *head)
+void env(t_env *head)
 {
 	t_env *tmp;
 
