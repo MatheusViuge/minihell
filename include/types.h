@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/17 17:04:40 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:45:19 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_data
 {
 	t_env	*env;
 	t_token	*tokens;
+	t_node	*ast;
 	int		exit_code;
 }	t_data;
 

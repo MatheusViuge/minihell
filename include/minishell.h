@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/30 15:52:27 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:32:36 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int				keycmp(char *variable, char **str, t_env env);
 bool			lexer(t_token **tokens, t_data *data);
 
 /*  parser functions */
-t_args			parser(t_token *tokens, t_data *data);
+void			parser(t_token *tokens, t_data *data);
+
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
