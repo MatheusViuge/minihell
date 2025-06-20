@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 21:28:16 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/18 22:13:58 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:37:57 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static t_node	*create_node(int number, t_token *token)
 		node->type = PIPE;
 	else
 		node->type = COMMAND;
-	node->fd_in = STDIN_FILENO;
-	node->fd_out = STDOUT_FILENO;
+	node->fd_in = -1;
+	node->fd_out = -1;
 	node->left = NULL;
 	node->right = NULL;
 	return (node);

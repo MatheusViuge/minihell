@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/18 21:32:36 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:10:09 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ bool			lexer(t_token **tokens, t_data *data);
 
 /*  parser functions */
 void			parser(t_token *tokens, t_data *data);
-
+void			free_ast(t_node *ast);
+void			ast_builder(t_data *data, int count);
+bool			ast_error_handler(t_node **ast, t_data *data, char *error_msg);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
