@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **env)
 		prompt = readline("mini> ");
 		if (!prompt)
 			continue ;
+		add_history(prompt);
 		loop = exec_command(&data, prompt);
 		free(prompt);
 		if (size_tokens(data.tokens) == 1
@@ -37,6 +38,7 @@ int	main(int ac, char **av, char **env)
 			loop = false;
 		free_tokens(&data.tokens);
 	}
+	clear_history();
 	free_env(data.env);
 	return (data.exit_code);
 }

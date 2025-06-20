@@ -63,11 +63,13 @@ char	*end_token(char *str)
 	int			i;
 	int			res;
 	char		*end;
-	const char	*meta_char = "|<>\'\"";
+	const char	*meta_char = "|<>";
 
 	res = token_quote(str, &end);
 	if (res == -1)
 		return (NULL);
+	else if (res == 1 && !ft_strchr(meta_char, *(end + 1)))
+		return (end_token((end + 1)));
 	else if (res == 1)
 		return (end);
 	i = -1;
@@ -88,6 +90,7 @@ char	*end_token(char *str)
 int	token_quote(char *str, char **end)
 {
 	char	*c;
+	int		res;
 
 	if (str[0] == '\'' || str[0] == '\"')
 	{
@@ -95,6 +98,9 @@ int	token_quote(char *str, char **end)
 		if (!c)
 			return (-1);
 		*end = c;
+		res = token_quote((*end) + 1, end);
+		if (res == -1)
+			return (-1);
 		return (1);
 	}
 	return (0);

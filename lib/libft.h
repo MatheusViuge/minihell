@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:11:53 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/27 19:40:05 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:03:57 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "gnl/get_next_line.h"
+# include "printf/ft_printf.h"
 
 typedef struct s_list
 {

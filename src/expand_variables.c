@@ -16,22 +16,29 @@ static int	join_variable(char **value, char *prev, char *variable, char *next);
 
 bool	expand_variable(t_token *token, t_data *data)
 {
-	char	*value;
 	int		i;
+	int		quote;
 	bool	res;
 
-	value = token->value;
-	if (*value == '\'')
-		return (true);
+	quote = -1;
 	res = true;
 	i = -1;
 	while (token->value[++i])
 	{
-		if (token->value[i] != '$')
+		if (token->value[i] == '\'' || token->value[i] == '\"')
+		{
+			if (quote == -1)
+				quote = token->value[i] & 1;
+			else if (quote == (token->value[i] & 1))
+				quote = -1;
+		}
+		if (token->value[i] != '$' || (token->value[i] == '$' && quote == 1))
 			continue ;
 		res = replace_variable(&token->value, &i, data);
 		if (!token->value[i] || !res)
 			break ;
+		if (quote == (token->value[i] & 1))
+			quote = -1;
 	}
 	return (res);
 }
@@ -143,10 +150,10 @@ static int	join_variable(char **value, char *prev, char *variable, char *next)
 	if (!str)
 		return (-1);
 	free(*value);
+	*value = str;
+	len = ft_strlen(*value) - ft_strlen(next);
 	free(prev);
 	free(variable);
 	free(next);
-	*value = str;
-	len = ft_strlen(*value);
 	return (len);
 }
