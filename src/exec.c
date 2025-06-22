@@ -20,7 +20,7 @@ bool	exec_command(t_data *data, char *command)
 	print_tokens(data->tokens);
 
 	// SOMENTE PARA TESTE
-	if (size_tokens(data->tokens) == 1 
+	if (size_tokens(data->tokens) == 1
 		&& !ft_strncmp(data->tokens->value, "exit", 5))
 	{
 		free_tokens(&data->tokens);

@@ -42,19 +42,18 @@ static void	verify_metas(t_token *token, bool *is_valid)
 
 bool	lexer(t_data *data)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	bool	is_valid;
 
 	tmp = data->tokens;
 	is_valid = true;
 	while (tmp && is_valid)
 	{
-		if (tmp->type == WORD && tmp->prev && tmp->prev->type != HEREDOC) // TO DO: Trocar a funcao que verifica se o token é um word, pela de expansao de variaveis
+		if (tmp->type == WORD && tmp->prev && tmp->prev->type != HEREDOC)
 			is_valid = expand_variable(tmp, data);
 		else
 			verify_metas(tmp, &is_valid);
 		tmp = tmp->next;
 	}
-		
 	return (is_valid);
 }

@@ -6,6 +6,8 @@ DIR_BUILTINS = src/builtins
 
 DIR_TOKEN = src/token
 
+DIR_LEXER = src/lexer
+
 SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
 		para_excluir.c src/expand/expand.c src/expand/utils.c src/exec.c $(DIR_LEXER)/lexer.c
 

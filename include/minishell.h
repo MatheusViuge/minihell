@@ -58,7 +58,7 @@ char			*token_recreate(char *value, char *variable, int *index,
 char			*find_key(char *variable, t_env *env);
 int				keycmp(char *variable, t_env env, char **str);
 
- /* Lexer functions */
+/* Lexer functions */
 bool			lexer(t_data *data);
 
 /*  para apagar      */
