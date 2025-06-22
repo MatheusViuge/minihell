@@ -27,3 +27,20 @@ void	free_tokens(t_token **tokens)
 	}
 	*tokens = NULL;
 }
+
+void free_env(t_env *head)
+{
+	t_env *current;
+
+	current = head;
+	while (current)
+	{
+		free(current->key);
+		free(current->value);
+		if (current->next == head)
+			break;
+		current = current->next;
+		free(current->prev);
+	}
+	free(current);
+}
