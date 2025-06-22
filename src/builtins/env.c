@@ -6,21 +6,21 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/19 15:20:56 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:03:00 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void add_env_node(t_env *new_node, t_env **head);
-static t_env *new_node(char *str);
+static void		add_env_node(t_env *new_node, t_env **head);
+static t_env	*new_node(char *str);
 
-void print_env(t_env *head)
+void	print_env(t_env *head)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	if (!head)
-		return;
+		return ;
 	tmp = head;
 	while (tmp != head->prev)
 	{
@@ -30,9 +30,9 @@ void print_env(t_env *head)
 	ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
 }
 
-void create_env(char **env, t_env **head)
+void	create_env(char **env, t_env **head)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -42,17 +42,17 @@ void create_env(char **env, t_env **head)
 	}
 }
 
-static void add_env_node(t_env *new_node, t_env **head)
+static void	add_env_node(t_env *new_node, t_env **head)
 {
-	t_env *current;
-	t_env *last;
+	t_env	*current;
+	t_env	*last;
 
 	if (!new_node)
-		return;
+		return ;
 	if (!*head)
 	{
 		*head = new_node;
-		return;
+		return ;
 	}
 	current = *head;
 	if (current->next == NULL)
@@ -61,7 +61,7 @@ static void add_env_node(t_env *new_node, t_env **head)
 		current->prev = new_node;
 		new_node->next = current;
 		new_node->prev = current;
-		return;
+		return ;
 	}
 	last = current->prev;
 	new_node->prev = last;
@@ -70,10 +70,10 @@ static void add_env_node(t_env *new_node, t_env **head)
 	last->next = new_node;
 }
 
-static t_env *new_node(char *str)
+static t_env	*new_node(char *str)
 {
-	t_env *new;
-	int i;
+	t_env	*new;
+	int		i;
 
 	new = malloc(sizeof(t_env));
 	if (!new)
