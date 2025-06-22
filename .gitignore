@@ -4,3 +4,6 @@
 obj/
 minishell
 .vscode/
+.editorconfig
+tester/
+test_lexer

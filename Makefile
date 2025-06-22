@@ -1,13 +1,15 @@
 NAME = minishell
 
-LIBFT = libft.a
+LIBFT = ./lib/libft.a
 
 DIR_BUILTINS = src/builtins
 
 DIR_TOKEN = src/token
 
+DIR_LEXER = src/lexer
+
 SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
-		para_excluir.c src/expand/expand.c src/expand/utils.c src/exec.c
+		para_excluir.c src/expand/expand.c src/expand/utils.c src/exec.c $(DIR_LEXER)/lexer.c
 
 OBJ_DIR = obj
 
@@ -17,7 +19,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C lib
-	cp lib/$(LIBFT) .
 	cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 
 $(OBJ_DIR)/%.o: %.c
@@ -25,6 +26,7 @@ $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
 	@ mkdir -p $(OBJ_DIR)/src/expand
 	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
+	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	cc -Wall -Wextra -Werror -g -c $< -o $@
 
 clean:
@@ -32,7 +34,7 @@ clean:
 	make clean -C lib
 
 fclean:
-	rm -rf $(OBJ_DIR) $(LIBFT) $(NAME)
+	rm -rf $(OBJ_DIR) $(NAME)
 	make fclean -C lib
 
 re: fclean all

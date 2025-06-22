@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
 /*   Updated: 2025/06/19 20:06:55 by jesda-si         ###   ########.fr       */
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <sys/types.h>
 # include <sys/resource.h>
 # include <signal.h>
@@ -29,8 +30,6 @@
 # include <stdbool.h>
 # include "../lib/libft.h"
 # include "types.h"
-
-bool			exec_command(t_data *data, char *command);
 
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
@@ -59,9 +58,13 @@ char			*token_recreate(char *value, char *variable, int *index,
 char			*find_key(char *variable, t_env *env);
 int				keycmp(char *variable, t_env env, char **str);
 
+/* Lexer functions */
+bool			lexer(t_data *data);
+
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
 
 bool			return_erro(char *message, int code, t_data *data);
+bool			exec_command(t_data *data, char *command);
 
 #endif
