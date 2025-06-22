@@ -6,10 +6,8 @@ DIR_BUILTINS = src/builtins
 
 DIR_TOKEN = src/token
 
-DIR_LEXER = src/lexer
-
-SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c \
-		para_excluir.c src/expand_variables.c src/clear.c src/exec.c $(DIR_LEXER)/lexer.c
+SRC = main.c $(DIR_BUILTINS)/env_utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
+		para_excluir.c src/expand/expand.c src/expand/utils.c src/exec.c $(DIR_LEXER)/lexer.c
 
 OBJ_DIR = obj
 
@@ -24,6 +22,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
+	@ mkdir -p $(OBJ_DIR)/src/expand
 	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	cc -Wall -Wextra -Werror -g -c $< -o $@
