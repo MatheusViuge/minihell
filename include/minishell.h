@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/20 15:10:09 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:46:38 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			print_env(t_env *head);
 void			free_env(t_env *head);
 
 /*  token functions  */
-bool			token(t_data *data, char *prompt, t_token **tokens);
+bool			token(t_data *data, char *prompt);
 char			*end_token(char *str);
 t_type_token	type_token(char *token);
 t_token			*new_token(char *str);
