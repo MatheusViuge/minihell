@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:57:09 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/05/27 23:26:36 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/23 20:05:16 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	print_error(char *msg, bool *is_valid)
 static void	verify_word(t_token *token, t_data *data, bool *is_valid)
 {
 	
-	if (ft_strchr(token->value, '$') && (!token->prev || token->prev->type != HEREDOC))
+	if (ft_strchr(token->value, '$') && (!token->prev
+			|| token->prev->type != HEREDOC))
 	{
 		if (!expand_variable(token, data))
 		{
@@ -68,6 +69,5 @@ bool	lexer(t_token **token, t_data *data)
 			verify_metas(tmp, &is_valid);
 		tmp = tmp->next;
 	}
-		
 	return (is_valid);
 }
