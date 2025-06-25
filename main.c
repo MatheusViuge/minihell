@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/20 19:49:28 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:40:06 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,21 @@ int	main(int ac, char **av, char **env)
 	loop = true;
 	data.exit_code = 0;
 	data.env = NULL;
-	data.tokens = NULL;
 	create_env(env, &data.env);
 	while (loop)
 	{
+		data.tokens = NULL;
+		data.ast = NULL;
 		prompt = readline("mini> ");
 		if (!prompt)
 			continue ;
 		add_history(prompt);
-		loop = exec_command(&data, prompt);
+		parser(&data, prompt);
 		free(prompt);
 		if (size_tokens(data.tokens) == 1
 			&& !ft_strncmp(data.tokens->value, "exit", 5))
 			loop = false;
+		free_ast(data.ast);
 		free_tokens(&data.tokens);
 	}
 	clear_history();

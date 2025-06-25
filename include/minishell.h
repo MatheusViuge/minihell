@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/20 19:46:38 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:31:48 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,21 @@ int				keycmp(char *variable, char **str, t_env env);
 bool			lexer(t_token **tokens, t_data *data);
 
 /*  parser functions */
-void			parser(t_token *tokens, t_data *data);
+bool			parser(t_data *data, char *input);
 void			free_ast(t_node *ast);
 void			ast_builder(t_data *data, int count);
+void			fill_cmd(char **cmd, t_token *token, int number);
+t_node			*create_node(int number, t_token *token);
+void			handle_pipe_node(t_data *data, t_token *token);
+void			link_pipe_node(t_data *data, t_node *node);
+void			link_node(t_data *data, t_node *node);
 bool			ast_error_handler(t_node **ast, t_data *data, char *error_msg);
+int				next_type_token(t_token *token, int count);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
-
+bool			exec_command(t_data *data, char *command);
 bool			return_erro(char *message, int code, t_data *data);
+void	        print_ast(t_node *n, int depth);
 
 #endif

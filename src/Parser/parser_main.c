@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:59:59 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/23 21:03:34 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:46:01 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ static bool	parser_validate(t_data *data)
 	while (tmp)
 	{
 		if (is_redir(tmp))
+		{
 			tmp = tmp->next->next;
-		continue;
+			continue;
+		}
 		if (tmp->type == WORD)
 			has_cmd = true;
 		tmp = tmp->next;
@@ -43,12 +45,13 @@ bool	parser(t_data *data, char *input)
 
 	is_valid = true;
 	if (!input || !*input)
-		return ;
+		return (false);
 	if (!(is_valid = token(data, input)))
 		return (is_valid);	
 	if (!(is_valid = lexer(&data->tokens, data)))
 		return (is_valid);	
-	if (is_valid = parser_validate(data))
+	if ((is_valid = parser_validate(data)))
 		ast_builder(data, 0);
+    print_ast(data->ast, 0);
 	return (is_valid);
 }
