@@ -29,6 +29,7 @@ $(NAME): $(OBJS)
 	@ make -C lib
 	@ cp lib/$(LIBFT) .
 	@ cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
+	@ clear
 	@ echo "$(GREEN)Compilado com sucesso!"
 
 $(OBJ_DIR)/%.o: %.c
@@ -37,17 +38,20 @@ $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_PARSER)
+	@ clear
 	@ echo "$(YELLOW)Compilando $<"
 	@ cc -Wall -Wextra -Werror -g -c $< -o $@
 
 clean:
 	@ rm -rf $(OBJ_DIR)
 	@ make clean -C lib
+	@ clear
 	@ echo "$(RED)Arquivos objeto removidos!"
 
 fclean:
 	@ rm -rf $(OBJ_DIR) $(LIBFT) $(NAME)
 	@ make fclean -C lib
+	@ clear
 	@ echo "$(RED)Arquivos objeto e executável removidos!"
 
 re: fclean all
