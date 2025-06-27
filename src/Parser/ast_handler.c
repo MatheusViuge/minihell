@@ -6,30 +6,35 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 21:28:16 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/24 21:15:35 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:41:59 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	fill_cmd(char **cmd, t_token *token, int number)
+void	fill_cmd(char **cmd, t_token *token, int number, int redir_amount)
 {
 	int	i;
 
 	i = 0;
-	while ( i < number && token)
+	while ( i < number && token && token->type != PIPE)
 	{
-		if (token->type == PIPE)
-			return ;
-		cmd[i] = ft_strdup(token->value);
-		if (!cmd[i])
-			return ;
-		i++;
-		token = token->next;
+		if (token->type == WORD)
+		{
+			cmd[i] = ft_strdup(token->value);
+			if (!cmd[i])
+				return ; //Tenho que retornar error aqui.
+			i++;
+			token = token->next;
+		}
+		// else 
+		// {
+			
+		// }
 	}
 }
 
-t_node	*create_node(int number, t_token *token)
+t_node	*create_node(int number, t_token *token, int redir_amount)
 {
     t_node	*node;
 
@@ -37,7 +42,7 @@ t_node	*create_node(int number, t_token *token)
     if (!node)
 		return (NULL);
 	node->cmd = (char **)ft_calloc(sizeof(char *), number + 1);
-	fill_cmd(node->cmd, token, number);
+	fill_cmd(node->cmd, token, number, redir_amount);
 	if (!node->cmd)
 	{
 		free(node);
@@ -82,11 +87,10 @@ void	link_node(t_data *data, t_node *node)
 	tmp->right = node;
 }
 
-void	ast_builder(t_data *data, int count)
+void	ast_builder(t_data *data)
 {
 	t_token	*tmp;
 	t_token	*after_pipe;
-	t_node	*node;
 	
 	tmp = data->tokens;
 	after_pipe = tmp;
@@ -97,15 +101,8 @@ void	ast_builder(t_data *data, int count)
 			after_pipe = tmp->next;
 			handle_pipe_node(data, tmp);
 		}
-		else if (!tmp->next || tmp->next->type == PIPE)
-		{
-			count += next_type_token(tmp, count);
-			node = create_node(count, after_pipe);
-			if (ast_error_handler(&node, data, "Failed to create node"))
-				break ;
-			link_node(data, node);
-		}
-		count++;
+		else 
+			handle_command_node(data, &tmp);
 		tmp = tmp->next;
 	}
 }

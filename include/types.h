@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/26 21:27:05 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:40:15 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,18 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+typedef struct s_redir
+{
+	t_type_token	type;
+	char			*name;
+	struct s_redir	*next;
+} t_redir;
+
 typedef struct s_node
 {
 	t_type_token	type;
 	char			**cmd;
-	char			**redirs;
+	struct s_redir	*redirs;
 	int				fd_in;
 	int				fd_out;
 	struct s_node	*left;
