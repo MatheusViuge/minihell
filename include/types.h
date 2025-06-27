@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/24 18:51:21 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/26 21:27:05 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,12 @@ typedef struct s_data
 	t_node	*ast;
 	int		exit_code;
 }	t_data;
+
+typedef struct s_expand
+{
+	char	*prev;
+	char	*next;
+	char	*new;
+}	t_expand;
 
 #endif
