@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:57:09 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/23 20:05:16 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:12:04 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ static void	verify_metas(t_token *token, bool *is_valid)
 	{
 		if (!token->prev || !token->next || ft_strlen(token->value) > 1)
 			print_error("syntax error: unexpected token", is_valid);
-		else if (token->prev->type != WORD || token->next->type != WORD)
+		else if ((token->prev->type != WORD && token->prev->type != HEREDOC )
+					|| ( token->next->type != WORD
+						&& token->next->type != HEREDOC))
 			print_error("syntax error: unexpected token", is_valid);
 	}
 }
