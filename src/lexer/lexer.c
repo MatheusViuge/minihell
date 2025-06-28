@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:57:09 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/27 16:12:04 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:57:43 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	print_error(char *msg, bool *is_valid)
 
 static void	verify_word(t_token *token, t_data *data, bool *is_valid)
 {
-	
 	if (ft_strchr(token->value, '$') && (!token->prev
 			|| token->prev->type != HEREDOC))
 	{
@@ -49,23 +48,22 @@ static void	verify_metas(t_token *token, bool *is_valid)
 	{
 		if (!token->prev || !token->next || ft_strlen(token->value) > 1)
 			print_error("syntax error: unexpected token", is_valid);
-		else if ((token->prev->type != WORD && token->prev->type != HEREDOC )
-					|| ( token->next->type != WORD
-						&& token->next->type != HEREDOC))
+		else if ((token->prev->type != WORD && token->prev->type != HEREDOC)
+			|| (token->next->type != WORD && token->next->type != HEREDOC))
 			print_error("syntax error: unexpected token", is_valid);
 	}
 }
 
 bool	lexer(t_token **token, t_data *data)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	bool	is_valid;
 
 	tmp = *token;
 	is_valid = true;
 	while (tmp && is_valid)
 	{
-		if (tmp->type == WORD) //TO DO: Trocar a funcao que verifica se o token é um word, pela de expansao de variaveis
+		if (tmp->type == WORD)
 			verify_word(tmp, data, &is_valid);
 		else
 			verify_metas(tmp, &is_valid);

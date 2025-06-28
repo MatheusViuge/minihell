@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:55:12 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 18:37:57 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:58:20 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_type_token	get_node_type(char *cmd)
 void	handle_pipe_node(t_data *data, t_token *token)
 {
 	t_node	*node;
-	
+
 	node = create_node(1, token, 0);
 	if (ast_error_handler(&node, data, "Failed to create node"))
 		return ;
@@ -54,7 +54,7 @@ int	redir_counter(t_token **token)
 	return (i);
 }
 
-void	get_redirs(t_redir **head ,t_token *token, int redir_amount)
+void	get_redirs(t_redir **head, t_token *token, int redir_amount)
 {
 	t_redir	*redir;
 	t_redir	*tmp;
@@ -92,7 +92,6 @@ void	handle_command_node(t_data *data, t_token **token)
 	count = 0;
 	redir_amount = 0;
 	tmp = *token;
-
 	if (tmp && is_redir(tmp))
 		redir_amount += redir_counter(&tmp);
 	while (tmp && tmp->type == WORD)
@@ -102,7 +101,7 @@ void	handle_command_node(t_data *data, t_token **token)
 		if (tmp && is_redir(tmp))
 			redir_amount += redir_counter(&tmp);
 	}
-	node = create_node(count, *token, redir_amount); // Ajustar está função depois
+	node = create_node(count, *token, redir_amount);
 	if (ast_error_handler(&node, data, "Failed to create node"))
 		return ;
 	link_node(data, node);

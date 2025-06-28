@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 18:38:43 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:54:07 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char			*token_recreate(char *value, char *variable, int *index,
 char			*find_key(char *variable, t_env *env);
 int				keycmp(char *variable, t_env env, char **str);
 
- /* lexer functions */
+/* lexer functions */
 bool			lexer(t_token **tokens, t_data *data);
 
 /*  parser functions */
@@ -68,7 +68,7 @@ void			free_ast(t_node *ast);
 void			ast_builder(t_data *data);
 char			**fill_cmd(t_token *token, int number);
 t_node			*create_node(int number, t_token *token, int redir_amount);
-void			get_redirs(t_redir **head ,t_token *token, int redir_amount);
+void			get_redirs(t_redir **head, t_token *token, int redir_amount);
 void			handle_pipe_node(t_data *data, t_token *token);
 void			handle_command_node(t_data *data, t_token **token);
 void			link_pipe_node(t_data *data, t_node *node);
@@ -81,6 +81,6 @@ t_type_token	get_node_type(char *cmd);
 void			print_tokens(t_token *tokens);
 bool			exec_command(t_data *data, char *command);
 bool			return_erro(char *message, int code, t_data *data);
-void	        print_ast(t_node *n, int depth);
+void			print_ast(t_node *n, int depth);
 
 #endif

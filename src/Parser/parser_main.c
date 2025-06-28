@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:59:59 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/27 19:39:43 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:59:00 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 
 bool	is_redir(t_token *token)
 {
@@ -20,16 +19,13 @@ bool	is_redir(t_token *token)
 
 bool	parser(t_data *data, char *input)
 {
-	bool	is_valid;
-
-	is_valid = true;
 	if (!input || !*input)
 		return (false);
-	if (!(is_valid = token(data, input)))
-		return (is_valid);	
-	if (!(is_valid = lexer(&data->tokens, data)))
-		return (is_valid);	
+	if (!token(data, input))
+		return (false);
+	if (!lexer(&data->tokens, data))
+		return (false);
 	ast_builder(data);
-    print_ast(data->ast, 0);
-	return (is_valid);
+	print_ast(data->ast, 0);
+	return (true);
 }

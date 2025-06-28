@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 21:28:16 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 18:32:37 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:59:34 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	**fill_cmd(t_token *token, int number)
 {
-	int	i;
+	int		i;
 	char	**cmd;
 
 	i = 0;
 	cmd = (char **)ft_calloc(sizeof(char *), number + 1);
-	while ( i < number && token && token->type != PIPE)
+	while (i < number && token && token->type != PIPE)
 	{
 		if (token && is_redir(token))
 			token = token->next->next;
@@ -27,7 +27,7 @@ char	**fill_cmd(t_token *token, int number)
 		{
 			cmd[i] = ft_strdup(token->value);
 			if (!cmd[i])
-			return (NULL); //Tenho que retornar error aqui.
+				return (NULL); //Tenho que retornar error aqui.
 			i++;
 		}
 		token = token->next;
@@ -37,17 +37,18 @@ char	**fill_cmd(t_token *token, int number)
 
 t_node	*create_node(int number, t_token *token, int redir_amount)
 {
-    t_node	*node;
+	t_node	*node;
 
-    node = (t_node *)ft_calloc(sizeof(t_node), 1);
-    if (!node)
+	node = (t_node *)ft_calloc(sizeof(t_node), 1);
+	if (!node)
 		return (NULL);
-	if (!(node->cmd = fill_cmd(token, number)))
+	node->cmd = fill_cmd(token, number);
+	if (!node->cmd)
 	{
 		free(node);
 		return (NULL);
 	}
-	get_redirs(&node->redirs ,token, redir_amount);
+	get_redirs(&node->redirs, token, redir_amount);
 	if (token->type == PIPE)
 		node->type = PIPE;
 	else
@@ -60,7 +61,7 @@ t_node	*create_node(int number, t_token *token, int redir_amount)
 void	link_pipe_node(t_data *data, t_node *node)
 {
 	t_node	*tmp;
-	
+
 	tmp = data->ast;
 	if (tmp->type != PIPE)
 	{
@@ -76,12 +77,14 @@ void	link_pipe_node(t_data *data, t_node *node)
 
 void	link_node(t_data *data, t_node *node)
 {
+	t_node	*tmp;
+
 	if (!data->ast)
 	{
 		data->ast = node;
 		return ;
 	}
-	t_node	*tmp = data->ast;
+	tmp = data->ast;
 	while (tmp->right)
 		tmp = tmp->right;
 	tmp->right = node;
@@ -91,7 +94,7 @@ void	ast_builder(t_data *data)
 {
 	t_token	*tmp;
 	t_token	*after_pipe;
-	
+
 	tmp = data->tokens;
 	after_pipe = tmp;
 	while (tmp)
