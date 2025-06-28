@@ -5,14 +5,21 @@ void print_ast(t_node *n, int depth)
 {
     int      i;
     t_redir *r;
+	const char *type_str;
 
     if (!n)
         return;
 
     /* Indentação e impressão do nó */
     for (i = 0; i < depth; i++)
-        printf("  ");
-    printf("- %s", n->type == PIPE ? "PIPE" : "COMMAND");
+        {printf("  ");}
+	if (n->type == PIPE)
+		type_str = "PIPE";
+	else if (n->type == BUILTIN)
+		type_str = "BUILTIN";
+	else
+		type_str = "COMMAND";
+	printf("- %s", type_str);
     if (n->cmd)
     {
         printf(":");

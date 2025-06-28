@@ -6,11 +6,30 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:55:12 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/27 19:13:33 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:37:57 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_type_token	get_node_type(char *cmd)
+{
+	if (ft_strncmp(cmd, "cd", (ft_strlen("cd") + 1)) == 0)
+		return (BUILTIN);
+	else if (ft_strncmp(cmd, "echo", (ft_strlen("echo") + 1)) == 0)
+		return (BUILTIN);
+	else if (ft_strncmp(cmd, "exit", (ft_strlen("exit") + 1)) == 0)
+		return (BUILTIN);
+	else if (ft_strncmp(cmd, "export", (ft_strlen("export") + 1)) == 0)
+		return (BUILTIN);
+	else if (ft_strncmp(cmd, "pwd", (ft_strlen("pwd") + 1)) == 0)
+		return (BUILTIN);
+	else if (ft_strncmp(cmd, "unset", (ft_strlen("unset") + 1)) == 0)
+		return (BUILTIN);
+	else if (ft_strncmp(cmd, "env", (ft_strlen("env") + 1)) == 0)
+		return (BUILTIN);
+	return (COMMAND);
+}
 
 void	handle_pipe_node(t_data *data, t_token *token)
 {

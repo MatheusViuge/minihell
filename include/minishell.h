@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/27 16:03:19 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:38:43 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void			link_pipe_node(t_data *data, t_node *node);
 void			link_node(t_data *data, t_node *node);
 bool			ast_error_handler(t_node **ast, t_data *data, char *error_msg);
 int				next_type_token(t_token *token, int count);
+t_type_token	get_node_type(char *cmd);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);

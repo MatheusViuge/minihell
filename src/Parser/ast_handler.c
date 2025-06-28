@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 21:28:16 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/27 19:16:29 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:32:37 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_node	*create_node(int number, t_token *token, int redir_amount)
 	if (token->type == PIPE)
 		node->type = PIPE;
 	else
-		node->type = COMMAND;
+		node->type = get_node_type(node->cmd[0]);
 	node->fd_in = -1;
 	node->fd_out = -1;
 	return (node);
