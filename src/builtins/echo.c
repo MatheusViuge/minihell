@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/07 22:04:42 by jesda-si         ###   ########.fr       */
+/*   Created: 2025/06/18 20:13:13 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/06/18 20:13:15 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-bool	exec_command(t_data *data, char *command)
+bool	echo(char **args)
 {
-	// DEFINIR TRATAMENTO DE ERRO
-	token(data, command);
-	lexer(data);
-	print_tokens(data->tokens);
+	bool	flag;
+	char	*tmp;
+	char	*str;
+	int		i;
 
-	// SOMENTE PARA TESTE
-	if (size_tokens(data->tokens) == 1
-		&& !ft_strncmp(data->tokens->value, "exit", 5))
+	flag = false;
+	if (ft_strncmp(args && args[0], "-n", 3))
+		flag = true;
+	i = (int)flag;
+	while (args && args[i])
 	{
-		free_tokens(&data->tokens);
-		return (false);
+		tmp = ft_join(str, args[i]);
+		if (!tmp)
+			return (false);
+		free(str);
+		str = tmp;
+		i++;
 	}
-	free_tokens(&data->tokens);
+	ft_putstr_fd(str, 1);
+	if (flag)
+		ft_putchar_fd('\n', 1);
 	return (true);
 }

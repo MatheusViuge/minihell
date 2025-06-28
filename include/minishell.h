@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/19 15:58:43 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:41:20 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <sys/types.h>
 # include <sys/resource.h>
 # include <signal.h>
@@ -29,8 +30,6 @@
 # include <stdbool.h>
 # include "../lib/libft.h"
 # include "types.h"
-
-bool			exec_command(t_data *data, char *command);
 
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
@@ -57,15 +56,19 @@ void			free_tokens(t_token **tokens);
 
 /*  expanding variables funcrions */
 bool			expand_variable(t_token *token, t_data *data);
-bool			replace_variable(char **value, int *index, t_data *data);
-bool			token_recreate(char **value, char *variable, int *index,
+char			*replace_variable(char *value, int *index, t_data *data);
+char			*token_recreate(char *value, char *variable, int *index,
 					t_data *data);
-char			*find_key(char *variable, t_env *env);
-int				keycmp(char *variable, char **str, t_env env);
+char			*find_value_env(char *variable, t_env *env);
+t_env			*find_env(char *variable, t_env *env);
+
+/* Lexer functions */
+bool			lexer(t_data *data);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
 
 bool			return_erro(char *message, int code, t_data *data);
+bool			exec_command(t_data *data, char *command);
 
 #endif

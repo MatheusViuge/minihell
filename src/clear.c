@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:32:33 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/20 18:32:35 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:01:52 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	free_tokens(t_token **tokens)
 	*tokens = NULL;
 }
 
-void free_env(t_env *head)
+void	free_env(t_env *head)
 {
-	t_env *current;
+	t_env	*current;
 
 	current = head;
 	while (current)
@@ -38,7 +38,7 @@ void free_env(t_env *head)
 		free(current->key);
 		free(current->value);
 		if (current->next == head)
-			break;
+			break ;
 		current = current->next;
 		free(current->prev);
 	}
