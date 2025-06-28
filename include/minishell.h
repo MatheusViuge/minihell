@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/22 16:01:02 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:29:07 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ bool			expand_variable(t_token *token, t_data *data);
 char			*replace_variable(char *value, int *index, t_data *data);
 char			*token_recreate(char *value, char *variable, int *index,
 					t_data *data);
-char			*find_key(char *variable, t_env *env);
-int				keycmp(char *variable, t_env env, char **str);
+char			*find_value_env(char *variable, t_env *env);
+t_env			*find_env(char *variable, t_env *env);
 
 /* Lexer functions */
 bool			lexer(t_data *data);

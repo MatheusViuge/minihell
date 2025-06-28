@@ -6,11 +6,11 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/19 21:14:26 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:32:12 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 static int		join_variable(char **value, t_expand *expand);
 static t_expand	create_expand(int index, char *value, char *key, t_data *data);
@@ -101,7 +101,7 @@ static t_expand	create_expand(int index, char *str, char *key, t_data *data)
 	if (!ft_strncmp(key, "?", 2))
 		expand.new = ft_itoa(data->exit_code);
 	else
-		expand.new = find_key(key, data->env);
+		expand.new = find_value_env(key, data->env);
 	return (expand);
 }
 

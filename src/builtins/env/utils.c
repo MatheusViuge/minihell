@@ -6,40 +6,41 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 19:14:45 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/19 20:59:11 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:32:05 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-char	*find_key(char *variable, t_env *env)
+t_env	*find_env(char *variable, t_env *env)
 {
-	char	*str;
 	t_env	*tmp;
+	t_env	*node;
 
-	str = NULL;
-	if (keycmp(variable, *env, &str) == -1)
-		return (NULL);
+	node = NULL;
+	if (ft_strncmp(variable, env->key, ft_strlen(variable) + 1))
+		node = env;
 	tmp = env->next;
-	while (!str && tmp != env)
+	while (!node && tmp != env)
 	{
-		if (keycmp(variable, *tmp, &str) == -1)
-			return (NULL);
+		if (ft_strncmp(variable, tmp->key, ft_strlen(variable) + 1))
+			node = tmp;
+		if (!node)
+			continue ;
 		tmp = tmp->next;
 	}
-	if (!str)
-		str = ft_strdup("");
-	return (str);
+	return (node);
 }
 
-int	keycmp(char *variable, t_env env, char **str)
+char	*find_value_env(char *variable, t_env *env)
 {
-	if (!ft_strncmp(variable, env.key, ft_strlen(variable) + 1))
-	{
-		*str = ft_strdup(env.value);
-		if (!*str)
-			return (-1);
-		return (1);
-	}
-	return (0);
+	t_env	*node;
+	char	*str;
+
+	node = find_env(variable, env);
+	if (node)
+		str = ft_strdup(node->value);
+	else
+		str = ft_strdup("");
+	return (str);
 }

@@ -6,11 +6,11 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/22 16:03:00 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:30:48 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static void		add_env_node(t_env *new_node, t_env **head);
 static t_env	*new_node(char *str);
