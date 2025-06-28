@@ -10,6 +10,8 @@ DIR_LEXER = src/lexer
 
 DIR_PARSER = src/Parser
 
+BOLD = \033[1m
+RESET = \033[0m
 GREEN = \033[0;32m
 RED = \033[0;31m
 YELLOW = \033[0;33m
@@ -30,7 +32,7 @@ $(NAME): $(OBJS)
 	@ cp lib/$(LIBFT) .
 	@ cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 	@ clear
-	@ echo "$(GREEN)Compilado com sucesso!"
+	@ echo "$(GREEN)Compilado com sucesso!$(RESET)"
 
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
@@ -40,20 +42,20 @@ $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_PARSER)
 	@ clear
-	@ echo "$(YELLOW)Compilando $<"
+	@ echo "$(YELLOW)$(BOLD)Compilando $<"
 	@ cc -Wall -Wextra -Werror -g -c $< -o $@
 
 clean:
 	@ rm -rf $(OBJ_DIR)
 	@ make clean -C lib
 	@ clear
-	@ echo "$(RED)Arquivos objeto removidos!"
+	@ echo "$(RED)$(BOLD)Arquivos objeto removidos!$(RESET)"
 
 fclean:
 	@ rm -rf $(OBJ_DIR) $(LIBFT) $(NAME)
 	@ make fclean -C lib
 	@ clear
-	@ echo "$(RED)Arquivos objeto e executável removidos!"
+	@ echo "$(RED)$(BOLD)Arquivos objetos e ./minishell removidos!$(RESET)"
 
 re: fclean all
 

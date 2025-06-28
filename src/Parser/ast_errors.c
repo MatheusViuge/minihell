@@ -6,11 +6,29 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:45:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/24 17:40:26 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:45:18 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_redir	*new_redir(t_token *token)
+{
+	t_redir	*redir;
+
+	redir = (t_redir *)ft_calloc(sizeof(t_redir), 1);
+	if (!redir)
+		return (NULL);
+	redir->type = token->type;
+	redir->name = ft_strdup(token->next->value);
+	if (!redir->name)
+	{
+		free(redir);
+		return (NULL);
+	}
+	redir->next = NULL;
+	return (redir);
+}
 
 void	free_ast(t_node *ast)
 {

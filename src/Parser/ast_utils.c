@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:55:12 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 18:58:20 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:20:51 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ void	get_redirs(t_redir **head, t_token *token, int redir_amount)
 	{
 		if (is_redir(token))
 		{
-			if (!(redir = (t_redir *)ft_calloc(sizeof(t_redir), 1)))
-				return ; // Handle error
-			redir->type = token->type;
-			if (!(redir->name = ft_strdup(token->next->value)))
-				return ; // Handle error
+			redir = new_redir(token);
+			if (!redir)
+			{
+				ft_putstr_fd("Error: Failed to create redirection node\n", 2);
+				return ;
+			}
 			if (!*head)
 				*head = redir;
 			else

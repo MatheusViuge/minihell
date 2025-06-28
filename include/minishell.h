@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 18:54:07 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:15:17 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			link_node(t_data *data, t_node *node);
 bool			ast_error_handler(t_node **ast, t_data *data, char *error_msg);
 int				next_type_token(t_token *token, int count);
 t_type_token	get_node_type(char *cmd);
+t_redir			*new_redir(t_token *token);
 
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
