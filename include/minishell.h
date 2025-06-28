@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/26 21:41:25 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:03:19 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ bool			parser(t_data *data, char *input);
 bool			is_redir(t_token *token);
 void			free_ast(t_node *ast);
 void			ast_builder(t_data *data);
-void			fill_cmd(char **cmd, t_token *token, int number);
-t_node			*create_node(int number, t_token *token);
+char			**fill_cmd(t_token *token, int number);
+t_node			*create_node(int number, t_token *token, int redir_amount);
+void			get_redirs(t_redir **head ,t_token *token, int redir_amount);
 void			handle_pipe_node(t_data *data, t_token *token);
 void			handle_command_node(t_data *data, t_token **token);
 void			link_pipe_node(t_data *data, t_node *node);

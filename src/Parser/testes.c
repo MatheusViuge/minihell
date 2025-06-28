@@ -3,14 +3,45 @@
 // opção de debug: imprime a árvore
 void print_ast(t_node *n, int depth)
 {
-    if (!n) return;
-    for (int i = 0; i < depth; i++) putchar(' ');
-    printf("- %s:", n->type == PIPE ? "PIPE" : "CMD");
+    int      i;
+    t_redir *r;
+
+    if (!n)
+        return;
+
+    /* Indentação e impressão do nó */
+    for (i = 0; i < depth; i++)
+        printf("  ");
+    printf("- %s", n->type == PIPE ? "PIPE" : "COMMAND");
     if (n->cmd)
-        for (char **c = n->cmd; *c; c++)
-            printf(" %s", *c);
-    putchar('\n');
-    print_ast(n->left,  depth + 2);
-    print_ast(n->right, depth + 2);
+    {
+        printf(":");
+        for (int j = 0; n->cmd[j]; j++)
+            printf(" %s", n->cmd[j]);
+    }
+    printf("\n");
+
+    /* Se houver redirecionamentos, imprima a lista */
+    if (n->redirs)
+    {
+        for (i = 0; i < depth; i++)
+            printf("  ");
+        printf("  Redirects:");
+        r = n->redirs;
+        while (r)
+        {
+            printf(" %s %s",
+                r->type == REDIR_IN   ? "<"  :
+                r->type == REDIR_OUT  ? ">"  :
+                r->type == APPEND     ? ">>" : "<<",
+                r->name);
+            r = r->next;
+        }
+        printf("\n");
+    }
+
+    /* Recursão nos filhos da AST */
+    print_ast(n->left,  depth + 1);
+    print_ast(n->right, depth + 1);
 }
 

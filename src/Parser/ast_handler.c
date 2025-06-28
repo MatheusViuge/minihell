@@ -6,32 +6,33 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 21:28:16 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/26 22:41:59 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:16:29 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	fill_cmd(char **cmd, t_token *token, int number, int redir_amount)
+char	**fill_cmd(t_token *token, int number)
 {
 	int	i;
+	char	**cmd;
 
 	i = 0;
+	cmd = (char **)ft_calloc(sizeof(char *), number + 1);
 	while ( i < number && token && token->type != PIPE)
 	{
+		if (token && is_redir(token))
+			token = token->next->next;
 		if (token->type == WORD)
 		{
 			cmd[i] = ft_strdup(token->value);
 			if (!cmd[i])
-				return ; //Tenho que retornar error aqui.
+			return (NULL); //Tenho que retornar error aqui.
 			i++;
-			token = token->next;
 		}
-		// else 
-		// {
-			
-		// }
+		token = token->next;
 	}
+	return (cmd);
 }
 
 t_node	*create_node(int number, t_token *token, int redir_amount)
@@ -41,13 +42,12 @@ t_node	*create_node(int number, t_token *token, int redir_amount)
     node = (t_node *)ft_calloc(sizeof(t_node), 1);
     if (!node)
 		return (NULL);
-	node->cmd = (char **)ft_calloc(sizeof(char *), number + 1);
-	fill_cmd(node->cmd, token, number, redir_amount);
-	if (!node->cmd)
+	if (!(node->cmd = fill_cmd(token, number)))
 	{
 		free(node);
 		return (NULL);
 	}
+	get_redirs(&node->redirs ,token, redir_amount);
 	if (token->type == PIPE)
 		node->type = PIPE;
 	else
@@ -101,8 +101,8 @@ void	ast_builder(t_data *data)
 			after_pipe = tmp->next;
 			handle_pipe_node(data, tmp);
 		}
-		else 
-			handle_command_node(data, &tmp);
+		else if (!tmp->next || tmp->next->type == PIPE)
+			handle_command_node(data, &after_pipe);
 		tmp = tmp->next;
 	}
 }
