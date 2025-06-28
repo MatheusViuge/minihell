@@ -6,14 +6,11 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 19:42:06 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:31:29 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-static void		add_env_node(t_env *new_node, t_env **head);
-static t_env	*new_node(char *str);
 
 void	env(t_env *head)
 {
@@ -42,7 +39,7 @@ void	create_env(char **env, t_env **head)
 	}
 }
 
-static void	add_env_node(t_env *new_node, t_env **head)
+void	add_env_node(t_env *new_node, t_env **head)
 {
 	t_env	*current;
 	t_env	*last;
@@ -70,7 +67,7 @@ static void	add_env_node(t_env *new_node, t_env **head)
 	last->next = new_node;
 }
 
-static t_env	*new_node(char *str)
+t_env	*new_node(char *str)
 {
 	t_env	*new;
 	int		i;

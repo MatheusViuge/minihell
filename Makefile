@@ -9,7 +9,7 @@ DIR_TOKEN = src/token
 DIR_LEXER = src/lexer
 
 SRC = main.c $(DIR_BUILTINS)/env/env.c $(DIR_BUILTINS)/env/utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
-		para_excluir.c src/expand.c src/exec.c $(DIR_LEXER)/lexer.c $(DIR_BUILTINS)/export/export.c \
+		para_excluir.c src/expand.c src/exec.c $(DIR_LEXER)/lexer.c $(DIR_BUILTINS)/export.c \
 
 OBJ_DIR = obj
 
@@ -25,7 +25,6 @@ $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)/env
-	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)/export
 	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	cc -Wall -Wextra -Werror -g -c $< -o $@

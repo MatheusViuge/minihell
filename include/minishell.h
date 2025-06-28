@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 19:41:20 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:37:46 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@
 void			create_env(char **env, t_env **head);
 void			env(t_env *head);
 void			free_env(t_env *head);
+void			add_env_node(t_env *new_node, t_env **head);
+t_env			*new_node(char *str);
 
 /*  export functions */
-bool 			export(char **args, t_env *head);
-bool			print_env_export(t_env *head);
+bool			export(char **args, t_env **head);
 
 /*  token functions  */
 bool			token(t_data *data, char *prompt);

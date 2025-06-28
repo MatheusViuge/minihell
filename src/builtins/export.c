@@ -6,30 +6,55 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/19 17:48:34 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:33:31 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 static void	order_env(t_env **list);
 static int	len_env(t_env *head);
+static void	set_env(char **args, t_env **head);
+static bool	print_env_export(t_env *head);
 
-bool export(char **args, t_env *head)
+bool	export(char **args, t_env **head)
 {
 	if (!args || !*args)
-		return (print_env_export(head));
+		return (print_env_export(*head));
+	set_env(args, head);
 	return (true);
 }
 
-bool	print_env_export(t_env *head)
+static void	set_env(char **args, t_env **head)
+{
+	int		i;
+
+	i = -1;
+	while (args[++i])
+	{
+		if (ft_strncmp(args[i], "=", 2))
+		{
+			while (args[i])
+			{
+				ft_putstr_fd("\'", 2);
+				ft_putstr_fd(args[i++], 2);
+				ft_putstr_fd("\'", 2);
+				ft_putendl_fd(" não é um identificador válido\n", 2);
+			}
+			return ;
+		}
+		add_env_node(new_node(args[i]), head);
+	}
+}
+
+static bool	print_env_export(t_env *head)
 {
 	int		len;
 	t_env	*tmp;
 	t_env	**cpy;
 
 	if (!head)
-		return true;
+		return (true);
 	len = len_env(head);
 	if (len < 2)
 		return (true);
@@ -76,7 +101,6 @@ static void	order_env(t_env **list)
 				break ;
 		}
 	}
-	
 }
 
 static int	len_env(t_env *head)
