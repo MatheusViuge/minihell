@@ -9,7 +9,7 @@ DIR_TOKEN = src/token
 DIR_LEXER = src/lexer
 
 SRC = main.c $(DIR_BUILTINS)/env/env.c $(DIR_BUILTINS)/env/utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c src/clear.c \
-		para_excluir.c src/expand.c src/exec.c $(DIR_LEXER)/lexer.c $(DIR_BUILTINS)/export.c \
+		para_excluir.c src/expand.c src/exec.c $(DIR_LEXER)/lexer.c $(DIR_BUILTINS)/export.c $(DIR_BUILTINS)/unset.c \
 
 OBJ_DIR = obj
 
