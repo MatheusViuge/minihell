@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/29 15:20:19 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:45:49 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ static void	set_env(char **args, t_env **head)
 	int		i;
 	t_env	*node;
 	t_env	*tmp;
+	char	*str;
 
 	i = -1;
 	while (args[++i])
 	{
 		if (ft_strncmp(args[i], "=", 2))
 		{
-			ft_putstr_fd("\'", 2);
-			ft_putstr_fd(args[i++], 2);
-			ft_putstr_fd("\'", 2);
-			ft_putendl_fd(" não é um identificador válido\n", 2);
+			str = ft_join_args(3, "\'", args[i],
+					"\' não é um identificador válido\n");
+			ft_putendl_fd(str, 2);
+			free(str);
 			continue ;
 		}
 		node = find_env(args[i], *head);
