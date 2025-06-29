@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 20:33:31 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:34:40 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,29 @@ bool	export(char **args, t_env **head)
 static void	set_env(char **args, t_env **head)
 {
 	int		i;
+	t_env	*node;
+	t_env	*tmp;
 
 	i = -1;
 	while (args[++i])
 	{
 		if (ft_strncmp(args[i], "=", 2))
 		{
-			while (args[i])
-			{
-				ft_putstr_fd("\'", 2);
-				ft_putstr_fd(args[i++], 2);
-				ft_putstr_fd("\'", 2);
-				ft_putendl_fd(" não é um identificador válido\n", 2);
-			}
-			return ;
+			ft_putstr_fd("\'", 2);
+			ft_putstr_fd(args[i++], 2);
+			ft_putstr_fd("\'", 2);
+			ft_putendl_fd(" não é um identificador válido\n", 2);
+			continue ;
+		}
+		node = find_env(args[i], *head);
+		if (node)
+		{
+			tmp = new_node(args);
+			free(node->value);
+			node->value = tmp->value;
+			free(node->key);
+			free(node);
+			continue ;
 		}
 		add_env_node(new_node(args[i]), head);
 	}
