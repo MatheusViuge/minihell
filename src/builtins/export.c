@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 21:34:40 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:20:19 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	set_env(char **args, t_env **head)
 		node = find_env(args[i], *head);
 		if (node)
 		{
-			tmp = new_node(args);
+			tmp = new_node(*args);
 			free(node->value);
 			node->value = tmp->value;
 			free(node->key);
