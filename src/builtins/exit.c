@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:00:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/29 15:20:44 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:51:42 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ bool	ft_exit(char **args, t_data *data)
 		ft_putendl_fd("número de argumentos excessivos", 2);
 		return (true);
 	}
-	data->exit_code = atoi_exit(*args);
+	if (args)
+		data->exit_code = atoi_exit(*args);
+	else
+		data->exit_code = 0;
 	return (false);
 }
 
