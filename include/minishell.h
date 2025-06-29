@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 21:00:10 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:20:04 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_env			*new_node(char *str);
 bool			export(char **args, t_env **head);
 bool			unset(char **args, t_env **head);
 void			pwd(t_env *head);
+bool			ft_exit(char **args, t_data *data);
+int				len_args(char **args);
 
 /*  token functions  */
 bool			token(t_data *data, char *prompt);

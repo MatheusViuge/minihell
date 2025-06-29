@@ -6,13 +6,12 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/29 13:52:21 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/29 14:02:55 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	len_args(char **args);
 static void	free_strs(char **strs);
 
 void	cd(char **args, t_env **env)
@@ -49,12 +48,12 @@ static void	free_strs(char **strs)
 	free(strs);
 }
 
-static int	len_args(char **args)
+int	len_args(char **args)
 {
 	int	len;
 
 	len = 0;
-	while (args[len])
+	while (args && args[len])
 		len++;
 	return (len);
 }
