@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 23:22:38 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/18 00:38:14 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/29 13:51:34 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	**ft_split(char const *s, char c)
 	int		size;
 	char	**strs;
 
+	if (!s)
+		return (NULL);
 	size = 0;
 	i = 0;
 	while (s[i])

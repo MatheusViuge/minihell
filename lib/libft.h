@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:11:53 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/27 19:40:05 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/28 23:31:38 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_strchr_nbr(char const *s, int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_join_args(int length, ...);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_strnstr(char const *big, char const *little, size_t len);
 char		*ft_strchr(char const *s, int c);
