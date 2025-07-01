@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:45:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/30 19:59:13 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:20:06 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,32 @@ t_redir	*new_redir(t_token *token)
 	return (redir);
 }
 
-void	free_ast(t_node *ast)
+void	free_ast(t_node **ast)
 {
 	char	**cmd;
+	int		i;
 
-	if (!ast)
+	if (!ast || !*ast)
 		return ;
-	cmd = ast->cmd;
-	free_ast(ast->left);
-	free_ast(ast->right);
-	if (ast->cmd)
+	cmd = (*ast)->cmd;
+	free_ast(&(*ast)->left);
+	free_ast(&(*ast)->right);
+	i = 0;
+	if ((*ast)->cmd)
 	{
-		while (cmd && *cmd)
+		while (cmd && cmd[i])
 		{
-			free(*cmd);
-			cmd++;
+			if (cmd[i])
+				free(cmd[i]);
+			i++;
 		}
-		free(ast->cmd);
+		free((*ast)->cmd);
+		(*ast)->cmd = NULL;
 	}
-	if (ast->redirs)
-		free_redir_list(ast->redirs);
-	free(ast);
+	if ((*ast)->redirs)
+		free_redir_list((*ast)->redirs);
+	free(*ast);
+	*ast = NULL;
 }
 
 bool	ast_error_handler(t_node **ast, t_data *data, char *error_msg)
@@ -71,7 +76,7 @@ bool	ast_error_handler(t_node **ast, t_data *data, char *error_msg)
 	if (!ast || !*ast)
 	{
 		if (data->ast)
-			free_ast(data->ast);
+			free_ast(&data->ast);
 		data->ast = NULL;
 		if (data->tokens)
 			free_tokens(&data->tokens);

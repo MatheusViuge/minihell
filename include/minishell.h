@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 19:15:17 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:17:13 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool			lexer(t_token **tokens, t_data *data);
 /*  parser functions */
 bool			parser(t_data *data, char *input);
 bool			is_redir(t_token *token);
-void			free_ast(t_node *ast);
+void			free_ast(t_node **ast);
 void			ast_builder(t_data *data);
 char			**fill_cmd(t_token *token, int number);
 t_node			*create_node(int number, t_token *token, int redir_amount);
