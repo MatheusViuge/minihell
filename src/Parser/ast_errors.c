@@ -6,11 +6,24 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:45:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 19:45:18 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:59:13 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static void	free_redir_list(t_redir *head)
+{
+	t_redir *tmp;
+
+	while (head)
+	{
+		tmp = head->next;
+		free(head->name);
+		free(head);
+		head = tmp;
+	}
+}
 
 t_redir	*new_redir(t_token *token)
 {
@@ -48,6 +61,8 @@ void	free_ast(t_node *ast)
 		}
 		free(ast->cmd);
 	}
+	if (ast->redirs)
+		free_redir_list(ast->redirs);
 	free(ast);
 }
 
