@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:45:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/01 18:20:06 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:34:56 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	free_redir_list(t_redir *head)
 {
-	t_redir *tmp;
+	t_redir	*tmp;
 
 	while (head)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 21:28:16 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 18:59:34 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:39:45 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ char	**fill_cmd(t_token *token, int number)
 		{
 			cmd[i] = ft_strdup(token->value);
 			if (!cmd[i])
-				return (NULL); //Tenho que retornar error aqui.
+			{
+				while (i-- > 0)
+					free(cmd[i]);
+				return (NULL);
+			}
 			i++;
 		}
 		token = token->next;
