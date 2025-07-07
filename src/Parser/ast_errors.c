@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_errors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:45:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/02 18:34:56 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/07 19:17:36 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,6 @@ t_redir	*new_redir(t_token *token)
 	}
 	redir->next = NULL;
 	return (redir);
-}
-
-void	free_ast(t_node **ast)
-{
-	char	**cmd;
-	int		i;
-
-	if (!ast || !*ast)
-		return ;
-	cmd = (*ast)->cmd;
-	free_ast(&(*ast)->left);
-	free_ast(&(*ast)->right);
-	i = 0;
-	if ((*ast)->cmd)
-	{
-		while (cmd && cmd[i])
-		{
-			if (cmd[i])
-				free(cmd[i]);
-			i++;
-		}
-		free((*ast)->cmd);
-		(*ast)->cmd = NULL;
-	}
-	if ((*ast)->redirs)
-		free_redir_list((*ast)->redirs);
-	free(*ast);
-	*ast = NULL;
 }
 
 bool	ast_error_handler(t_node **ast, t_data *data, char *error_msg)

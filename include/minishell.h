@@ -34,7 +34,7 @@
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
 void			env(t_env *head);
-void			free_env(t_env *head);
+void			free_env(t_env **head);
 void			add_env_node(t_env *new_node, t_env **head);
 t_env			*new_node(char *str);
 
