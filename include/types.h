@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/19 20:51:27 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:48:21 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_type_token
 	HEREDOC,
 	APPEND,
 	COMMAND,
+	BUILTIN,
 }	t_type_token;
 
 typedef struct s_token
@@ -40,10 +41,29 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+typedef struct s_redir
+{
+	t_type_token	type;
+	char			*name;
+	struct s_redir	*next;
+}	t_redir;
+
+typedef struct s_node
+{
+	t_type_token	type;
+	char			**cmd;
+	struct s_redir	*redirs;
+	int				fd_in;
+	int				fd_out;
+	struct s_node	*left;
+	struct s_node	*right;
+}	t_node;
+
 typedef struct s_data
 {
 	t_env	*env;
 	t_token	*tokens;
+	t_node	*ast;
 	int		exit_code;
 }	t_data;
 

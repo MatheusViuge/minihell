@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:57:09 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/05/27 23:26:36 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/07 15:35:26 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	verify_metas(t_token *token, bool *is_valid)
 	{
 		if (!token->prev || !token->next || ft_strlen(token->value) > 1)
 			print_error("syntax error: unexpected token", is_valid);
-		else if (token->prev->type != WORD || token->next->type != WORD)
+		else if ((token->prev->type != WORD && token->prev->type != HEREDOC)
+			|| (token->next->type != WORD && token->next->type != HEREDOC))
 			print_error("syntax error: unexpected token", is_valid);
 	}
 }
