@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/07 16:00:25 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/07 19:19:03 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@
 # include "../lib/libft.h"
 # include "types.h"
 
+bool			line_comand(t_data *data);
+
 /*	env functions	*/
-void			create_env(char **env, t_env **head);
+t_env			*create_env(char **env);
 void			env(t_env *head);
 void			free_env(t_env **head);
 void			add_env_node(t_env *new_node, t_env **head);
@@ -90,7 +92,6 @@ t_redir			*new_redir(t_token *token);
 /*  para apagar      */
 void			print_tokens(t_token *tokens);
 bool			exec_command(t_data *data, char *command);
-bool			return_erro(char *message, int code, t_data *data);
 void			print_ast(t_node *n, int depth);
 
 #endif

@@ -15,39 +15,39 @@
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
-	char	*prompt;
 	bool	loop;
 
 	(void)ac;
 	(void)av;
 	loop = true;
 	data.exit_code = 0;
-	data.env = NULL;
-	create_env(env, &data.env);
+	data.env = create_env(env);
 	while (loop)
-	{
-		data.tokens = NULL;
-		data.ast = NULL;
-		prompt = readline("mini> ");
-		if (!prompt)
-			continue ;
-		add_history(prompt);
-		parser(&data, prompt);
-		free(prompt);
-		if (size_tokens(data.tokens) == 1
-			&& !ft_strncmp(data.tokens->value, "exit", 5))
-			loop = false;
-		free_ast(&data.ast);
-		free_tokens(&data.tokens);
-	}
+		loop = line_comand(&data);
 	clear_history();
 	free_data(&data);
 	return (data.exit_code);
 }
 
-bool	return_erro(char *message, int code, t_data *data)
+bool	line_comand(t_data *data)
 {
-	data->exit_code = code;
-	ft_putendl_fd(message, 2);
+	char	*prompt;
+	bool	res;
+
+	data->tokens = NULL;
+	data->ast = NULL;
+	prompt = readline("mini> ");
+	if (!prompt)
+		return (true);
+	add_history(prompt);
+	res = parser(&data, prompt);
+	free(prompt);
+	if (!res)
+		return (false);
+	if (size_tokens(data->tokens) == 1
+		&& !ft_strncmp(data->tokens->value, "exit", 5))
+		return (false);
+	free_ast(&data->ast);
+	free_tokens(&data->tokens);
 	return (false);
 }
