@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/27 23:14:39 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:17:07 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
+
+void	free_data(t_data *data)
+{
+	if (data->env)
+		free_env(data->env);
+	if (data->tokens)
+		free_tokens(&data->tokens);
+	if (data->ast)
+		free_ast(&data->ast);
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -23,23 +33,25 @@ int	main(int ac, char **av, char **env)
 	loop = true;
 	data.exit_code = 0;
 	data.env = NULL;
-	data.tokens = NULL;
 	create_env(env, &data.env);
 	while (loop)
 	{
+		data.tokens = NULL;
+		data.ast = NULL;
 		prompt = readline("mini> ");
 		if (!prompt)
 			continue ;
 		add_history(prompt);
-		loop = exec_command(&data, prompt);
+		parser(&data, prompt);
 		free(prompt);
 		if (size_tokens(data.tokens) == 1
 			&& !ft_strncmp(data.tokens->value, "exit", 5))
 			loop = false;
+		free_ast(&data.ast);
 		free_tokens(&data.tokens);
 	}
 	clear_history();
-	free_env(data.env);
+	free_data(&data);
 	return (data.exit_code);
 }
 

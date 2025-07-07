@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/24 19:22:14 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:47:45 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	token(t_data *data, char *prompt)
 		curr = prompt + i;
 		end = end_token(curr);
 		if (!end)
-			return (return_erro("Error", -1, data));
+			return (return_erro("Error on tokenization", -1, data));
 		token = create_token(prompt, curr, end, &len);
 		if (!len)
 		{
@@ -34,7 +34,7 @@ bool	token(t_data *data, char *prompt)
 			continue ;
 		}
 		if (!token)
-			return (return_erro("Error", -1, data));
+			return (return_erro("Error on tokenization", -1, data));
 		add_token(&data->tokens, token);
 		i += len;
 	}
