@@ -15,7 +15,7 @@
 bool	token(t_data *data, char *prompt)
 {
 	int		i;
-	size_t	len;
+	int		len;
 	char	*curr;
 	char	*end;
 	t_token	*token;
@@ -41,7 +41,7 @@ bool	token(t_data *data, char *prompt)
 	return (true);
 }
 
-t_token	*create_token(char *prompt, char *start, char *end, size_t *size)
+t_token	*create_token(char *prompt, char *start, char *end, int *size)
 {
 	char	*str;
 	t_token	*token;

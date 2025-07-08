@@ -56,7 +56,7 @@ int				size_tokens(t_token *tokens);
 t_token			*last_token(t_token *tokens);
 void			add_token(t_token **tokens, t_token *new);
 t_token			*create_token(char *prompt, char *start, char *end,
-					size_t *size);
+					int *size);
 int				token_quote(char *str, char **end);
 char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
