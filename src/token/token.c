@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/20 19:47:45 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/07 23:23:07 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ bool	token(t_data *data, char *prompt)
 		curr = prompt + i;
 		end = end_token(curr);
 		if (!end)
-			return (return_erro("Error on tokenization", -1, data));
+			return (error_message(data, 1,
+					"tokenization: syntax error", NULL));
 		token = create_token(prompt, curr, end, &len);
 		if (!len)
 		{
 			i++;
 			continue ;
 		}
-		if (!token)
-			return (return_erro("Error on tokenization", -1, data));
+		if (!token && len == -1)
+			return (error_message(data, 1, "tokenization: memory error", NULL));
 		add_token(&data->tokens, token);
 		i += len;
 	}
@@ -51,7 +52,10 @@ t_token	*create_token(char *prompt, char *start, char *end, int *size)
 		return (NULL);
 	str = ft_substr(prompt, start - prompt, *size);
 	if (!str)
+	{
+		*size = -1;
 		return (NULL);
+	}
 	token = new_token(str);
 	if (!token)
 		*size = -1;

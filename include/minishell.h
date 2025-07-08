@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/07 19:19:03 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:35:55 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # include "types.h"
 
 bool			line_comand(t_data *data);
+void			free_data(t_data *data);
+bool			error_message(t_data *data, int exit_code, char *msg,
+					char *allocated_msg);
 
 /*	env functions	*/
 t_env			*create_env(char **env);

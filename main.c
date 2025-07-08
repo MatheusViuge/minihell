@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/07 19:19:30 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/07 23:06:05 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	line_comand(t_data *data)
 	if (!prompt)
 		return (true);
 	add_history(prompt);
-	res = parser(&data, prompt);
+	res = parser(data, prompt);
 	free(prompt);
 	if (!res)
 		return (false);
@@ -49,5 +49,20 @@ bool	line_comand(t_data *data)
 		return (false);
 	free_ast(&data->ast);
 	free_tokens(&data->tokens);
-	return (false);
+	data->exit_code = 0;
+	return (true);
+}
+
+bool	error_message(t_data *data, int exit_code, char *msg,
+	char *allocated_msg)
+{
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd(allocated_msg, STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
+	if (exit_code == -1)
+		data->exit_code = 1;
+	else
+		data->exit_code = exit_code;
+	return (exit_code != -1);
 }
