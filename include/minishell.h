@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/07 22:36:12 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:50:26 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int				next_type_token(t_token *token, int count);
 t_type_token	get_node_type(char *cmd);
 t_redir			*new_redir(t_token *token);
 
-/*	redirects functios	*/
+/*	redirects functions	*/
 void			handle_redirects(t_data *data, t_node *node);
-void			set_fd(int	fd, int *target_fd);
+void			handle_pipes(t_node *node);
 
 /*	para apagar	*/
 void			print_tokens(t_token *tokens);

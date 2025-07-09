@@ -6,13 +6,13 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 22:13:53 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/07 22:43:20 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:49:41 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void set_fd(int	fd, int *target_fd)
+static void set_fd(int	fd, int *target_fd)
 {
 	if (*target_fd != -1)
 		close(*target_fd);
