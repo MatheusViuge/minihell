@@ -3,42 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/05/07 22:04:42 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:54:46 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-bool	exec_command(t_data *data, char *command)
+void	dupper(int fd_in, int fd_out)
 {
-	bool	res;
-	t_token	*node;
+	if (fd_in != -1)
+	{
+		dup2(fd_in, STDIN_FILENO);
+		close(fd_in);
+	}
+	if (fd_out != -1)
+	{
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
+}
 
-	res = token(data, command);
-	if (res)
+void	exec(t_data *data, t_node *node, char **path)
+{
+	int	i;
+
+	i = 0;
+	while (path && path[i])
 	{
-		node = data->tokens;
-		while (node)
-		{
-			if (node->type == WORD)
-			{
-				if (!expand_variable(node, data))
-					return (true);
-			}
-			node = node->next;
-		}
-		print_tokens(data->tokens);
+		if (access(path[i], F_OK | X_OK) == 0)
+			break ;
+		i++;
 	}
-	// SOMENTE PARA TESTE
-	if (size_tokens(data->tokens) == 1
-		&& !ft_strncmp(data->tokens->value, "exit", 5))
+	if (path[i] == NULL)
 	{
-		free_tokens(&data->tokens);
-		return (false);
+		return_erro(data, 127, "Command not found");
+		exit(data->exit_code);
 	}
-	free_tokens(&data->tokens);
-	return (true);
+	dupper(node->fd_in, node->fd_out);
+	if (execve(path[i], node->cmd, data->env) == -1)
+	{
+		return_erro(data, 1, "Execution failed");
+		exit(data->exit_code);
+	}
 }
