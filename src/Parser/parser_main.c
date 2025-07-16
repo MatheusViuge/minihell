@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:59:59 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 18:59:00 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/07 15:36:22 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	parser(t_data *data, char *input)
 		return (false);
 	if (!token(data, input))
 		return (false);
-	if (!lexer(&data->tokens, data))
+	if (!lexer(data))
 		return (false);
 	ast_builder(data);
 	print_ast(data->ast, 0);

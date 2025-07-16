@@ -14,24 +14,11 @@
 
 bool	exec_command(t_data *data, char *command)
 {
-	bool	res;
-	t_token	*node;
+	// DEFINIR TRATAMENTO DE ERRO
+	token(data, command);
+	lexer(data);
+	print_tokens(data->tokens);
 
-	res = token(data, command);
-	if (res)
-	{
-		node = data->tokens;
-		while (node)
-		{
-			if (node->type == WORD)
-			{
-				if (!expand_variable(node, data))
-					return (true);
-			}
-			node = node->next;
-		}
-		print_tokens(data->tokens);
-	}
 	// SOMENTE PARA TESTE
 	if (size_tokens(data->tokens) == 1
 		&& !ft_strncmp(data->tokens->value, "exit", 5))
