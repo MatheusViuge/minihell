@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 18:48:21 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:42:59 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_node
 {
 	t_type_token	type;
 	char			**cmd;
-	struct s_redir	*redirs;
+	t_redir			*redirs;
 	int				fd_in;
 	int				fd_out;
 	struct s_node	*left;

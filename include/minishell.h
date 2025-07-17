@@ -36,7 +36,7 @@ void			create_env(char **env, t_env **head);
 void			print_env(t_env *head);
 void			free_env(t_env *head);
 
-/*  token functions  */
+/*	token functions	*/
 bool			token(t_data *data, char *prompt);
 char			*end_token(char *str);
 t_type_token	type_token(char *token);
@@ -50,7 +50,7 @@ int				token_quote(char *str, char **end);
 char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
 
-/*  expanding variables */
+/*	expanding variables	*/
 bool			expand_variable(t_token *token, t_data *data);
 char			*replace_variable(char *value, int *index, t_data *data);
 char			*token_recreate(char *value, char *variable, int *index,
@@ -61,7 +61,7 @@ int				keycmp(char *variable, t_env env, char **str);
 /* Lexer functions */
 bool			lexer(t_data *data);
 
-/*  parser functions */
+/*	parser functions	*/
 bool			parser(t_data *data, char *input);
 bool			is_redir(t_token *token);
 void			free_ast(t_node **ast);
@@ -78,7 +78,11 @@ int				next_type_token(t_token *token, int count);
 t_type_token	get_node_type(char *cmd);
 t_redir			*new_redir(t_token *token);
 
-/*  para apagar      */
+/*	redirects functions	*/
+void			handle_redirects(t_data *data, t_node *node);
+void			handle_pipes(t_node *node);
+
+/*	para apagar	*/
 void			print_tokens(t_token *tokens);
 bool			exec_command(t_data *data, char *command);
 bool			return_erro(char *message, int code, t_data *data);
