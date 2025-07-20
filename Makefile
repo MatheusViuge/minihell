@@ -17,7 +17,7 @@ RED = \033[0;31m
 YELLOW = \033[0;33m
 
 SRC = main.c $(DIR_BUILTINS)/env/env.c $(DIR_BUILTINS)/env/utils.c $(DIR_TOKEN)/token.c $(DIR_TOKEN)/utils.c \
-		para_excluir.c src/expand.c src/clear.c src/exec.c $(DIR_LEXER)/lexer.c \
+		src/expand.c src/clear.c src/exec.c $(DIR_LEXER)/lexer.c src/utils.c src/error.c \
 		$(DIR_PARSER)/parser_main.c $(DIR_PARSER)/ast_handler.c $(DIR_PARSER)/ast_errors.c \
 		$(DIR_PARSER)/ast_utils.c $(DIR_PARSER)/testes.c $(DIR_BUILTINS)/export.c $(DIR_BUILTINS)/unset.c \
 		$(DIR_BUILTINS)/pwd.c $(DIR_BUILTINS)/cd.c $(DIR_BUILTINS)/exit.c 

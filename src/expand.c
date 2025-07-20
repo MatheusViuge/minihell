@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 19:32:12 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/20 15:18:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	expand_variable(t_token *token, t_data *data)
 			continue ;
 		token->value = replace_variable(token->value, &i, data);
 		if (!token->value)
-			return (return_erro("Error", 2, data));
+			return (return_erro("Error", NULL, 2, data));
 		if (!token->value[i])
 			break ;
 		if (quote == (token->value[i] & 1))

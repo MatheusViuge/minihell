@@ -6,24 +6,11 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:45:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/07 19:17:36 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/20 15:24:25 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static void	free_redir_list(t_redir *head)
-{
-	t_redir	*tmp;
-
-	while (head)
-	{
-		tmp = head->next;
-		free(head->name);
-		free(head);
-		head = tmp;
-	}
-}
 
 t_redir	*new_redir(t_token *token)
 {

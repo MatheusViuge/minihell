@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/07 19:19:03 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/20 15:32:21 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 # include "types.h"
 
 bool			line_comand(t_data *data);
+void			free_data(t_data *data);
+bool			return_erro(char *msg, char *allocated_msg,
+					int code, t_data *data);
+void			free_redir_list(t_redir *redir);
 
 /*	env functions	*/
 t_env			*create_env(char **env);
@@ -39,6 +43,9 @@ void			env(t_env *head);
 void			free_env(t_env **head);
 void			add_env_node(t_env *new_node, t_env **head);
 t_env			*new_node(char *str);
+char			**convert_env(t_env *env);
+void			*free_env_array(char **env_array);
+int				len_env(t_env *head);
 
 /*  builtins functions */
 bool			export(char **args, t_env **head);
@@ -90,7 +97,6 @@ t_type_token	get_node_type(char *cmd);
 t_redir			*new_redir(t_token *token);
 
 /*  para apagar      */
-void			print_tokens(t_token *tokens);
 bool			exec_command(t_data *data, char *command);
 void			print_ast(t_node *n, int depth);
 

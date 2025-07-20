@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:32:33 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/07 19:17:50 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/20 15:26:10 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,17 @@ void	free_ast(t_node **ast)
 		free_redir_list((*ast)->redirs);
 	free(*ast);
 	*ast = NULL;
+}
+
+void	free_redir_list(t_redir *head)
+{
+	t_redir	*tmp;
+
+	while (head)
+	{
+		tmp = head->next;
+		free(head->name);
+		free(head);
+		head = tmp;
+	}
 }
