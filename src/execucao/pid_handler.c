@@ -6,11 +6,11 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:32:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/24 02:21:58 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/24 02:48:56 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	handle_pid(t_data *data, int pid)
 {

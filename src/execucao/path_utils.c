@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:05:44 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/21 23:32:29 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/24 02:48:44 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	path_join(char **path, char *cmd)
 	}
 }
 
-char **path_finder(t_env *env, char *cmd)
+char	**path_finder(t_env *env, char *cmd)
 {
-	char **path;
-	t_env *current;
+	char	**path;
+	t_env	*current;
 
 	if (!env || !cmd)
 		return (NULL);
