@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:32:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/24 02:48:56 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:04:37 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ void	pid_wait(t_data *data, t_pid *pid)
 		current = current->next;
 	}
 	pid_cleaner(pid);
+	data->pids = NULL;
 }
