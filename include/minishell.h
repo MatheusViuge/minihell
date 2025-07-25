@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/25 15:26:10 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:48:39 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/ioctl.h>
 # include <sys/resource.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <sys/types.h>
 # include <termios.h>
 # include <unistd.h>
@@ -95,6 +96,12 @@ char			**path_finder(t_env *env, char *cmd);
 /* process ID handling */
 void			handle_pid(t_data *data, int pid);
 void			pid_wait(t_data *data, t_pid *pid);
+
+/* data cleanup */
+void			free_data(t_data *data);
+
+/* builtins */
+void			builtin_handler(t_data *data, t_node *node);
 
 /*	para apagar	*/
 void			print_tokens(t_token *tokens);

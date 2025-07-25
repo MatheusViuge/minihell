@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/24 23:57:01 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:47:04 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path)
 		i++;
 	}
 	if (!path[i])
-		return_erro(data, 127, "Command not found");
-	dupper(node->fd_in, node->fd_out);
-	if (execve(path[i], node->cmd, data->env) == -1)
-		return_erro(data, 1, "Execution failed");
+		return_erro("Command not found", 127, data);
+	dupper(ast->fd_in, ast->fd_out);
+	if (execve(path[i], ast->cmd, NULL) == -1)
+		return_erro("Execution failed", 1, data);
 	exec_cleaner(data, path);
 }
 
@@ -64,14 +64,14 @@ static void	exec_pipe(t_data *data, t_node *ast)
 	pid = fork();
 	if (pid < 0)
 	{
-		return_erro(data, 1, "Fork failed");
+		return_erro("Fork failed", 1, data);
 		return ;
 	}
 	path = path_finder(data->env, ast->cmd[0]);
 	if (pid == 0)
 		exec_from_pipe(data, ast, path);
 	path_cleaner(path);
-	pid_handler(data, pid);
+	handle_pid(data, pid);
 }
 
 static void	single_exec(t_data *data, t_node *node)
@@ -80,6 +80,7 @@ static void	single_exec(t_data *data, t_node *node)
 	int		status;
 	char	**path;
 
+	status = 0;
 	if (node->type == BUILTIN)
 	{
 		builtin_handler(data, node);
@@ -89,12 +90,12 @@ static void	single_exec(t_data *data, t_node *node)
 	pid = fork();
 	if (pid < 0)
 	{
-		return_erro(data, 1, "Fork failed");
+		return_erro("Fork failed", 1, data);
 		return ;
 	}
 	if (pid == 0)
 		exec(data, node, path);
-	pid_handler(data, pid);
+	handle_pid(data, pid);
 	path_cleaner(path);
 	data->exit_code = WEXITSTATUS(status);
 }

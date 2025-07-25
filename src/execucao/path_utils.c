@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:05:44 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/24 02:48:44 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:49:30 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	**path_finder(t_env *env, char *cmd)
 	if (!env || !cmd)
 		return (NULL);
 	current = env->next;
+	path = NULL;
 	while (current != env)
 	{
 		if (ft_strncmp(current->key, "PATH", 4) == 0)

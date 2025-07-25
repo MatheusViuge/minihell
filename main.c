@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/01 18:17:07 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:28:45 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	t_data	data;
 	char	*prompt;
 	bool	loop;
+	bool	parsed;
 
 	(void)ac;
 	(void)av;
@@ -42,10 +43,12 @@ int	main(int ac, char **av, char **env)
 		if (!prompt)
 			continue ;
 		add_history(prompt);
-		parser(&data, prompt);
+		parsed = parser(&data, prompt);
 		free(prompt);
-		if (size_tokens(data.tokens) == 1
-			&& !ft_strncmp(data.tokens->value, "exit", 5))
+		if (parsed)
+			exec_handler(&data);
+		if (size_tokens(data.tokens) == 1 && !ft_strncmp(data.tokens->value,
+				"exit", 5))
 			loop = false;
 		free_ast(&data.ast);
 		free_tokens(&data.tokens);
