@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 19:32:12 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/26 13:06:24 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	expand_variable(t_token *token, t_data *data)
 	i = -1;
 	while (token->value[++i])
 	{
-		if (token->value[i] == '\'' || token->value[i] == '\"')
+		if ((token->value[i] == '\'' || token->value[i] == '\"'))
 		{
 			if (quote == -1)
 				quote = token->value[i] & 1;
@@ -38,7 +38,8 @@ bool	expand_variable(t_token *token, t_data *data)
 			return (return_erro("Error", 2, data));
 		if (!token->value[i])
 			break ;
-		if (quote == (token->value[i] & 1))
+		if (((token->value[i] == '\'' || token->value[i] == '\"'))
+			&& quote == (token->value[i] & 1))
 			quote = -1;
 	}
 	return (true);
