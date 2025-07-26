@@ -18,12 +18,12 @@ t_env	*find_env(char *variable, t_env *env)
 	t_env	*node;
 
 	node = NULL;
-	if (ft_strncmp(variable, env->key, ft_strlen(variable) + 1))
+	if (!ft_strncmp(variable, env->key, ft_strlen(variable) + 1))
 		node = env;
 	tmp = env->next;
 	while (!node && tmp != env)
 	{
-		if (ft_strncmp(variable, tmp->key, ft_strlen(variable) + 1))
+		if (!ft_strncmp(variable, tmp->key, ft_strlen(variable) + 1))
 			node = tmp;
 		if (!node)
 			continue ;
