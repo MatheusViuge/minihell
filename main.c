@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/25 16:28:45 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/29 02:33:21 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av, char **env)
 	loop = true;
 	data.exit_code = 0;
 	data.env = NULL;
+	data.pids = NULL;
 	create_env(env, &data.env);
 	while (loop)
 	{

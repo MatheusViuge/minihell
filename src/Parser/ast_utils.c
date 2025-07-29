@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:55:12 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 19:20:51 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/29 02:49:15 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 t_type_token	get_node_type(char *cmd)
 {
-	if (ft_strncmp(cmd, "cd", (ft_strlen("cd") + 1)) == 0)
+	if (cmd && ft_strncmp(cmd, "cd", (ft_strlen("cd") + 1)) == 0)
 		return (BUILTIN);
-	else if (ft_strncmp(cmd, "echo", (ft_strlen("echo") + 1)) == 0)
+	else if (cmd && ft_strncmp(cmd, "echo", (ft_strlen("echo") + 1)) == 0)
 		return (BUILTIN);
-	else if (ft_strncmp(cmd, "exit", (ft_strlen("exit") + 1)) == 0)
+	else if (cmd && ft_strncmp(cmd, "exit", (ft_strlen("exit") + 1)) == 0)
 		return (BUILTIN);
-	else if (ft_strncmp(cmd, "export", (ft_strlen("export") + 1)) == 0)
+	else if (cmd && ft_strncmp(cmd, "export", (ft_strlen("export") + 1)) == 0)
 		return (BUILTIN);
-	else if (ft_strncmp(cmd, "pwd", (ft_strlen("pwd") + 1)) == 0)
+	else if (cmd && ft_strncmp(cmd, "pwd", (ft_strlen("pwd") + 1)) == 0)
 		return (BUILTIN);
-	else if (ft_strncmp(cmd, "unset", (ft_strlen("unset") + 1)) == 0)
+	else if (cmd && ft_strncmp(cmd, "unset", (ft_strlen("unset") + 1)) == 0)
 		return (BUILTIN);
-	else if (ft_strncmp(cmd, "env", (ft_strlen("env") + 1)) == 0)
+	else if (cmd && ft_strncmp(cmd, "env", (ft_strlen("env") + 1)) == 0)
 		return (BUILTIN);
 	return (COMMAND);
 }

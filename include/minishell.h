@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/25 16:48:39 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/29 04:20:35 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ void			handle_pipes(t_node *node);
 /* execution functions */
 void			dupper(int fd_in, int fd_out);
 void			exec_cleaner(t_data *data, char **path);
-void			exec(t_data *data, t_node *node, char **path);
+void			exec(t_data *data, t_node *node, char **path, char **env);
 void			exec_handler(t_data *data);
+char			**env_transform(t_env *env);
+void			free_matrix_env(char **env);
 
 /* path utilities */
 void			path_cleaner(char **path);

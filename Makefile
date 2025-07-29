@@ -28,6 +28,7 @@ SRC = main.c \
 		src/clear.c \
 		src/exec.c \
 		src/execucao/exec_handler.c \
+		src/execucao/exec_utils.c \
 		src/execucao/pid_handler.c \
 		src/execucao/path_utils.c \
 		$(DIR_LEXER)/lexer.c \

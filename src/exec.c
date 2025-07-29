@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/25 16:36:11 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/29 04:17:59 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	exec_cleaner(t_data *data, char **path)
 	exit(exit_code);
 }
 
-void	exec(t_data *data, t_node *node, char **path)
+void	exec(t_data *data, t_node *node, char **path, char **env)
 {
 	int	i;
 
@@ -72,7 +72,7 @@ void	exec(t_data *data, t_node *node, char **path)
 	if (!path[i])
 		return_erro("Command not found", 127, data);
 	dupper(node->fd_in, node->fd_out);
-	if (execve(path[i], node->cmd, NULL) == -1)
+	if (execve(path[i], node->cmd, env) == -1)
 		return_erro("Execution failed", 1, data);
 	exec_cleaner(data, path);
 }
