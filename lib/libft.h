@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:11:53 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/07 16:00:31 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/10 01:21:38 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int			ft_strncmp(char const *s1, char const *s2, size_t n);
 int			ft_atoi(const char *nptr);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_strchr_nbr(char const *s, int c);
+int			ft_strnrchr_nbr(char const *s, int c, int end);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_join_args(int length, ...);
