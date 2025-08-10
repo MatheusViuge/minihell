@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pid_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:32:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/24 23:04:37 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/10 04:21:10 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	pid_wait(t_data *data, t_pid *pid)
 	t_pid	*current;
 	int		status;
 
+	status = 0;
 	current = pid;
 	while (current)
 	{
