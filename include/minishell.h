@@ -6,30 +6,30 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/26 12:47:29 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/10 03:36:13 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include <sys/types.h>
-# include <sys/resource.h>
-# include <signal.h>
-# include <sys/stat.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <dirent.h>
-# include <stdbool.h>
 # include "../lib/libft.h"
 # include "types.h"
+# include <dirent.h>
+# include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/ioctl.h>
+# include <sys/resource.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <termios.h>
+# include <unistd.h>
 
 /*	env functions	*/
 void			create_env(char **env, t_env **head);
@@ -90,6 +90,29 @@ t_redir			*new_redir(t_token *token);
 /*	redirects functions	*/
 void			handle_redirects(t_data *data, t_node *node);
 void			handle_pipes(t_node *node);
+
+/* execution functions */
+void			dupper(int fd_in, int fd_out);
+void			exec_cleaner(t_data *data, char **path);
+void			exec(t_data *data, t_node *node, char **path, char **env);
+void			exec_handler(t_data *data);
+char			**env_transform(t_env *env);
+void			free_matrix_env(char **env);
+
+/* path utilities */
+void			path_cleaner(char **path);
+void			path_join(char **path, char *cmd);
+char			**path_finder(t_env *env, char *cmd);
+
+/* process ID handling */
+void			handle_pid(t_data *data, int pid);
+void			pid_wait(t_data *data, t_pid *pid);
+
+/* data cleanup */
+void			free_data(t_data *data);
+
+/* builtins */
+void			builtin_handler(t_data *data, t_node *node);
 
 /*	para apagar	*/
 void			print_tokens(t_token *tokens);

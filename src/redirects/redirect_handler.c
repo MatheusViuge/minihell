@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:02:29 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/07 18:18:37 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/24 02:47:57 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ void	handle_redirects(t_data *data, t_node *node)
 		redir = redir->next;
 	}
 }
-

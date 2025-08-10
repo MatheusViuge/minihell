@@ -6,13 +6,13 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 22:13:53 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/09 16:49:41 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/24 02:49:49 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void set_fd(int	fd, int *target_fd)
+static void	set_fd(int fd, int *target_fd)
 {
 	if (*target_fd != -1)
 		close(*target_fd);
@@ -21,8 +21,10 @@ static void set_fd(int	fd, int *target_fd)
 
 void	handle_pipes(t_node *node)
 {
-	int pipefd[2];
+	int	pipefd[2];
 
+	if (node == NULL || node->type != PIPE)
+		return ;
 	if (pipe(pipefd) == -1)
 	{
 		return_erro("Failed to create pipe", 1, NULL);
