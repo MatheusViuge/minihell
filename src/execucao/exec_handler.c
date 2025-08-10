@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/10 04:23:13 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/10 04:40:51 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static void	single_exec(t_data *data, t_node *node, char **env)
 void	exec_handler(t_data *data)
 {
 	char	**char_env;
-	
+
 	if (data->exit_code != 0)
 		data->exit_code = 0;
 	if (!data->ast)
