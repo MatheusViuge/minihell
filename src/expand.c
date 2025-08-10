@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/26 13:06:24 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/10 01:07:18 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,20 @@ char	*token_recreate(char *str, char *key, int *index, t_data *data)
 		free(expand.prev);
 		free(expand.next);
 		free(expand.new);
+		*index = -1;
 		return (NULL);
 	}
-	*index = join_variable(&str, &expand);
-	if (*index == -1)
+	free(str);
+	str = ft_join_args(3, expand.prev, expand.new, expand.next);
+	if (!str)
+	{
+		*index = -1;
 		return (NULL);
+	}
+	*index = ft_strlen(str) - ft_strlen(expand.next);
+	free(expand.prev);
+	free(expand.next);
+	free(expand.new);
 	return (str);
 }
 
@@ -104,27 +113,4 @@ static t_expand	create_expand(int index, char *str, char *key, t_data *data)
 	else
 		expand.new = find_value_env(key, data->env);
 	return (expand);
-}
-
-static int	join_variable(char **value, t_expand *expand)
-{
-	char	*str;
-	char	*tmp;
-	int		len;
-
-	str = ft_strjoin(expand->prev, expand->new);
-	if (!str)
-		return (-1);
-	tmp = str;
-	str = ft_strjoin(tmp, expand->next);
-	free(tmp);
-	if (!str)
-		return (-1);
-	free(*value);
-	*value = str;
-	len = ft_strlen(*value) - ft_strlen(expand->next);
-	free(expand->prev);
-	free(expand->next);
-	free(expand->new);
-	return (len);
 }
