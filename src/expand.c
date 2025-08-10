@@ -6,14 +6,15 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/10 01:07:18 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/10 02:19:01 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int		join_variable(char **value, t_expand *expand);
 static t_expand	create_expand(int index, char *value, char *key, t_data *data);
+static void		remove_quotes(char **value, int *index);
+static void		set_quote(char **token, int *index, int *quote, char c);
 
 bool	expand_variable(t_token *token, t_data *data)
 {
@@ -25,12 +26,7 @@ bool	expand_variable(t_token *token, t_data *data)
 	while (token->value[++i])
 	{
 		if ((token->value[i] == '\'' || token->value[i] == '\"'))
-		{
-			if (quote == -1)
-				quote = token->value[i] & 1;
-			else if (quote == (token->value[i] & 1))
-				quote = -1;
-		}
+			set_quote(&token->value, &i, &quote, token->value[i]);
 		if (token->value[i] != '$' || (token->value[i] == '$' && quote == 1))
 			continue ;
 		token->value = replace_variable(token->value, &i, data);
@@ -38,11 +34,56 @@ bool	expand_variable(t_token *token, t_data *data)
 			return (return_erro("Error", 2, data));
 		if (!token->value[i])
 			break ;
-		if (((token->value[i] == '\'' || token->value[i] == '\"'))
-			&& quote == (token->value[i] & 1))
-			quote = -1;
+		if (token->value[i] == '\'' || token->value[i] == '\"')
+			set_quote(&token->value, &i, &quote, token->value[i]);
+		if (!token->value)
+			return (return_erro("Error", 2, data));
 	}
 	return (true);
+}
+
+static void remove_quotes(char **value, int *index)
+{
+	int		start;
+	int		end;
+	char	*str;
+	char	*tmp;
+	char	*prev;
+
+	end = *index;
+	start = ft_strnrchr_nbr(*value, (*value)[*index], *index - 1);
+	prev = ft_substr(*value, 0, start);
+	tmp = ft_substr(*value, start + 1, end - start - 1);
+	if (!tmp)
+	{
+		free(prev);
+		free(*value);
+		*value = NULL;
+		return ;
+	}
+	str = ft_join_args(3, prev, tmp, &(*value)[end + 1]);
+	*index = ft_strlen(tmp) - 1;
+	free(prev);
+	free(tmp);
+	if (!str)
+	{
+		free(*value);
+		*value = NULL;
+		return ;
+	}
+	free(*value);
+	*value = str;
+}
+
+static void	set_quote(char **token, int *index, int *quote, char c)
+{
+	if (*quote == -1)
+		*quote = c & 1;
+	else if (*quote == (c & 1))
+	{
+		remove_quotes(token, index);
+		*quote = -1;
+	}
 }
 
 char	*replace_variable(char *value, int *index, t_data *data)
