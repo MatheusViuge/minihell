@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:57:09 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 18:57:43 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/07 15:35:26 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,6 @@ static void	print_error(char *msg, bool *is_valid)
 {
 	ft_putendl_fd(msg, 2);
 	*is_valid = false;
-}
-
-static void	verify_word(t_token *token, t_data *data, bool *is_valid)
-{
-	if (ft_strchr(token->value, '$') && (!token->prev
-			|| token->prev->type != HEREDOC))
-	{
-		if (!expand_variable(token, data))
-		{
-			print_error("syntax error: unexpected token", is_valid);
-			return ;
-		}
-	}
 }
 
 static void	verify_metas(t_token *token, bool *is_valid)
@@ -54,17 +41,17 @@ static void	verify_metas(t_token *token, bool *is_valid)
 	}
 }
 
-bool	lexer(t_token **token, t_data *data)
+bool	lexer(t_data *data)
 {
 	t_token	*tmp;
 	bool	is_valid;
 
-	tmp = *token;
+	tmp = data->tokens;
 	is_valid = true;
 	while (tmp && is_valid)
 	{
-		if (tmp->type == WORD)
-			verify_word(tmp, data, &is_valid);
+		if (tmp->type == WORD && tmp->prev && tmp->prev->type != HEREDOC)
+			is_valid = expand_variable(tmp, data);
 		else
 			verify_metas(tmp, &is_valid);
 		tmp = tmp->next;
