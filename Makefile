@@ -1,6 +1,6 @@
 NAME = minishell
 
-LIBFT = libft.a
+LIBFT = ./lib/libft.a
 
 DIR_BUILTINS = src/builtins
 
@@ -48,7 +48,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ make -C lib
-	@ cp lib/$(LIBFT) .
+	@ cp $(LIBFT) .
 	@ cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 	@ clear
 	@ echo "$(GREEN)Compilado com sucesso!$(RESET)"

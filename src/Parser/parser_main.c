@@ -23,7 +23,7 @@ bool	parser(t_data *data, char *input)
 		return (false);
 	if (!token(data, input))
 		return (false);
-	if (!lexer(&data->tokens, data))
+	if (!lexer(data))
 		return (false);
 	ast_builder(data);
 	/* print_ast(data->ast, 0); */
