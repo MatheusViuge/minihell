@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/29 04:19:10 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:05:36 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	if (!path[i])
 		return_erro("Command not found", 127, data);
 	dupper(ast->fd_in, ast->fd_out);
+	ast_fd_closer(data->ast);
 	if (execve(path[i], ast->cmd, env) == -1)
 		return_erro("Execution failed", 1, data);
 	exec_cleaner(data, path);
 }
 
-static void	exec_pipe(t_data *data, t_node *ast, char **env)
+static void	 exec_pipe(t_data *data, t_node *ast, char **env)
 {
 	int		pid;
 	char	**path;
