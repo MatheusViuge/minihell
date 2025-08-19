@@ -56,7 +56,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)
-	@ mkdir -p $(OBJ_DIR)/src/expand
+	@ mkdir -p $(OBJ_DIR)/$(DIR_BUILTINS)/env
 	@ mkdir -p $(OBJ_DIR)/$(DIR_TOKEN)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_PARSER)

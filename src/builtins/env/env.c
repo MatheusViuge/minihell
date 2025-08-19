@@ -1,18 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/04/18 01:28:28 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:52:42 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-static void	add_env_node(t_env *new_node, t_env **head)
+void	env(t_env *head)
+{
+	t_env	*tmp;
+
+	if (!head)
+		return ;
+	tmp = head;
+	while (tmp != head->prev)
+	{
+		ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
+		tmp = tmp->next;
+	}
+	ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
+}
+
+t_env	*create_env(char **env)
+{
+	int		i;
+	t_env	*head;
+
+	head = NULL;
+	i = 0;
+	while (env[i])
+	{
+		add_env_node(new_node(env[i]), &head);
+		i++;
+	}
+	return (head);
+}
+
+void	add_env_node(t_env *new_node, t_env **head)
 {
 	t_env	*current;
 	t_env	*last;
@@ -40,7 +70,7 @@ static void	add_env_node(t_env *new_node, t_env **head)
 	last->next = new_node;
 }
 
-static t_env	*new_node(char *str)
+t_env	*new_node(char *str)
 {
 	t_env	*new;
 	int		i;
@@ -62,48 +92,4 @@ static t_env	*new_node(char *str)
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
-}
-
-void	print_env(t_env *head)
-{
-	t_env	*current;
-
-	current = head;
-	if (!head)
-		return ;
-	while (current->next != head)
-	{
-		printf("%s=%s\n", current->key, current->value);
-		current = current->next;
-	}
-	printf("%s=%s\n", current->key, current->value);
-}
-
-void	free_env(t_env *head)
-{
-	t_env	*current;
-
-	current = head;
-	while (current)
-	{
-		free(current->key);
-		free(current->value);
-		if (current->next == head)
-			break ;
-		current = current->next;
-		free(current->prev);
-	}
-	free(current);
-}
-
-void	create_env(char **env, t_env **head)
-{
-	int		i;
-
-	i = 0;
-	while (env[i])
-	{
-		add_env_node(new_node(env[i]), head);
-		i++;
-	}
 }
