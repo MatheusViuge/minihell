@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/18 21:21:26 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:26:52 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_data	data;
 	bool	loop;
-	bool	parsed;
 
 	(void)ac;
 	(void)av;
@@ -37,6 +36,7 @@ bool	line_comand(t_data *data)
 
 	data->tokens = NULL;
 	data->ast = NULL;
+	data->pids = NULL;
 	prompt = readline("mini> ");
 	if (!prompt)
 		return (true);
@@ -45,6 +45,8 @@ bool	line_comand(t_data *data)
 	free(prompt);
 	if (!res)
 		return (false);
+	else
+		exec_handler(data);
 	if (size_tokens(data->tokens) == 1
 		&& !ft_strncmp(data->tokens->value, "exit", 5))
 		return (false);

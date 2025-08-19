@@ -19,14 +19,21 @@ RED = \033[0;31m
 YELLOW = \033[1;33m
 
 SRC = main.c \
-		$(DIR_BUILTINS)/env_utils.c \
+		$(DIR_BUILTINS)/env/env.c \
+		$(DIR_BUILTINS)/env/utils.c \
+		$(DIR_BUILTINS)/cd.c \
+		$(DIR_BUILTINS)/echo.c \
+		$(DIR_BUILTINS)/exit.c \
+		$(DIR_BUILTINS)/export.c \
+		$(DIR_BUILTINS)/pwd.c \
+		$(DIR_BUILTINS)/unset.c \
 		$(DIR_TOKEN)/token.c \
 		$(DIR_TOKEN)/utils.c \
-		para_excluir.c \
-		src/expand/expand.c \
-		src/expand/utils.c \
+		src/expand.c \
+		src/utils.c \
 		src/clear.c \
 		src/exec.c \
+		src/error.c \
 		src/execucao/exec_handler.c \
 		src/execucao/exec_utils.c \
 		src/execucao/pid_handler.c \

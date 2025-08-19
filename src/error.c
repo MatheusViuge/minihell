@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 15:09:14 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/20 15:30:23 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:52:05 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-bool	return_erro(char *msg, char *allocated_msg, int code,
-	t_data *data)
+bool	return_erro(char *msg, char *allocated_msg, int code, t_data *data)
 {
 	bool	ret;
 
