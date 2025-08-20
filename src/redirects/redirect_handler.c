@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:02:29 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/19 18:40:10 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/20 14:40:42 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ void	handle_redirects(t_data *data, t_node *node)
 {
 	t_redir	*redir;
 
-	if (!node || !node->redirs)
+	if (!node)
 		return ;
 	handle_redirects(data, node->left);
 	handle_redirects(data, node->right);
+	if (!node->redirs)
+		return ;
 	redir = node->redirs;
 	while (redir)
 	{
