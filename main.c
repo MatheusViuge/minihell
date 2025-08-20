@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/19 19:26:52 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:15:42 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ bool	line_comand(t_data *data)
 		return (false);
 	free_ast(&data->ast);
 	free_tokens(&data->tokens);
-	return (false);
+	return (true);
 }
