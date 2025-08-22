@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/22 15:12:13 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:35:42 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ bool	expand_variable(t_token *token, t_data *data)
 			return (return_erro("Error", NULL, 2, data));
 		if (token->value[i] != '$' || (token->value[i] == '$' && quote == 1))
 			continue ;
-		token->value = replace_variable(token->value, &i, data);
+		if (quote != 1)
+			token->value = replace_variable(token->value, &i, data);
 		if (!token->value)
 			return (return_erro("Error", NULL, 2, data));
 		if (!token->value[i])
