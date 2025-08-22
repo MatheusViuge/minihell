@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/10 03:36:13 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:05:40 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,26 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <termios.h>
-# include <unistd.h>
+# include <dirent.h>
+# include <stdbool.h>
+# include "../lib/libft.h"
+# include "types.h"
+
+bool			line_comand(t_data *data);
+void			free_data(t_data *data);
+bool			return_erro(char *msg, char *allocated_msg,
+					int code, t_data *data);
+void			free_redir_list(t_redir *redir);
 
 /*	env functions	*/
-void			create_env(char **env, t_env **head);
+t_env			*create_env(char **env);
 void			env(t_env *head);
-void			free_env(t_env *head);
+void			free_env(t_env **head);
 void			add_env_node(t_env *new_node, t_env **head);
 t_env			*new_node(char *str);
+char			**convert_env(t_env *env);
+void			*free_env_array(char **env_array);
+int				len_env(t_env *head);
 
 /*  builtins functions */
 bool			export(char **args, t_env **head);
@@ -117,7 +129,6 @@ void			builtin_handler(t_data *data, t_node *node);
 /*	para apagar	*/
 void			print_tokens(t_token *tokens);
 bool			exec_command(t_data *data, char *command);
-bool			return_erro(char *message, int code, t_data *data);
 void			print_ast(t_node *n, int depth);
 
 #endif

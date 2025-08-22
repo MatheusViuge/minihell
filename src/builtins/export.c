@@ -6,14 +6,13 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/29 15:45:49 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/20 15:26:50 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 static void	order_env(t_env **list);
-static int	len_env(t_env *head);
 static void	set_env(char **args, t_env **head);
 static bool	print_env_export(t_env *head);
 
@@ -113,7 +112,7 @@ static void	order_env(t_env **list)
 	}
 }
 
-static int	len_env(t_env *head)
+int	len_env(t_env *head)
 {
 	int		len;
 	t_env	*tmp;

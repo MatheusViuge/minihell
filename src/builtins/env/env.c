@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/06/28 20:31:29 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:52:42 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ void	env(t_env *head)
 	ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
 }
 
-void	create_env(char **env, t_env **head)
+t_env	*create_env(char **env)
 {
-	int	i;
+	int		i;
+	t_env	*head;
 
+	head = NULL;
 	i = 0;
 	while (env[i])
 	{
-		add_env_node(new_node(env[i]), head);
+		add_env_node(new_node(env[i]), &head);
 		i++;
 	}
+	return (head);
 }
 
 void	add_env_node(t_env *new_node, t_env **head)

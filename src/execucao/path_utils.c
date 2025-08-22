@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:05:44 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/25 16:49:30 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:21:12 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	path_join(char **path, char *cmd)
 		}
 		free(path[i]);
 		path[i] = ft_strjoin(temp, cmd);
+		free(temp);
 		i++;
 	}
 }
