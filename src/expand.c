@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/22 15:35:42 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/22 16:04:58 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	remove_quotes(char **value, int *index)
 		return ;
 	}
 	str = ft_join_args(3, prev, tmp, &(*value)[*index + 1]);
-	*index = ft_strlen(tmp) - 1;
+	*index = ft_strlen(prev) + ft_strlen(tmp) - 1;
 	free(prev);
 	free(tmp);
 	free(*value);
