@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:11:53 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/10 01:21:38 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:46:07 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "gnl/get_next_line.h"
 # include "printf/ft_printf.h"
+# include "sprintf/ft_sprintf.h"
 
 typedef struct s_list
 {

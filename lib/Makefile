@@ -14,7 +14,9 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	gnl/get_next_line.c gnl/get_next_line_utils.c ft_strcspn.c ft_lstswap.c ft_dbl_lstswap.c \
 	ft_atol.c ft_strchr_nbr.c ft_join_args.c ft_strnrchr_nbr.c \
 	printf/ft_printf.c printf/print_char.c printf/print_str.c printf/print_pointer.c printf/print_nbr.c printf/print_unsigned.c \
-	printf/print_hex.c printf/print_uns_long_hex.c
+	printf/print_hex.c printf/print_uns_long_hex.c \
+	sprintf/ft_sprintf.c sprintf/malloc_char.c sprintf/malloc_str.c sprintf/malloc_pointer.c sprintf/malloc_nbr.c sprintf/malloc_unsigned.c \
+	sprintf/malloc_hex.c sprintf/malloc_uns_long_hex.c
 
 OBJ_DIR = obj
 
@@ -27,6 +29,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)
+	@ mkdir -p $(OBJ_DIR)/sprintf
 	@ mkdir -p $(OBJ_DIR)/printf
 	@ mkdir -p $(OBJ_DIR)/gnl
 	cc -Wall -Wextra -Werror -g -c $< -o $@
