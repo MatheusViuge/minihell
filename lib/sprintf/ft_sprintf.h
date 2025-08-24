@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:58:43 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/24 19:20:20 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:49:22 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@ char	*malloc_nbr(va_list *args);
 char	*malloc_unsigned(va_list *args);
 char	*malloc_hex(va_list *args, char c);
 char	*malloc_uns_long_hex(unsigned long p, const char *base);
+char	**malloc_array_args(const char *str);
+char	*malloc_new_str(const char *str, char **array_args);
+void	free_array_args(char **array_args);
 
 #endif

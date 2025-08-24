@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:55:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/24 19:44:05 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:51:05 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 static char	*switch_format(char c, va_list *args);
 static void	malloc_format(const char *str, char **array_args, va_list *args);
 static char	*cpy_str_format(char *new_str, const char *str, char **array_args);
-static char	*malloc_new_str(const char *str, char **array_args);
-static char	**malloc_array_args(const char *str);
-static void	free_array_args(char **array_args);
 
 char	*ft_sprintf(const char *str, ...)
 {
@@ -50,29 +47,24 @@ static char	*cpy_str_format(char *new_str, const char *str, char **array_args)
 	int	i;
 	int	j;
 	int	k;
-	int	len;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	k = 0;
-	while (str && str[i])
+	while (str && str[++i])
 	{
 		if (str[i] == '%' && str[i + 1])
 		{
-			if (str[i + 1] == '%')
-				new_str[j++] = str[i++];
-			else
+			if (str[++i] == '%')
 			{
-				len = (int)ft_strlen(array_args[k]);
-				ft_strlcpy(&new_str[j], array_args[k], len + 1);
-				j += len;
-				k++;
-				i++;
+				new_str[j++] = '%';
+				continue ;
 			}
+			j += (int)ft_strlen(array_args[k]);
+			ft_strlcat(new_str, array_args[k++], j + 1);
 		}
 		else
 			new_str[j++] = str[i];
-		i++;
 	}
 	new_str[j] = '\0';
 	return (new_str);
@@ -118,65 +110,4 @@ static char	*switch_format(char c, va_list *args)
 	if (c == 'x' || c == 'X')
 		return (malloc_hex(args, c));
 	return (NULL);
-}
-
-static char	**malloc_array_args(const char *str)
-{
-	int		i;
-	int		count;
-	char	**array_args;
-
-	array_args = NULL;
-	i = 0;
-	count = 0;
-	while (str && str[i])
-	{
-		if (str[i] == '%' && str[i + 1])
-		{
-			if (str[i + 1] != '%')
-				count++;
-			else
-				i++;
-		}
-		i++;
-	}
-	array_args = (char **)ft_calloc(count + 1, sizeof(char *));
-	return (array_args);
-}
-
-static char	*malloc_new_str(const char *str, char **array_args)
-{
-	int		i;
-	int		count;
-	char	*new_str;
-
-	i = 0;
-	count = 0;
-	while (str && str[i])
-	{
-		if (str[i] == '%' && str[i + 1])
-		{
-			if (str[i + 1] == '%')
-				count++;
-			i++;
-		}
-		else
-			count++;
-		i++;
-	}
-	i = -1;
-	while (array_args && array_args[++i])
-		count += ft_strlen(array_args[i]);
-	new_str = (char *)ft_calloc(count + 1, sizeof(char));
-	return (new_str);
-}
-
-static void	free_array_args(char **array_args)
-{
-	int	i;
-
-	i = -1;
-	while (array_args && array_args[++i])
-		free(array_args[i]);
-	free(array_args);
 }

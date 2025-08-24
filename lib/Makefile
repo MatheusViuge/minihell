@@ -16,7 +16,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	printf/ft_printf.c printf/print_char.c printf/print_str.c printf/print_pointer.c printf/print_nbr.c printf/print_unsigned.c \
 	printf/print_hex.c printf/print_uns_long_hex.c \
 	sprintf/ft_sprintf.c sprintf/malloc_char.c sprintf/malloc_str.c sprintf/malloc_pointer.c sprintf/malloc_nbr.c sprintf/malloc_unsigned.c \
-	sprintf/malloc_hex.c sprintf/malloc_uns_long_hex.c
+	sprintf/malloc_hex.c sprintf/malloc_uns_long_hex.c sprintf/utils.c
 
 OBJ_DIR = obj
 
