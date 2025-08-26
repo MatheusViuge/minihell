@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/26 18:54:13 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:21:52 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,30 @@
 
 static t_expand	create_expand(int index, char *value, char *key, t_data *data);
 static void		remove_quotes(char **value, int *index);
-static void		set_quote(char **token, int *index, int *quote, char c);
 
 bool	expand_variable(t_token *token, t_data *data)
 {
 	int		i;
 	int		quote;
+	char	letter;
 
 	quote = -1;
 	i = -1;
 	while (token->value[++i])
 	{
-		if ((token->value[i] == '\'' || token->value[i] == '\"'))
-			set_quote(&token->value, &i, &quote, token->value[i]);
-		if (!token->value)
-			return (return_erro("Error", NULL, 2, data));
-		if (token->value[i] != '$' || (token->value[i] == '$' && quote == 1))
+		letter = token->value[i];
+		if ((letter == '\'' || letter == '\"') && quote == -1)
+			quote = letter & 1;
+		else if ((letter == '\'' || letter == '\"') && quote == (letter & 1))
+		{
+			remove_quotes(&token->value, &i);
+			if (!token->value)
+				return (return_erro("Error", NULL, 2, data));
+			quote = -1;
+		}
+		if (letter != '$' || (letter == '$' && quote == 1))
 			continue ;
-		token->value = replace_variable(token->value, &i, data);
+		replace_variable(token->value, &i, data);
 		if (!token->value)
 			return (return_erro("Error", NULL, 2, data));
 	}
@@ -64,17 +70,6 @@ static void	remove_quotes(char **value, int *index)
 	*value = str;
 }
 
-static void	set_quote(char **token, int *index, int *quote, char c)
-{
-	if (*quote == -1)
-		*quote = c & 1;
-	else if (*quote == (c & 1))
-	{
-		remove_quotes(token, index);
-		*quote = -1;
-	}
-}
-
 char	*replace_variable(char *value, int *index, t_data *data)
 {
 	int			i;
@@ -91,8 +86,12 @@ char	*replace_variable(char *value, int *index, t_data *data)
 		i++;
 	else
 	{
-		while (value[i] && (ft_isalnum((int)value[i]) || value[i] == '_'))
+		while (value[i])
+		{
+			if (ft_isalnum((int)value[i]) || value[i] == '_')
+				break ;
 			i++;
+		}
 	}
 	variable = ft_substr(value, start, i - start);
 	if (!variable)
