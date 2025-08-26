@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:55:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/24 20:51:05 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/26 18:20:14 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_sprintf(const char *str, ...)
 		return (NULL);
 	}
 	cpy_str_format(new_str, str, array_args);
+	free_array_args(array_args);
 	return (new_str);
 }
 
