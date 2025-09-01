@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/20 15:26:50 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/28 17:02:43 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static bool	print_env_export(t_env *head)
 	cpy[len--] = tmp;
 	order_env(cpy);
 	while (cpy[++len])
-		ft_printf("declare -x %s=\"%s\"\n", cpy[len]->key, cpy[len]->value);
+		ft_printf("declare -x %s=%s\n", cpy[len]->key, cpy[len]->value);
 	free(cpy);
 	return (true);
 }

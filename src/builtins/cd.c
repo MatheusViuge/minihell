@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/29 14:02:55 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/28 19:41:41 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	free_strs(char **strs);
+//static void	free_strs(char **strs);
 
 void	cd(char **args, t_env **env)
 {
 	char	*old_pwd;
 	char	*str;
 	char	**strs;
-
+	(void)env;
 	if (len_args(args) > 1)
 	{
 		printf("número excessivo de argumentos\n");
@@ -37,17 +37,17 @@ void	cd(char **args, t_env **env)
 	free(str);
 	if (!strs)
 		return ; // error
-	unset(strs, env);
-	free_strs(strs);
+	//unset(strs, env);
+	//free_strs(strs);
 }
 
-static void	free_strs(char **strs)
+/* static void	free_strs(char **strs)
 {
 	free(strs[0]);
 	free(strs[1]);
 	free(strs);
 }
-
+ */
 int	len_args(char **args)
 {
 	int	len;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/07 18:52:42 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/08/25 23:36:59 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	env(t_env *head)
 	tmp = head;
 	while (tmp != head->prev)
 	{
-		ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
+		ft_printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
-	ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
+	ft_printf("%s=%s\n", tmp->key, tmp->value);
 }
 
 t_env	*create_env(char **env)
