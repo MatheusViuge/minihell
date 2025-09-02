@@ -60,8 +60,11 @@ static char	*cpy_str_format(char *new_str, const char *str, char **array_args)
 				new_str[j++] = '%';
 				continue ;
 			}
-			j += (int)ft_strlen(array_args[k]);
-			ft_strlcat(new_str, array_args[k++], j + 1);
+			if (array_args)
+			{
+				j += (int)ft_strlen(array_args[k]);
+				ft_strlcat(new_str, array_args[k++], j + 1);
+			}
 		}
 		else
 			new_str[j++] = str[i];
