@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/22 15:05:40 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:26:14 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void			*free_env_array(char **env_array);
 int				len_env(t_env *head);
 
 /*  builtins functions */
+void			cd(char **args, t_env **env);
+bool			echo(char **args);
 bool			export(char **args, t_env **head);
 bool			unset(char **args, t_env **head);
 void			pwd(t_env *head);
