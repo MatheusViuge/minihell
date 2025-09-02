@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:00:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/29 15:51:42 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/01 23:16:58 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 static int	atoi_exit(char *str);
 
-bool	ft_exit(char **args, t_data *data)
+void	ft_exit(t_node *ast, t_data *data)
 {
 	ft_putendl_fd("exit", 1);
-	if (len_args(args) > 1)
+	if (len_args(&ast->cmd[1]) > 1)
 	{
 		data->exit_code = 2;
 		ft_putendl_fd("número de argumentos excessivos", 2);
-		return (true);
+		return ;
 	}
-	if (args)
-		data->exit_code = atoi_exit(*args);
+	if (ast->cmd[1])
+		data->exit_code = atoi_exit(ast->cmd[1]);
 	else
 		data->exit_code = 0;
-	return (false);
+	free_data(data);
+	exit(data->exit_code);
 }
 
 static int	atoi_exit(char *str)

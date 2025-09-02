@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/01 22:57:11 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/01 23:18:09 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool			echo(char **args);
 bool			export(char **args, t_env **head);
 bool			unset(char **args, t_env **head);
 void			pwd(t_data *data);
-bool			ft_exit(char **args, t_data *data);
+void			ft_exit(t_node *ast, t_data *data);
 int				len_args(char **args);
 
 /*	token functions	*/
