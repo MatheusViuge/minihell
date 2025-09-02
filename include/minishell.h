@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/28 17:29:40 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/01 22:57:11 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			cd(char **args, t_env **env);
 bool			echo(char **args);
 bool			export(char **args, t_env **head);
 bool			unset(char **args, t_env **head);
-void			pwd(t_env *head);
+void			pwd(t_data *data);
 bool			ft_exit(char **args, t_data *data);
 int				len_args(char **args);
 
