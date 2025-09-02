@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/29 04:20:35 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/28 17:29:40 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,35 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <termios.h>
-# include <unistd.h>
+# include <dirent.h>
+# include <stdbool.h>
+# include "../lib/libft.h"
+# include "types.h"
+
+bool			line_comand(t_data *data);
+void			free_data(t_data *data);
+bool			return_erro(char *msg, char *allocated_msg,
+					int code, t_data *data);
+void			free_redir_list(t_redir *redir);
 
 /*	env functions	*/
-void			create_env(char **env, t_env **head);
-void			print_env(t_env *head);
-void			free_env(t_env *head);
+t_env			*create_env(char **env);
+void			env(t_env *head);
+void			free_env(t_env **head);
+void			add_env_node(t_env *new_node, t_env **head);
+t_env			*new_node(char *str);
+char			**convert_env(t_env *env);
+void			*free_env_array(char **env_array);
+int				len_env(t_env *head);
+
+/*  builtins functions */
+void			cd(char **args, t_env **env);
+bool			echo(char **args);
+bool			export(char **args, t_env **head);
+bool			unset(char **args, t_env **head);
+void			pwd(t_env *head);
+bool			ft_exit(char **args, t_data *data);
+int				len_args(char **args);
 
 /*	token functions	*/
 bool			token(t_data *data, char *prompt);
@@ -50,13 +73,13 @@ int				token_quote(char *str, char **end);
 char			*token_meta_char(char *end);
 void			free_tokens(t_token **tokens);
 
-/*	expanding variables	*/
+/*  expanding variables funcrions */
 bool			expand_variable(t_token *token, t_data *data);
 char			*replace_variable(char *value, int *index, t_data *data);
 char			*token_recreate(char *value, char *variable, int *index,
 					t_data *data);
-char			*find_key(char *variable, t_env *env);
-int				keycmp(char *variable, t_env env, char **str);
+char			*find_value_env(char *variable, t_env *env);
+t_env			*find_env(char *variable, t_env *env);
 
 /* Lexer functions */
 bool			lexer(t_data *data);
@@ -108,7 +131,6 @@ void			builtin_handler(t_data *data, t_node *node);
 /*	para apagar	*/
 void			print_tokens(t_token *tokens);
 bool			exec_command(t_data *data, char *command);
-bool			return_erro(char *message, int code, t_data *data);
 void			print_ast(t_node *n, int depth);
 
 #endif

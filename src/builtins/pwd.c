@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   para_excluir.c                                     :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 15:56:25 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/30 15:56:28 by jesda-si         ###   ########.fr       */
+/*   Created: 2025/06/28 20:58:56 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/06/29 13:53:54 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../../include/minishell.h"
 
-void	print_tokens(t_token *tokens)
+void	pwd(t_env *head)
 {
-	const char	*types[6] = {"word", "pipe", "redirect input",
-		"redirect output", "heredoc", "append"};
+	t_env	*node;
 
-	if (!tokens)
+	node = find_env("PWD", head);
+	if (!node)
 		return ;
-	while (tokens)
-	{
-		printf("token: %s\ntipo: %s\n\n", tokens->value, types[tokens->type]);
-		tokens = tokens->next;
-	}
+	ft_putendl_fd(node->value, 1);
 }

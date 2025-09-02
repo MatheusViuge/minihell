@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/29 04:17:59 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/28 17:28:45 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void	builtin_handler(t_data *data, t_node *ast)
 	if (ast->type == BUILTIN)
 	{
 		if (ft_strncmp(ast->cmd[0], "cd", 3) == 0)
-			printf("cd command not implemented\n");//cd_handler(data, ast);
+			cd(ast->cmd + 1, &data->env);
 		else if (ft_strncmp(ast->cmd[0], "echo", 4) == 0)
-			printf("echo command not implemented\n");//echo_handler(data, ast);
+			echo(ast->cmd + 1);
 		else if (ft_strncmp(ast->cmd[0], "env", 3) == 0)
-			printf("env command not implemented\n");//env_handler(data, ast);
+			env(data->env);
 		else if (ft_strncmp(ast->cmd[0], "exit", 4) == 0)
-			printf("exit command not implemented\n");//exit_handler(data, ast);
+			ft_exit(ast->cmd + 1, data);
 		else if (ft_strncmp(ast->cmd[0], "export", 6) == 0)
-			printf("export command not implemented\n");//export_handler(data, ast);
+			export(ast->cmd + 1, &data->env);
 		else if (ft_strncmp(ast->cmd[0], "pwd", 3) == 0)
-			printf("pwd command not implemented\n");//pwd_handler(data, ast);
+			pwd(data->env);
 		else if (ft_strncmp(ast->cmd[0], "unset", 6) == 0)
-			printf("unset command not implemented\n");//unset_handler(data, ast);
+			unset(ast->cmd + 1, &data->env);
 	}
 }
 
@@ -70,9 +70,9 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 		i++;
 	}
 	if (!path[i])
-		return_erro("Command not found", 127, data);
+		perror("Exec failed");//return_erro("Command not found", 127, data);
 	dupper(node->fd_in, node->fd_out);
 	if (execve(path[i], node->cmd, env) == -1)
-		return_erro("Execution failed", 1, data);
+		perror("Exec failed");//return_erro("Execution failed", 1, data);
 	exec_cleaner(data, path);
 }

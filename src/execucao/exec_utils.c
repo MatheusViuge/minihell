@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 03:35:55 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/29 04:29:33 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/15 16:55:45 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ char **env_transform(t_env *env)
 	if (!env)
 		return NULL;
 	size = get_env_size(env);
-	char_env = malloc(sizeof(char *) * size);
+	char_env = (char **)malloc(sizeof(char *) * size);
 	if (!char_env)
 		return NULL;
 	i = 0;
-	while (env && i < size)
+	while (env && i < size - 1)
 	{
 		temp_str = ft_strjoin(env->key, "=");
 		char_env[i] = ft_strjoin(temp_str, env->value);
