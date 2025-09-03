@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/28 17:29:40 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:08:52 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # include <termios.h>
 # include <dirent.h>
 # include <stdbool.h>
-# include "../lib/libft.h"
-# include "types.h"
 
 bool			line_comand(t_data *data);
 void			free_data(t_data *data);
