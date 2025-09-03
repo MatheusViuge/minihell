@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 20:42:04 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/24 20:49:09 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:01:01 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,19 @@ char	*malloc_new_str(const char *str, char **array_args)
 		i++;
 	}
 	i = -1;
-	while (array_args && array_args[++i])
+	while (array_args && array_args[++i]) // acesso indevido de memoria => len array = 0
 		count += ft_strlen(array_args[i]);
 	new_str = (char *)ft_calloc(count + 1, sizeof(char));
 	return (new_str);
 }
 
-void	free_array_args(char **array_args)
+void	free_array_args(char ***array_args)
 {
 	int	i;
 
 	i = -1;
-	while (array_args && array_args[++i])
-		free(array_args[i]);
-	free(array_args);
+	while (*array_args && (*array_args)[++i])
+		free((*array_args)[i]);
+	free(*array_args);
+	*array_args = NULL;
 }

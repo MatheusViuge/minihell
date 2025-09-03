@@ -6,14 +6,14 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:55:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/24 20:51:05 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:00:27 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_sprintf.h"
 
 static char	*switch_format(char c, va_list *args);
-static void	malloc_format(const char *str, char **array_args, va_list *args);
+static void	malloc_format(const char *str, char ***array_args, va_list *args);
 static char	*cpy_str_format(char *new_str, const char *str, char **array_args);
 
 char	*ft_sprintf(const char *str, ...)
@@ -30,15 +30,16 @@ char	*ft_sprintf(const char *str, ...)
 	if (!array_args)
 		return (NULL);
 	va_start(args, str);
-	malloc_format(str, array_args, &args);
+	malloc_format(str, &array_args, &args);
 	va_end(args);
 	new_str = malloc_new_str(str, array_args);
 	if (!new_str)
 	{
-		free_array_args(array_args);
+		free_array_args(&array_args);
 		return (NULL);
 	}
 	cpy_str_format(new_str, str, array_args);
+	free_array_args(&array_args);
 	return (new_str);
 }
 
@@ -60,7 +61,7 @@ static char	*cpy_str_format(char *new_str, const char *str, char **array_args)
 				new_str[j++] = '%';
 				continue ;
 			}
-			if (array_args)
+			if (array_args && str[i] != '%')
 			{
 				j += (int)ft_strlen(array_args[k]);
 				ft_strlcat(new_str, array_args[k++], j + 1);
@@ -73,7 +74,7 @@ static char	*cpy_str_format(char *new_str, const char *str, char **array_args)
 	return (new_str);
 }
 
-static void	malloc_format(const char *str, char **array_args, va_list *args)
+static void	malloc_format(const char *str, char ***array_args, va_list *args)
 {
 	int		i;
 	char	*ptr;
@@ -87,8 +88,12 @@ static void	malloc_format(const char *str, char **array_args, va_list *args)
 			free_array_args(array_args);
 			return ;
 		}
-		array_args[i] = switch_format(*(ptr + 1), args);
-		if (!array_args[i])
+		if (*(ptr + 1) == '%') {
+			ptr = ft_strchr(ptr + 2, '%');
+			continue ;
+		}
+		(*array_args)[i] = switch_format(*(ptr + 1), args);
+		if (!(*array_args)[i])
 		{
 			free_array_args(array_args);
 			return ;
