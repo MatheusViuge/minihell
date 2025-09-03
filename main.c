@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/20 12:15:42 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:46:28 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ bool	line_comand(t_data *data)
 	data->pids = NULL;
 	prompt = readline("mini> ");
 	if (!prompt)
+		return (false);
+	if (ft_strlen(prompt) == 0)
 		return (true);
 	add_history(prompt);
 	res = parser(data, prompt);
