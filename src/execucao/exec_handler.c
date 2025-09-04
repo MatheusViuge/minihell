@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/19 18:38:23 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:06:18 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static void	single_exec(t_data *data, t_node *node, char **env)
 		exec(data, node, path, env);
 	handle_pid(data, pid);
 	ast_fd_closer(data->ast);
+	data->pids = NULL;
 	pid_wait(data, data->pids);
 	path_cleaner(path);
 	data->exit_code = WEXITSTATUS(status);
@@ -106,7 +107,7 @@ static void	single_exec(t_data *data, t_node *node, char **env)
 void	exec_handler(t_data *data)
 {
 	char	**char_env;
-	
+
 	if (data->exit_code != 0)
 		data->exit_code = 0;
 	if (!data->ast)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/20 12:15:42 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/04 10:38:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	loop = true;
 	data.exit_code = 0;
+	data.pids = NULL;
 	data.env = create_env(env);
 	while (loop)
 		loop = line_comand(&data);
@@ -36,7 +37,6 @@ bool	line_comand(t_data *data)
 
 	data->tokens = NULL;
 	data->ast = NULL;
-	data->pids = NULL;
 	prompt = readline("mini> ");
 	if (!prompt)
 		return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 03:35:55 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/15 16:55:45 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:06:58 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static size_t	get_env_size(t_env *env)
 {
 	size_t	size;
 	t_env	*temp;
-	
+
 	temp = env->next;
 	if (temp)
 		size = 1;
@@ -46,19 +46,19 @@ static size_t	get_env_size(t_env *env)
 	return (size + 1);
 }
 
-char **env_transform(t_env *env)
+char	**env_transform(t_env *env)
 {
-	char 	**char_env;
-	char 	*temp_str;
+	char	**char_env;
+	char	*temp_str;
 	int		size;
-	int 	i;
+	int		i;
 
 	if (!env)
-		return NULL;
+		return (NULL);
 	size = get_env_size(env);
-	char_env = (char **)malloc(sizeof(char *) * size);
+	char_env = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!char_env)
-		return NULL;
+		return (NULL);
 	i = 0;
 	while (env && i < size - 1)
 	{
