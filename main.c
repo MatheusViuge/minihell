@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/03 19:04:27 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/04 10:30:20 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ bool	line_comand(t_data *data)
 
 	data->tokens = NULL;
 	data->ast = NULL;
-	data->pids = NULL;
 	prompt = readline("mini> ");
 	if (!prompt)
 		return (false);
