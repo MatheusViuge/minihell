@@ -6,13 +6,15 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/04 10:30:20 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:35:41 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
 
-void a(void);
+static int	g_sig;
+
+void	a(void);
 
 int	main(int ac, char **av, char **env)
 {
@@ -24,6 +26,7 @@ int	main(int ac, char **av, char **env)
 	a();
 	loop = true;
 	data.exit_code = 0;
+	data.pids = NULL;
 	data.env = create_env(env);
 	while (loop)
 		loop = line_comand(&data);
@@ -62,31 +65,31 @@ bool	line_comand(t_data *data)
 void	signal_handler(int signum, siginfo_t *info, void *ucontext)
 {
 	(void)ucontext;
-	(void)info;
 	if (signum == SIGINT)
 	{
+		g_sig = info->si_signo;
 		rl_replace_line("", 1);
-		rl_redisplay();
+		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_redisplay();
-		rl_on_new_line();
-		rl_redisplay();
+		// data->exit_code = 130;
 	}
 	else if (signum == SIGQUIT)
 	{
-		rl_replace_line("", 0);
-		rl_redisplay();
+		g_sig = info->si_signo;
 		rl_on_new_line();
 		rl_redisplay();
+		// data->exit_code = 131;
 	}
 }
 
-void a(void)
+void	a(void)
 {
 	struct sigaction	action;
 
 	action.sa_sigaction = signal_handler;
 	action.sa_flags = SA_SIGINFO;
+	sigemptyset(&action.sa_mask);
 	sigaction(SIGINT, &action, NULL);
 	sigaction(SIGQUIT, &action, NULL);
 }
