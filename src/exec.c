@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/01 23:17:40 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:05:29 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	builtin_handler(t_data *data, t_node *ast)
 		if (ft_strncmp(ast->cmd[0], "cd", 3) == 0)
 			cd(ast->cmd + 1, &data->env);
 		else if (ft_strncmp(ast->cmd[0], "echo", 4) == 0)
-			echo(ast->cmd + 1);
+			echo(ast);
 		else if (ft_strncmp(ast->cmd[0], "env", 3) == 0)
 			env(data->env);
 		else if (ft_strncmp(ast->cmd[0], "exit", 4) == 0)
