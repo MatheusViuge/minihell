@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:13:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/11 22:30:49 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:13:15 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	echo(t_node *ast)
 		fd = ast->fd_out;
 	else
 		fd = STDOUT_FILENO;
+	if (fd == -1)
+		fd = 1;
 	flag = false;
 	i = 1;
 	flag = flag_checker(ast->cmd[i]);
@@ -47,8 +49,8 @@ void	echo(t_node *ast)
 	{
 		ft_putstr_fd(ast->cmd[i++], fd);
 		if (ast->cmd[i])
-			printf(" ");
+			ft_putchar_fd(' ', fd);
 	}
 	if (!flag)
-		printf("\n");
+		ft_putchar_fd('\n', fd);
 }
