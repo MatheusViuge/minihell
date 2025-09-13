@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/13 16:31:56 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:36:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	g_sig;
 
-void	a(void);
+static void	set_signal_handler(void);
+static void	set_exit_code(t_data *data);
 
 int	main(int ac, char **av, char **env)
 {
@@ -23,7 +24,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	a();
+	set_signal_handler();
 	loop = true;
 	data.exit_code = 0;
 	data.pids = NULL;
@@ -48,11 +49,7 @@ bool	line_comand(t_data *data)
 	if (ft_strlen(prompt) == 0)
 		return (true);
 	add_history(prompt);
-	if (g_sig == SIGINT)
-		data->exit_code = 130;
-	else if (g_sig == SIGQUIT)
-		data->exit_code = 131;
-	g_sig = 0;
+	set_exit_code(data);
 	res = parser(data, prompt);
 	free(prompt);
 	if (!res)
@@ -87,7 +84,7 @@ void	signal_handler(int signum, siginfo_t *info, void *ucontext)
 	}
 }
 
-void	a(void)
+static void	set_signal_handler(void)
 {
 	struct sigaction	action;
 
@@ -96,4 +93,13 @@ void	a(void)
 	sigemptyset(&action.sa_mask);
 	sigaction(SIGINT, &action, NULL);
 	sigaction(SIGQUIT, &action, NULL);
+}
+
+static void	set_exit_code(t_data *data)
+{
+	if (g_sig == SIGINT)
+		data->exit_code = 130;
+	else if (g_sig == SIGQUIT)
+		data->exit_code = 131;
+	g_sig = 0;
 }
