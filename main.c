@@ -44,12 +44,12 @@ bool	line_comand(t_data *data)
 	data->tokens = NULL;
 	data->ast = NULL;
 	prompt = readline("mini> ");
+	set_exit_code(data);
 	if (!prompt)
 		return (false);
 	if (ft_strlen(prompt) == 0)
 		return (true);
 	add_history(prompt);
-	set_exit_code(data);
 	res = parser(data, prompt);
 	free(prompt);
 	if (!res)
