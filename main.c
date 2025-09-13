@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/13 16:36:09 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:48:32 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	signal_handler(int signum, siginfo_t *info, void *ucontext)
 	{
 		g_sig = info->si_signo;
 		rl_on_new_line();
-		rl_redisplay();
+		if (info->si_pid != 0)
+			rl_redisplay();
 	}
 }
 
