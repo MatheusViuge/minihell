@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/13 16:55:22 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/13 17:03:04 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	exec_cleaner(data, path);
 }
 
-static void	 exec_pipe(t_data *data, t_node *ast, char **env)
+static void	exec_pipe(t_data *data, t_node *ast, char **env)
 {
 	int		pid;
 	char	**path;
