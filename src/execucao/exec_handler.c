@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/01 23:22:09 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:01:07 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	exec_cleaner(data, path);
 }
 
-static void	 exec_pipe(t_data *data, t_node *ast, char **env)
+static void	exec_pipe(t_data *data, t_node *ast, char ***env)
 {
 	int		pid;
 	char	**path;
@@ -70,12 +70,12 @@ static void	 exec_pipe(t_data *data, t_node *ast, char **env)
 	}
 	path = path_finder(data->env, ast->cmd[0]);
 	if (pid == 0)
-		exec_from_pipe(data, ast, path, env);
+		exec_from_pipe(data, ast, path, *env);
 	path_cleaner(path);
 	handle_pid(data, pid);
 }
 
-static void	single_exec(t_data *data, t_node *node, char **env)
+static void	single_exec(t_data *data, t_node *node, char ***env)
 {
 	int		pid;
 	int		status;
@@ -96,7 +96,7 @@ static void	single_exec(t_data *data, t_node *node, char **env)
 		return ;
 	}
 	if (pid == 0)
-		exec(data, node, path, env);
+		exec(data, node, path, *env);
 	handle_pid(data, pid);
 	ast_fd_closer(data->ast);
 	pid_wait(data, data->pids);
@@ -107,7 +107,7 @@ static void	single_exec(t_data *data, t_node *node, char **env)
 void	exec_handler(t_data *data)
 {
 	char	**char_env;
-	
+
 	if (data->exit_code != 0)
 		data->exit_code = 0;
 	if (!data->ast)
@@ -116,10 +116,10 @@ void	exec_handler(t_data *data)
 	handle_pipes(data->ast);
 	char_env = env_transform(data->env);
 	if (data->ast->type == PIPE)
-		exec_pipe(data, data->ast, char_env);
+		exec_pipe(data, data->ast, &char_env);
 	else
-		single_exec(data, data->ast, char_env);
-	free_matrix_env(char_env);
+		single_exec(data, data->ast, &char_env);
+	free_matrix_env(&char_env);
 	ast_fd_closer(data->ast);
 	pid_wait(data, data->pids);
 }
