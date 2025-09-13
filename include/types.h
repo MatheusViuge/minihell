@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/23 20:32:12 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/13 15:28:12 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
+
+extern int  g_sig;
 
 typedef struct s_env
 {

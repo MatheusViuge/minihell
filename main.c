@@ -6,13 +6,13 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/04 21:35:41 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:31:56 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
 
-static int	g_sig;
+int	g_sig;
 
 void	a(void);
 
@@ -48,6 +48,11 @@ bool	line_comand(t_data *data)
 	if (ft_strlen(prompt) == 0)
 		return (true);
 	add_history(prompt);
+	if (g_sig == SIGINT)
+		data->exit_code = 130;
+	else if (g_sig == SIGQUIT)
+		data->exit_code = 131;
+	g_sig = 0;
 	res = parser(data, prompt);
 	free(prompt);
 	if (!res)
@@ -71,15 +76,14 @@ void	signal_handler(int signum, siginfo_t *info, void *ucontext)
 		rl_replace_line("", 1);
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
-		rl_redisplay();
-		// data->exit_code = 130;
+		if (info->si_pid != 0)
+			rl_redisplay();
 	}
 	else if (signum == SIGQUIT)
 	{
 		g_sig = info->si_signo;
 		rl_on_new_line();
 		rl_redisplay();
-		// data->exit_code = 131;
 	}
 }
 
