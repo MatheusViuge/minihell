@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/13 19:55:18 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/13 21:35:13 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_env			*new_node(char *str);
 char			**convert_env(t_env *env);
 void			*free_env_array(char **env_array);
 int				len_env(t_env *head);
+char			*find_value_env(char *variable, t_env *env);
+t_env			*find_env(char *variable, t_env *env);
 
 /*  builtins functions */
 void			cd(char **args, t_env **env);
@@ -73,11 +75,12 @@ void			free_tokens(t_token **tokens);
 
 /*	expanding variables	*/
 bool			expand_variable(t_token *token, t_data *data);
-char			*replace_variable(char *value, int *index, t_data *data);
+void			replace_variable(char **value, int *index, t_data *data);
 char			*token_recreate(char *value, char *variable, int *index,
 					t_data *data);
-char			*find_value_env(char *variable, t_env *env);
-t_env			*find_env(char *variable, t_env *env);
+t_expand		create_expand(int index, char *str, char *key, t_data *data);
+void			remove_quotes(char **value, int *index);
+void			set_quote(char **token, int *index, int *quote, char c);
 
 /* Lexer functions */
 bool			lexer(t_data *data);
