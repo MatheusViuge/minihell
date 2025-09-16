@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/28 17:02:43 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:22:52 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,21 +110,4 @@ static void	order_env(t_env **list)
 				break ;
 		}
 	}
-}
-
-int	len_env(t_env *head)
-{
-	int		len;
-	t_env	*tmp;
-
-	if (!head)
-		return (0);
-	len = 1;
-	tmp = head->next;
-	while (tmp != head)
-	{
-		len++;
-		tmp = tmp->next;
-	}
-	return (len);
 }
