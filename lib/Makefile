@@ -12,7 +12,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_dbl_lstnew.c ft_dbl_lstadd_front.c ft_dbl_lstsize.c ft_dbl_lstlast.c \
 	ft_dbl_lstadd_back.c ft_dbl_lstdelone.c ft_dbl_lstiter.c ft_dbl_lstmap.c ft_dbl_lstclear.c \
 	gnl/get_next_line.c gnl/get_next_line_utils.c ft_strcspn.c ft_lstswap.c ft_dbl_lstswap.c \
-	ft_atol.c ft_strchr_nbr.c ft_join_args.c \
+	ft_atol.c ft_strchr_nbr.c ft_join_args.c free_split.c \
 	printf/ft_printf.c printf/print_char.c printf/print_str.c printf/print_pointer.c printf/print_nbr.c printf/print_unsigned.c \
 	printf/print_hex.c printf/print_uns_long_hex.c
 
