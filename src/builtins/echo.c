@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:13:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/13 16:13:15 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/13 21:17:55 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	echo(t_node *ast)
 	int		i;
 	int		fd;
 
-	if (ast->fd_in)
+	if (ast->fd_in != -1)
 		close(ast->fd_in);
 	if (ast->fd_out != 1)
 		fd = ast->fd_out;
