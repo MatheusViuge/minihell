@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/16 21:13:48 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/17 01:18:23 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	exec_cleaner(data, path);
 }
 
-static void	exec_pipe(t_data *data, t_node *ast, char **env)
+static void	exec_pipe(t_data *data, t_node *ast, char ***env)
 {
 	int		pid;
 	char	**path;
@@ -70,7 +70,7 @@ static void	exec_pipe(t_data *data, t_node *ast, char **env)
 	}
 	path = path_finder(data->env, ast->cmd[0]);
 	if (pid == 0)
-		exec_from_pipe(data, ast, path, env);
+		exec_from_pipe(data, ast, path, *env);
 	path_cleaner(path);
 	handle_pid(data, pid);
 }
@@ -117,7 +117,7 @@ void	exec_handler(t_data *data)
 	handle_pipes(data->ast);
 	char_env = env_transform(data->env);
 	if (data->ast->type == PIPE)
-		exec_pipe(data, data->ast, char_env);
+		exec_pipe(data, data->ast, &char_env);
 	else
 		single_exec(data, data->ast, &char_env);
 	free_matrix_env(&char_env);

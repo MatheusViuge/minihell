@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:13:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/13 16:51:37 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 22:16:22 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	echo(t_node *ast)
 		fd = ast->fd_out;
 	else
 		fd = STDOUT_FILENO;
+	if (fd == -1)
+		fd = 1;
 	flag = false;
 	i = 1;
 	flag = flag_checker(ast->cmd[i]);
