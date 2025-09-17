@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/13 17:01:45 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:58:05 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 //static void	free_strs(char **strs);
 
-void	cd(char **args, t_env **env)
+void	cd(t_node *ast, t_env **env)
 {
 	char	*old_pwd;
 	char	*str;
 	char	**strs;
 
 	(void)env;
-	if (len_args(args) > 1)
+	if (len_args(&ast->cmd[1]) > 1)
 	{
 		printf("número excessivo de argumentos\n");
 		return ;
@@ -29,17 +29,22 @@ void	cd(char **args, t_env **env)
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
 		return ; // error
-	if (chdir(*args) == -1)
-		return ; // error
-	str = ft_join_args(4, "OLDPWD=", old_pwd, " PWD=", *args);
+	str = ft_join_args(4, "OLDPWD=", old_pwd, " PWD=", ast->cmd[1]);
+	free(old_pwd);
 	if (!str)
 		return ; // error
 	strs = ft_split(str, 32);
 	free(str);
 	if (!strs)
 		return ; // error
-	//unset(strs, env);
-	//free_strs(strs);
+	if (chdir(ast->cmd[1]) == -1)
+	{
+		free_split(&strs);
+		perror("cd");
+		return ; // error
+	}
+	unset(strs, env);
+	free_split(&strs);
 }
 
 /* static void	free_strs(char **strs)
