@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:13:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 22:16:22 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/17 01:20:07 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ bool	flag_checker(char *arg)
 {
 	int	i;
 
+	if (!arg)
+		return (false);
 	i = 1;
 	if (arg[0] != '-')
 		return (false);
@@ -32,9 +34,9 @@ void	echo(t_node *ast)
 	int		i;
 	int		fd;
 
-	if (ast->fd_in)
+	if (ast->fd_in != -1)
 		close(ast->fd_in);
-	if (ast->fd_out != 1)
+	if (ast->fd_out != -1)
 		fd = ast->fd_out;
 	else
 		fd = STDOUT_FILENO;

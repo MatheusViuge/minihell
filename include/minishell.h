@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/17 01:16:18 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/17 01:19:42 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			cd(char **args, t_env **env);
 void			echo(t_node *ast);
 bool			export(char **args, t_env **head);
 bool			unset(char **args, t_env **head);
-void			pwd(t_data *data);
+void			pwd(t_node *ast, t_data *data);
 void			ft_exit(t_node *ast, t_data *data);
 int				len_args(char **args);
 
@@ -68,7 +68,7 @@ void			add_token(t_token **tokens, t_token *new);
 t_token			*create_token(char *prompt, char *start, char *end,
 					size_t *size);
 int				token_quote(char *str, char **end, int *index);
-char			*token_meta_char(char *end);
+char			*token_meta_char(char *end, int index);
 void			free_tokens(t_token **tokens);
 
 /*	expanding variables	*/
