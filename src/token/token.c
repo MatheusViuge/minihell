@@ -98,7 +98,7 @@ int	token_quote(char *str, char **end, int *index)
 		if (!c)
 			return (-1);
 		*end = c;
-		*index += *end - str;
+		*index = *end - str + 1;
 	}
 	if (str + *index != *end)
 		return (1);
