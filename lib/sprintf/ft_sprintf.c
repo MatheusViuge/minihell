@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:55:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/03 16:00:27 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 21:52:15 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static void	malloc_format(const char *str, char ***array_args, va_list *args)
 			free_array_args(array_args);
 			return ;
 		}
-		if (*(ptr + 1) == '%') {
+		if (*(ptr + 1) == '%')
+		{
 			ptr = ft_strchr(ptr + 2, '%');
 			continue ;
 		}
