@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/17 01:19:42 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/17 02:38:13 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			*free_env_array(char **env_array);
 int				len_env(t_env *head);
 
 /*  builtins functions */
-void			cd(char **args, t_env **env);
+void			cd(t_node *ast, t_env **env);
 void			echo(t_node *ast);
 bool			export(char **args, t_env **head);
 bool			unset(char **args, t_env **head);
