@@ -16,6 +16,8 @@ bool	flag_checker(char *arg)
 {
 	int	i;
 
+	if (!arg)
+		return (false);
 	i = 1;
 	if (arg[0] != '-')
 		return (false);
