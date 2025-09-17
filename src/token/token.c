@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/20 15:17:34 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 21:02:33 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	token(t_data *data, char *prompt)
 	t_token	*token;
 
 	i = 0;
-	while (prompt[i])
+	while ((i == 0 || prompt[i - 1]) && prompt[i])
 	{
 		curr = prompt + i;
 		end = end_token(curr);
@@ -65,16 +65,17 @@ char	*end_token(char *str)
 	char		*end;
 	const char	*meta_char = "|<>";
 
-	res = token_quote(str, &end);
-	if (res == -1)
-		return (NULL);
-	else if (res == 1 && !ft_strchr(meta_char, *(end + 1)))
-		return (end_token((end + 1)));
-	else if (res == 1)
-		return (end);
+	end = str;
 	i = -1;
 	while (str[++i])
 	{
+		res = token_quote(str, &end, &i);
+		if (res == -1)
+			return (NULL);
+		else if (res == 1 && !ft_isspace(*(end + 1)))
+			return (end_token((end + 1)));
+		else if (res == 1)
+			return (end);
 		end = str + i;
 		if (!ft_strchr(meta_char, *end) && !ft_isspace(*end))
 			continue ;
@@ -87,22 +88,20 @@ char	*end_token(char *str)
 	return (end);
 }
 
-int	token_quote(char *str, char **end)
+int	token_quote(char *str, char **end, int *index)
 {
 	char	*c;
-	int		res;
 
-	if (str[0] == '\'' || str[0] == '\"')
+	while (str[*index] == '\'' || str[*index] == '\"')
 	{
-		c = ft_strchr(str + 1, (int)str[0]);
+		c = ft_strchr(str + *index + 1, (int)str[*index]);
 		if (!c)
 			return (-1);
 		*end = c;
-		res = token_quote((*end) + 1, end);
-		if (res == -1)
-			return (-1);
-		return (1);
+		*index += *end - str;
 	}
+	if (str + *index != *end)
+		return (1);
 	return (0);
 }
 
