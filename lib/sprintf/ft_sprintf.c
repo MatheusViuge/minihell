@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:55:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 21:52:15 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 22:50:19 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,8 @@ static char	*cpy_str_format(char *new_str, const char *str, char **array_args)
 		if (str[i] == '%' && str[i + 1])
 		{
 			if (str[++i] == '%')
-			{
 				new_str[j++] = '%';
-				continue ;
-			}
-			if (array_args && str[i] != '%')
+			else if (array_args && str[i] != '%')
 			{
 				j += (int)ft_strlen(array_args[k]);
 				ft_strlcat(new_str, array_args[k++], j + 1);
@@ -79,7 +76,7 @@ static void	malloc_format(const char *str, char ***array_args, va_list *args)
 	int		i;
 	char	*ptr;
 
-	i = 0;
+	i = -1;
 	ptr = ft_strchr(str, '%');
 	while (ptr)
 	{
@@ -93,14 +90,13 @@ static void	malloc_format(const char *str, char ***array_args, va_list *args)
 			ptr = ft_strchr(ptr + 2, '%');
 			continue ;
 		}
-		(*array_args)[i] = switch_format(*(ptr + 1), args);
+		(*array_args)[++i] = switch_format(*(ptr + 1), args);
 		if (!(*array_args)[i])
 		{
 			free_array_args(array_args);
 			return ;
 		}
 		ptr = ft_strchr(ptr + 1, '%');
-		i++;
 	}
 }
 

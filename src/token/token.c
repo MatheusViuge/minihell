@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 21:02:33 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 22:51:10 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ bool	token(t_data *data, char *prompt)
 			return (return_erro("Error on tokenization", NULL, -1, data));
 		token = create_token(prompt, curr, end, &len);
 		if (!len)
-		{
 			i++;
-			continue ;
+		else
+		{
+			if (!token)
+				return (return_erro("Error on tokenization", NULL, -1, data));
+			add_token(&data->tokens, token);
+			i += len;
 		}
-		if (!token)
-			return (return_erro("Error on tokenization", NULL, -1, data));
-		add_token(&data->tokens, token);
-		i += len;
 	}
 	return (true);
 }
@@ -79,10 +79,7 @@ char	*end_token(char *str)
 		end = str + i;
 		if (!ft_strchr(meta_char, *end) && !ft_isspace(*end))
 			continue ;
-		if (ft_isspace(*end) || i > 0)
-			end--;
-		else
-			end = token_meta_char(end);
+		end = token_meta_char(end, i);
 		break ;
 	}
 	return (end);
@@ -105,8 +102,13 @@ int	token_quote(char *str, char **end, int *index)
 	return (0);
 }
 
-char	*token_meta_char(char *end)
+char	*token_meta_char(char *end, int index)
 {
+	if (ft_isspace(*end) || index > 0)
+	{
+		end--;
+		return (end);
+	}
 	while (*end && *end == *(end + 1))
 		end = end + 1;
 	if (!*end)

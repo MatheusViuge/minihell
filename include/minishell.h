@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 22:28:44 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 22:51:28 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			add_token(t_token **tokens, t_token *new);
 t_token			*create_token(char *prompt, char *start, char *end,
 					size_t *size);
 int				token_quote(char *str, char **end, int *index);
-char			*token_meta_char(char *end);
+char			*token_meta_char(char *end, int index);
 void			free_tokens(t_token **tokens);
 
 /*	expanding variables	*/
