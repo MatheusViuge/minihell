@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 03:35:55 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/13 16:59:09 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 21:13:53 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**env_transform(t_env *env)
 	if (!env)
 		return (NULL);
 	size = get_env_size(env);
-	char_env = (char **)malloc(sizeof(char *) * size);
+	char_env = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!char_env)
 		return (NULL);
 	i = 0;
