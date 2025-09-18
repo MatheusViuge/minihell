@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 22:51:10 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:12:53 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ char	*end_token(char *str)
 		res = token_quote(str, &end, &i);
 		if (res == -1)
 			return (NULL);
-		else if (res == 1 && !ft_isspace(*(end + 1)))
+		else if (res == 1
+			&& !ft_isspace(*(end + 1)) && !ft_strchr(meta_char, *(end + 1)))
 			return (end_token((end + 1)));
 		else if (res == 1)
 			return (end);
