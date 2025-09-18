@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/18 18:12:53 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:38:17 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ bool	token(t_data *data, char *prompt)
 		curr = prompt + i;
 		end = end_token(curr);
 		if (!end)
-			return (return_erro("Error on tokenization", NULL, -1, data));
+			return (token_error(curr, data));
 		token = create_token(prompt, curr, end, &len);
 		if (!len)
 			i++;
 		else
 		{
 			if (!token)
-				return (return_erro("Error on tokenization", NULL, -1, data));
+				return (token_error(curr, data));
 			add_token(&data->tokens, token);
 			i += len;
 		}

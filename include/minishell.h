@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/17 02:38:13 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:38:39 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_token			*create_token(char *prompt, char *start, char *end,
 int				token_quote(char *str, char **end, int *index);
 char			*token_meta_char(char *end, int index);
 void			free_tokens(t_token **tokens);
+bool			token_error(char *prompt, t_data *data);
 
 /*	expanding variables	*/
 bool			expand_variable(t_token *token, t_data *data);
