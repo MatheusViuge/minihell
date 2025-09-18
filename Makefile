@@ -55,7 +55,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ make -C lib
-	@ cp $(LIBFT) .
 	@ cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 	@ clear
 	@ echo "$(GREEN)Compilado com sucesso!$(RESET)"
