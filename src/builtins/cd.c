@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/17 17:58:05 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:25:03 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	cd(t_node *ast, t_env **env)
 	(void)env;
 	if (len_args(&ast->cmd[1]) > 1)
 	{
-		printf("número excessivo de argumentos\n");
+		printf("too many arguments\n");
 		return ;
 	}
 	old_pwd = getcwd(NULL, 0);
@@ -47,13 +47,6 @@ void	cd(t_node *ast, t_env **env)
 	free_split(&strs);
 }
 
-/* static void	free_strs(char **strs)
-{
-	free(strs[0]);
-	free(strs[1]);
-	free(strs);
-}
- */
 int	len_args(char **args)
 {
 	int	len;

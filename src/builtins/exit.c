@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:00:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/01 23:16:58 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:24:40 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_exit(t_node *ast, t_data *data)
 	if (len_args(&ast->cmd[1]) > 1)
 	{
 		data->exit_code = 2;
-		ft_putendl_fd("número de argumentos excessivos", 2);
+		ft_putendl_fd("too many arguments", 2);
 		return ;
 	}
 	if (ast->cmd[1])
@@ -51,7 +51,7 @@ static int	atoi_exit(char *str)
 		if (!ft_isdigit(str[i]))
 		{
 			ft_putstr_fd(str, 2);
-			ft_putendl_fd(": requer um argumento númerico", 2);
+			ft_putendl_fd(": numeric argument required", 2);
 			return (2);
 		}
 		nbr = (nbr * 10) + (str[i++] - '0');
