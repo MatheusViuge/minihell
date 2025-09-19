@@ -69,10 +69,10 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 			break ;
 		i++;
 	}
-	if (!path[i])
+	if (!path && !path[i])
 		perror("Exec failed");//return_erro("Command not found", 127, data);
 	dupper(node->fd_in, node->fd_out);
-	if (execve(path[i], node->cmd, env) == -1)
+	if (path && execve(path[i], node->cmd, env) == -1)
 		perror("Exec failed");//return_erro("Execution failed", 1, data);
 	exec_cleaner(data, path);
 }
