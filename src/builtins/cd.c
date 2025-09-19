@@ -30,7 +30,7 @@ void	cd(t_node *ast, t_env **env)
 		return ;
 	if (ast->cmd[1] && ft_strncmp(ast->cmd[1], "~", 2) != 0)
 		pwd = ft_strdup(ast->cmd[1]);
-	else
+	else if (!ast->cmd[1] || ft_strncmp(ast->cmd[1], "~", 2) == 0)
 		pwd = find_value_env("HOME", *env);
 	str = ft_join_args(4, "OLDPWD=", old_pwd, " PWD=", pwd);
 	free(old_pwd);
