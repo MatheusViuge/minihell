@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 13:29:53 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:30:55 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,18 @@ void	signal_handler(int signum, siginfo_t *info, void *ucontext)
 	else if (signum == SIGQUIT)
 	{
 		g_sig = info->si_signo;
+		if (info->si_pid == 0)
+		{
+			ft_putstr_fd("Quit (core dumped)\n", 1);
+			rl_on_new_line();
+			return ;
+		}
+		rl_replace_line("  ", 1);
+		rl_redisplay();
+		rl_replace_line("", 1);
+		rl_redisplay();
 		rl_on_new_line();
-		if (info->si_pid != 0)
-			rl_redisplay();
+		rl_redisplay();
 	}
 }
 
