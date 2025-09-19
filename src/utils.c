@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:28:27 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/20 15:29:16 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:25:48 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,51 @@ void	*free_env_array(char **env_array)
 		free(env_array[i]);
 	free(env_array);
 	return (NULL);
+}
+
+void	env_init(t_data *data)
+{
+	int		shlvl;
+	char	*str;
+	char	**strs;
+	char	*shell;
+
+	shell = getcwd(NULL, 0);
+	if (!shell)
+		return ;
+	shlvl = atoi_shlvl(data->env);
+	str = ft_sprintf("SHLVL=%d SHELL=%s/minishell", shlvl + 1, shell);
+	free(shell);
+	if (!str)
+		return ;
+	strs = ft_split(str, ' ');
+	free(str);
+	if (!strs)
+		return ;
+	export(strs, &data->env);
+	free_split(&strs);
+}
+
+int	atoi_shlvl(t_env *env)
+{
+	char	*str;
+	int		nbr;
+	int		i;
+
+	str = find_value_env("SHLVL", env);
+	if (!str)
+		nbr = -1;
+	i = 0;
+	nbr = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+		{
+			nbr = 0;
+			break ;
+		}
+		nbr = (nbr * 10) + (str[i++] - '0');
+	}
+	free(str);
+	return (nbr);
 }

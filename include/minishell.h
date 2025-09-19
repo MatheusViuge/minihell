@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 16:07:20 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:22:32 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ bool			return_erro(char *msg, char *allocated_msg,
 void			free_redir_list(t_redir *redir);
 void			set_signal_handler(void);
 void			set_exit_code(t_data *data);
+void			env_init(t_data *data);
+int				atoi_shlvl(t_env *env);
 
 /*	env functions	*/
 t_env			*create_env(char **env);

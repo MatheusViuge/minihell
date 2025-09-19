@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 16:08:48 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:27:25 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int ac, char **av, char **env)
 	data.exit_code = 0;
 	data.pids = NULL;
 	data.env = create_env(env);
+	env_init(&data);
 	while (loop)
 		loop = line_comand(&data);
 	clear_history();
