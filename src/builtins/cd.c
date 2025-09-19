@@ -6,48 +6,74 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 16:54:51 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:02:44 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	cd(t_node *ast, t_env **env)
+static char	*create_pwd(char *arg, t_env *env);
+static char	**create_variables(char *pwd);
+
+void	cd(char **args, t_env **env)
 {
-	char	*old_pwd;
-	char	*str;
 	char	**strs;
 	char	*pwd;
+	int		ret;
 
-	(void)env;
-	if (len_args(&ast->cmd[1]) > 1)
+	if (len_args(args) > 1)
 	{
 		printf("too many arguments\n");
 		return ;
 	}
+	pwd = create_pwd(args[0], *env);
+	strs = create_variables(pwd);
+	if (!strs)
+	{
+		free(pwd);
+		return ;
+	}
+	ret = chdir(pwd);
+	if (ret == 0)
+		export(strs, env);
+	else
+		perror("cd");
+	free(pwd);
+	free_split(&strs);
+	return ;
+}
+
+static char	**create_variables(char *pwd)
+{
+	char	*str;
+	char	**strs;
+	char	*old_pwd;
+
+	if (!pwd)
+		return (NULL);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
-		return ;
-	if (ast->cmd[1] && ft_strncmp(ast->cmd[1], "~", 2) != 0)
-		pwd = ft_strdup(ast->cmd[1]);
-	else if (!ast->cmd[1] || ft_strncmp(ast->cmd[1], "~", 2) == 0)
-		pwd = find_value_env("HOME", *env);
-	str = ft_join_args(4, "OLDPWD=", old_pwd, " PWD=", pwd);
+		return (NULL);
+	str = ft_sprintf("OLDPWD=%s PWD=%s", old_pwd, pwd);
 	free(old_pwd);
 	if (!str)
-		return ; // error
+		return (NULL);
 	strs = ft_split(str, 32);
 	free(str);
-	if (!strs)
-		return ; // error
-	if (chdir(pwd) == -1)
-	{
-		free_split(&strs);
-		perror("cd");
-		return ; // error
-	}
-	unset(strs, env);
-	free_split(&strs);
+	return (strs);
+}
+
+static char	*create_pwd(char *arg, t_env *env)
+{
+	char	*pwd;
+
+	if (!arg || ft_strncmp(arg, "~", 2) == 0)
+		pwd = find_value_env("HOME", env);
+	else if (ft_strncmp(arg, "-", 2) == 0)
+		pwd = find_value_env("OLDPWD", env);
+	else
+		pwd = ft_strdup(arg);
+	return (pwd);
 }
 
 int	len_args(char **args)
