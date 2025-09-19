@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 19:04:33 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:29:53 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ bool	line_comand(t_data *data)
 	prompt = readline("mini> ");
 	set_exit_code(data);
 	if (!prompt)
+	{
+		ft_putstr_fd("exit\n", 1);
 		return (false);
+	}
 	if (ft_strlen(prompt) == 0)
 		return (true);
 	add_history(prompt);
@@ -56,9 +59,6 @@ bool	line_comand(t_data *data)
 		return (false);
 	else
 		exec_handler(data);
-	if (size_tokens(data->tokens) == 1
-		&& !ft_strncmp(data->tokens->value, "exit", 5))
-		return (false);
 	free_ast(&data->ast);
 	free_tokens(&data->tokens);
 	return (true);
