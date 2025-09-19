@@ -6,19 +6,18 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 14:25:03 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:54:51 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-//static void	free_strs(char **strs);
 
 void	cd(t_node *ast, t_env **env)
 {
 	char	*old_pwd;
 	char	*str;
 	char	**strs;
+	char	*pwd;
 
 	(void)env;
 	if (len_args(&ast->cmd[1]) > 1)
@@ -28,8 +27,12 @@ void	cd(t_node *ast, t_env **env)
 	}
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
-		return ; // error
-	str = ft_join_args(4, "OLDPWD=", old_pwd, " PWD=", ast->cmd[1]);
+		return ;
+	if (ast->cmd[1] && ft_strncmp(ast->cmd[1], "~", 2) != 0)
+		pwd = ft_strdup(ast->cmd[1]);
+	else
+		pwd = find_value_env("HOME", *env);
+	str = ft_join_args(4, "OLDPWD=", old_pwd, " PWD=", pwd);
 	free(old_pwd);
 	if (!str)
 		return ; // error
@@ -37,7 +40,7 @@ void	cd(t_node *ast, t_env **env)
 	free(str);
 	if (!strs)
 		return ; // error
-	if (chdir(ast->cmd[1]) == -1)
+	if (chdir(pwd) == -1)
 	{
 		free_split(&strs);
 		perror("cd");
