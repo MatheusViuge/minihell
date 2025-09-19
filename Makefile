@@ -29,6 +29,7 @@ SRC = main.c \
 		$(DIR_BUILTINS)/unset.c \
 		$(DIR_TOKEN)/token.c \
 		$(DIR_TOKEN)/utils.c \
+		src/signal.c \
 		src/expand.c \
 		src/utils.c \
 		src/clear.c \

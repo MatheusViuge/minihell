@@ -6,16 +6,13 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 13:30:55 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:08:48 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
 
 int	g_sig;
-
-static void	set_signal_handler(void);
-static void	set_exit_code(t_data *data);
 
 int	main(int ac, char **av, char **env)
 {
@@ -62,54 +59,4 @@ bool	line_comand(t_data *data)
 	free_ast(&data->ast);
 	free_tokens(&data->tokens);
 	return (true);
-}
-
-void	signal_handler(int signum, siginfo_t *info, void *ucontext)
-{
-	(void)ucontext;
-	if (signum == SIGINT)
-	{
-		g_sig = info->si_signo;
-		rl_replace_line("", 1);
-		ft_putchar_fd('\n', 1);
-		rl_on_new_line();
-		if (info->si_pid != 0)
-			rl_redisplay();
-	}
-	else if (signum == SIGQUIT)
-	{
-		g_sig = info->si_signo;
-		if (info->si_pid == 0)
-		{
-			ft_putstr_fd("Quit (core dumped)\n", 1);
-			rl_on_new_line();
-			return ;
-		}
-		rl_replace_line("  ", 1);
-		rl_redisplay();
-		rl_replace_line("", 1);
-		rl_redisplay();
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
-
-static void	set_signal_handler(void)
-{
-	struct sigaction	action;
-
-	action.sa_sigaction = signal_handler;
-	action.sa_flags = SA_SIGINFO;
-	sigemptyset(&action.sa_mask);
-	sigaction(SIGINT, &action, NULL);
-	sigaction(SIGQUIT, &action, NULL);
-}
-
-static void	set_exit_code(t_data *data)
-{
-	if (g_sig == SIGINT)
-		data->exit_code = 130;
-	else if (g_sig == SIGQUIT)
-		data->exit_code = 131;
-	g_sig = 0;
 }

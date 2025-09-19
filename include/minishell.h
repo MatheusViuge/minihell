@@ -6,13 +6,14 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/18 19:38:39 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:07:20 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#define _POSIX_C_SOURCE 200809L
 # include "../lib/libft.h"
 # include "types.h"
 # include <dirent.h>
@@ -37,6 +38,8 @@ void			free_data(t_data *data);
 bool			return_erro(char *msg, char *allocated_msg,
 					int code, t_data *data);
 void			free_redir_list(t_redir *redir);
+void			set_signal_handler(void);
+void			set_exit_code(t_data *data);
 
 /*	env functions	*/
 t_env			*create_env(char **env);
