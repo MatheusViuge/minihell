@@ -21,6 +21,8 @@ void	env(t_env *head)
 	tmp = head;
 	while (tmp != head->prev)
 	{
+		if (!ft_strlen(tmp->value))
+			continue ;
 		ft_printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
