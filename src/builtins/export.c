@@ -68,6 +68,7 @@ static bool	print_env_export(t_env *head)
 	int		len;
 	t_env	*tmp;
 	t_env	**cpy;
+	char	*str;
 
 	if (!head)
 		return (true);
@@ -86,7 +87,14 @@ static bool	print_env_export(t_env *head)
 	cpy[len--] = tmp;
 	order_env(cpy);
 	while (cpy[++len])
-		ft_printf("declare -x %s=%s\n", cpy[len]->key, cpy[len]->value);
+	{
+		if (ft_strlen(cpy[len]->value))
+			str = ft_sprintf("=\"%s\"", cpy[len]->value);
+		else
+			str = ft_strdup("");
+		ft_printf("declare -x %s%s\n", cpy[len]->key, str);
+		free(str);
+	}
 	free(cpy);
 	return (true);
 }
