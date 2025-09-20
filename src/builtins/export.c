@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/16 21:47:01 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:15:37 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ bool	export(char **args, t_env **head)
 	i = -1;
 	while (args[++i])
 	{
-		if (!(ft_isalpha(args[i][0]) || args[i][0] == '_'))
+		if (!ft_isalpha(args[i][0]) && args[i][0] != '_')
 		{
-			str = ft_sprintf("'%s' não é um identificador válido", args[i]);
-			if (!str)
-				return (false);
+			str = ft_sprintf("`%s': not a valid identifier", args[i]);
 			ft_putendl_fd(str, 2);
 			free(str);
 			continue ;
