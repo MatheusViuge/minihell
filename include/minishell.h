@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 17:15:34 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:35:57 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int				atoi_shlvl(t_env *env);
 
 /*	env functions	*/
 t_env			*create_env(char **env);
-void			env(t_env *head);
+void			env(t_env *head, t_node *ast);
 void			free_env(t_env **head);
 void			add_env_node(t_env *new_node, t_env **head);
 t_env			*new_node(char *str);
@@ -72,7 +72,6 @@ char			*end_token(char *str);
 t_type_token	type_token(char *token);
 t_token			*new_token(char *str);
 int				size_tokens(t_token *tokens);
-t_token			*last_token(t_token *tokens);
 void			add_token(t_token **tokens, t_token *new);
 t_token			*create_token(char *prompt, char *start, char *end,
 					size_t *size);

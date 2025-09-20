@@ -6,27 +6,38 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 17:29:47 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:39:44 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	env(t_env *head)
+void	env(t_env *head, t_node *ast)
 {
 	t_env	*tmp;
+	char	*str;
+	int		fd;
 
 	if (!head)
 		return ;
+	fd = define_fd(ast);
 	tmp = head;
 	while (tmp != head->prev)
 	{
 		if (ft_strlen(tmp->value) > 0)
-			ft_printf("%s=%s\n", tmp->key, tmp->value);
+		{
+			str = ft_sprintf("%s=%s", tmp->key, tmp->value);
+			ft_putendl_fd(str, fd);
+			free(str);
+		}
 		tmp = tmp->next;
 	}
 	if (ft_strlen(tmp->value) > 0)
-		ft_printf("%s=%ld\n", tmp->key, ft_strlen(tmp->value));
+	{
+		str = ft_sprintf("%s=%s", tmp->key, tmp->value);
+		ft_putendl_fd(str, fd);
+		free(str);
+	}
 }
 
 t_env	*create_env(char **env)
