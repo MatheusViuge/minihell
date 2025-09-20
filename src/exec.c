@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 17:24:52 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:44:07 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,24 @@
 
 void	builtin_handler(t_data *data, t_node *ast)
 {
-	if (ft_strncmp(ast->cmd[0], "cd", 3) == 0)
-		cd(ast->cmd + 1, &data->env);
-	else if (ft_strncmp(ast->cmd[0], "echo", 4) == 0)
-		echo(ast);
-	else if (ft_strncmp(ast->cmd[0], "env", 3) == 0)
-		env(data->env);
-	else if (ft_strncmp(ast->cmd[0], "exit", 4) == 0)
-		ft_exit(ast, data);
-	else if (ft_strncmp(ast->cmd[0], "export", 6) == 0)
-		export(ast->cmd + 1, &data->env);
-	else if (ft_strncmp(ast->cmd[0], "pwd", 3) == 0)
-		pwd(ast, data);
-	else if (ft_strncmp(ast->cmd[0], "unset", 6) == 0)
-		unset(ast->cmd + 1, &data->env);
+	(void)data;
+	if (ast->type == BUILTIN)
+	{
+		if (ft_strncmp(ast->cmd[0], "cd", 3) == 0)
+			cd(ast->cmd + 1, &data->env);
+		else if (ft_strncmp(ast->cmd[0], "echo", 5) == 0)
+			echo(ast);
+		else if (ft_strncmp(ast->cmd[0], "env", 4) == 0)
+			env(data->env, ast);
+		else if (ft_strncmp(ast->cmd[0], "exit", 5) == 0)
+			ft_exit(ast, data);
+		else if (ft_strncmp(ast->cmd[0], "export", 7) == 0)
+			export(ast, &data->env);
+		else if (ft_strncmp(ast->cmd[0], "pwd", 4) == 0)
+			pwd(ast, data);
+		else if (ft_strncmp(ast->cmd[0], "unset", 6) == 0)
+			unset(ast->cmd + 1, &data->env);
+	}
 }
 
 void	dupper(int fd_in, int fd_out)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 17:25:37 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:45:03 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	{
 		free_matrix_env(&env);
 		builtin_handler(data, ast);
-		exec_cleaner(data, path);
+		exec_cleaner(data, path, &env);
 		return ;
 	}
 	while (path && path[i])

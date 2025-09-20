@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:40:05 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/28 23:29:40 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/13 21:43:12 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*ft_join_args(int length, ...)
 {
 	char	*tmp;
+	char	*arg;
 	char	*str;
 	va_list	args;
 
@@ -22,8 +23,10 @@ char	*ft_join_args(int length, ...)
 	str = NULL;
 	while (length-- > 0)
 	{
-		tmp = va_arg(args, char *);
-		str = ft_strjoin(str, tmp);
+		arg = va_arg(args, char *);
+		tmp = str;
+		str = ft_strjoin(tmp, arg);
+		free(tmp);
 		if (!str)
 			return (NULL);
 	}

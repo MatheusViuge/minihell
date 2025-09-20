@@ -6,13 +6,13 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 20:39:32 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 22:25:21 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:33:55 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	unset(char **args, t_env **head)
+void	unset(char **args, t_env **head)
 {
 	t_env	*node;
 	int		i;
@@ -31,5 +31,4 @@ bool	unset(char **args, t_env **head)
 		free(node->value);
 		free(node);
 	}
-	return (true);
 }

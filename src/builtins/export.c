@@ -6,91 +6,114 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/16 21:47:01 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:12:36 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	order_env(t_env **list);
-static bool	set_env(t_env **head, char *arg);
-static bool	print_env_export(t_env *head);
+static void		order_env(t_env **list);
+static void		set_env(t_env **head, char *arg);
+static void		print_env_export(t_node *ast, t_env *head);
+static t_env	**create_env_array(t_env *head);
 
-bool	export(char **args, t_env **head)
+void	export(t_node *ast, t_env **head)
 {
 	int		i;
 	char	*str;
-	bool	success;
 
-	if (!args || !*args)
-		return (print_env_export(*head));
-	i = -1;
-	while (args[++i])
+	if (!ast->cmd || !ast->cmd[1])
 	{
-		if (!(ft_isalpha(args[i][0]) || args[i][0] == '_'))
+		print_env_export(ast, *head);
+		return ;
+	}
+	i = 0;
+	while (ast->cmd[++i])
+	{
+		if (!ft_isalpha(ast->cmd[i][0]) && ast->cmd[i][0] != '_')
 		{
-			str = ft_sprintf("'%s' não é um identificador válido", args[i]);
-			if (!str)
-				return (false);
+			str = ft_sprintf("`%s': not a valid identifier", ast->cmd[i]);
 			ft_putendl_fd(str, 2);
 			free(str);
 			continue ;
 		}
-		success = set_env(head, args[i]);
-		if (!success)
-			return (false);
+		set_env(head, ast->cmd[i]);
 	}
-	return (true);
+	return ;
 }
 
-static bool	set_env(t_env **head, char *arg)
+static void	set_env(t_env **head, char *arg)
 {
 	t_env	*node;
-	char	**tmp;
+	char	*tmp;
+	int		i;
 
-	tmp = ft_split(arg, '=');
+	i = ft_strchr_nbr(arg, '=');
+	tmp = ft_substr(arg, 0, i);
 	if (!tmp)
-		return (false);
-	node = find_env(tmp[0], *head);
+		return ;
+	node = find_env(tmp, *head);
+	free(tmp);
 	if (node)
 	{
 		free(node->value);
-		node->value = tmp[1];
-		free(tmp[0]);
-		free(tmp);
-		return (true);
+		node->value = ft_substr(arg, i + 1, ft_strlen(arg));
+		return ;
 	}
-	free_split(&tmp);
 	add_env_node(new_node(arg), head);
-	return (false);
 }
 
-static bool	print_env_export(t_env *head)
+static void	print_env_export(t_node *ast, t_env *head)
+{
+	int		len;
+	char	*str;
+	char	*value;
+	t_env	**env_array;
+	int		fd;
+
+	fd = define_fd(ast);
+	env_array = create_env_array(head);
+	if (!env_array)
+		return ;
+	len = -1;
+	while (env_array[++len])
+	{
+		if (ft_strlen(env_array[len]->value))
+			value = ft_sprintf("=\"%s\"", env_array[len]->value);
+		else
+			value = ft_strdup("");
+		str = ft_sprintf("declare -x %s%s", env_array[len]->key, value);
+		free(value);
+		if (!str)
+			break ;
+		ft_putendl_fd(str, fd);
+		free(str);
+	}
+	free(env_array);
+	return ;
+}
+
+static t_env	**create_env_array(t_env *head)
 {
 	int		len;
 	t_env	*tmp;
 	t_env	**cpy;
 
-	if (!head)
-		return (true);
 	len = len_env(head);
-	if (len < 2)
-		return (true);
+	if (len == 0)
+		return (NULL);
 	cpy = ft_calloc(len + 1, sizeof(t_env *));
 	if (!cpy)
-		return (false);
+		return (NULL);
 	tmp = head;
-	while (tmp != head->prev && --len > 0)
+	while (tmp != head->prev && --len >= 0)
 	{
 		cpy[len] = tmp;
 		tmp = tmp->next;
 	}
-	cpy[len--] = tmp;
+	cpy[--len] = tmp;
 	order_env(cpy);
-	while (cpy[++len])
-		ft_printf("declare -x %s=%s\n", cpy[len]->key, cpy[len]->value);
-	free(cpy);
-	return (true);
+	return (cpy);
 }
 
 static void	order_env(t_env **list)

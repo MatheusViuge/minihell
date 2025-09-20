@@ -3,28 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/25 23:36:59 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:39:44 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	env(t_env *head)
+void	env(t_env *head, t_node *ast)
 {
 	t_env	*tmp;
+	char	*str;
+	int		fd;
 
 	if (!head)
 		return ;
+	fd = define_fd(ast);
 	tmp = head;
 	while (tmp != head->prev)
 	{
-		ft_printf("%s=%s\n", tmp->key, tmp->value);
+		if (ft_strlen(tmp->value) > 0)
+		{
+			str = ft_sprintf("%s=%s", tmp->key, tmp->value);
+			ft_putendl_fd(str, fd);
+			free(str);
+		}
 		tmp = tmp->next;
 	}
-	ft_printf("%s=%s\n", tmp->key, tmp->value);
+	if (ft_strlen(tmp->value) > 0)
+	{
+		str = ft_sprintf("%s=%s", tmp->key, tmp->value);
+		ft_putendl_fd(str, fd);
+		free(str);
+	}
 }
 
 t_env	*create_env(char **env)
@@ -85,10 +98,7 @@ t_env	*new_node(char *str)
 		free(new);
 		return (NULL);
 	}
-	if (str[i])
-		new->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
-	else
-		new->value = NULL;
+	new->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
