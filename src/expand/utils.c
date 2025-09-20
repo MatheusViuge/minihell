@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/20 15:40:32 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 15:41:38 by jesda-si         ###   ########.fr       */
+/*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
+/*   Updated: 2025/09/20 16:02:11 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,13 @@ t_expand	create_expand(int index, char *str, char *key, t_data *data)
 	expand.prev = NULL;
 	if (index > 0)
 		expand.prev = ft_substr(str, 0, index);
-	start = index + 1 + ft_strlen(key);
+	start = index + 1;
+	if (key[0] == '?')
+		start++;
+	else
+		start += ft_strlen(key);
 	expand.next = ft_substr(str, start, ft_strlen(str));
-	if (!ft_strncmp(key, "?", 2))
+	if (!ft_strncmp(key, "?", 1))
 		expand.new = ft_itoa(data->exit_code);
 	else
 		expand.new = find_value_env(key, data->env);

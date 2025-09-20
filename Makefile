@@ -30,8 +30,8 @@ SRC = main.c \
 		$(DIR_TOKEN)/token.c \
 		$(DIR_TOKEN)/utils.c \
 		src/signal.c \
-		src/expand/expand/expand.c \
-		src/expand/expand/utils.c \
+		src/expand/expand.c \
+		src/expand/utils.c \
 		src/utils.c \
 		src/clear.c \
 		src/exec.c \
@@ -69,6 +69,7 @@ $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_PARSER)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_REDIRECT)
+	@ mkdir -p $(OBJ_DIR)/src/expand
 	@ mkdir -p $(OBJ_DIR)/src/execucao
 	@ clear
 	@ echo "$(YELLOW)Compilando $<"
