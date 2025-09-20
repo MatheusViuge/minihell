@@ -30,7 +30,8 @@ SRC = main.c \
 		$(DIR_TOKEN)/token.c \
 		$(DIR_TOKEN)/utils.c \
 		src/signal.c \
-		src/expand.c \
+		src/expand/expand/expand.c \
+		src/expand/expand/utils.c \
 		src/utils.c \
 		src/clear.c \
 		src/exec.c \

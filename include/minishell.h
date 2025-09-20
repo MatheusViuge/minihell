@@ -6,14 +6,14 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 19:07:43 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:41:35 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#define _POSIX_C_SOURCE 200809L
+# define _POSIX_C_SOURCE 200809L
 # include "../lib/libft.h"
 # include "types.h"
 # include <dirent.h>
@@ -82,6 +82,9 @@ bool			expand_variable(t_token *token, t_data *data);
 char			*replace_variable(char *value, int *index, t_data *data);
 char			*token_recreate(char *value, char *variable, int *index,
 					t_data *data);
+void			remove_quotes(char **value, int *index);
+void			set_quote(char **token, int *index, int *quote, char c);
+t_expand		create_expand(int index, char *str, char *key, t_data *data);
 char			*find_value_env(char *variable, t_env *env);
 t_env			*find_env(char *variable, t_env *env);
 
