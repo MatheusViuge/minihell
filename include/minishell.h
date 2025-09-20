@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 16:01:02 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:33:43 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ t_env			*find_env(char *variable, t_env *env);
 /*  builtins functions */
 void			cd(char **args, t_env **env);
 void			echo(t_node *ast);
-bool			export(char **args, t_env **head);
-bool			unset(char **args, t_env **head);
+void			export(t_node *ast, t_env **head);
+void			unset(char **args, t_env **head);
 void			pwd(t_node *ast, t_data *data);
 void			ft_exit(t_node *ast, t_data *data);
 int				len_args(char **args);
+int				set_fd(t_node *ast);
 
 /*	token functions	*/
 bool			token(t_data *data, char *prompt);

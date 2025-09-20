@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 15:56:38 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:16:30 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	builtin_handler(t_data *data, t_node *ast)
 		else if (ft_strncmp(ast->cmd[0], "exit", 4) == 0)
 			ft_exit(ast, data);
 		else if (ft_strncmp(ast->cmd[0], "export", 6) == 0)
-			export(ast->cmd + 1, &data->env);
+			export(ast, &data->env);
 		else if (ft_strncmp(ast->cmd[0], "pwd", 3) == 0)
 			pwd(ast, data);
 		else if (ft_strncmp(ast->cmd[0], "unset", 6) == 0)
