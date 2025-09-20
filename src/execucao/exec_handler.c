@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 15:32:39 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:25:37 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	ast_fd_closer(data->ast);
 	if (execve(path[i], ast->cmd, env) == -1)
 		perror("Error on Exec_from_pipe");//return_erro("Execution failed", 1, data);
-	exec_cleaner(data, path);
+	exec_cleaner(data, path, &env);
 }
 
 static void	exec_pipe(t_data *data, t_node *ast, char ***env)

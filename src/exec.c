@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 15:36:46 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:24:52 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ void	dupper(int fd_in, int fd_out)
 	}
 }
 
-void	exec_cleaner(t_data *data, char **path)
+void	exec_cleaner(t_data *data, char **path, char ***env)
 {
 	int	exit_code;
 
 	path_cleaner(path);
+	free_matrix_env(env);
 	exit_code = data->exit_code;
 	ast_fd_closer(data->ast);
 	pid_cleaner(data->pids);
@@ -72,5 +73,5 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 	dupper(node->fd_in, node->fd_out);
 	if (path && execve(path[i], node->cmd, env) == -1)
 		perror("Exec failed");//return_erro("Execution failed", 1, data);
-	exec_cleaner(data, path);
+	exec_cleaner(data, path, &env);
 }
