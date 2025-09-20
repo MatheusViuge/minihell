@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:32:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/02 17:26:26 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:05:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	pid_wait(t_data *data, t_pid *pid)
 	current = pid;
 	while (current)
 	{
-		if (waitpid(current->pid, &status, 0) == -1)
+		if (waitpid(current->pid, &status, 0) == -1
+			&& g_sig != SIGINT && g_sig != SIGQUIT)
 			perror("waitpid");
 		if (WIFEXITED(status))
 			data->exit_code = WEXITSTATUS(status);

@@ -6,11 +6,13 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/04 10:38:09 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:27:25 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
+
+int	g_sig;
 
 int	main(int ac, char **av, char **env)
 {
@@ -19,10 +21,12 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	set_signal_handler();
 	loop = true;
 	data.exit_code = 0;
 	data.pids = NULL;
 	data.env = create_env(env);
+	env_init(&data);
 	while (loop)
 		loop = line_comand(&data);
 	clear_history();
@@ -38,7 +42,13 @@ bool	line_comand(t_data *data)
 	data->tokens = NULL;
 	data->ast = NULL;
 	prompt = readline("mini> ");
+	set_exit_code(data);
 	if (!prompt)
+	{
+		ft_putstr_fd("exit\n", 1);
+		return (false);
+	}
+	if (ft_strlen(prompt) == 0)
 		return (true);
 	add_history(prompt);
 	res = parser(data, prompt);
@@ -47,9 +57,6 @@ bool	line_comand(t_data *data)
 		return (false);
 	else
 		exec_handler(data);
-	if (size_tokens(data->tokens) == 1
-		&& !ft_strncmp(data->tokens->value, "exit", 5))
-		return (false);
 	free_ast(&data->ast);
 	free_tokens(&data->tokens);
 	return (true);

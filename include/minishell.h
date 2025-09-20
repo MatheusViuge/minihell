@@ -6,13 +6,14 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/02 17:26:14 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:07:43 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#define _POSIX_C_SOURCE 200809L
 # include "../lib/libft.h"
 # include "types.h"
 # include <dirent.h>
@@ -31,14 +32,16 @@
 # include <termios.h>
 # include <dirent.h>
 # include <stdbool.h>
-# include "../lib/libft.h"
-# include "types.h"
 
 bool			line_comand(t_data *data);
 void			free_data(t_data *data);
 bool			return_erro(char *msg, char *allocated_msg,
 					int code, t_data *data);
 void			free_redir_list(t_redir *redir);
+void			set_signal_handler(void);
+void			set_exit_code(t_data *data);
+void			env_init(t_data *data);
+int				atoi_shlvl(t_env *env);
 
 /*	env functions	*/
 t_env			*create_env(char **env);
@@ -52,11 +55,11 @@ int				len_env(t_env *head);
 
 /*  builtins functions */
 void			cd(char **args, t_env **env);
-bool			echo(char **args);
+void			echo(t_node *ast);
 bool			export(char **args, t_env **head);
 bool			unset(char **args, t_env **head);
-void			pwd(t_env *head);
-bool			ft_exit(char **args, t_data *data);
+void			pwd(t_node *ast, t_data *data);
+void			ft_exit(t_node *ast, t_data *data);
 int				len_args(char **args);
 
 /*	token functions	*/
@@ -69,9 +72,10 @@ t_token			*last_token(t_token *tokens);
 void			add_token(t_token **tokens, t_token *new);
 t_token			*create_token(char *prompt, char *start, char *end,
 					size_t *size);
-int				token_quote(char *str, char **end);
-char			*token_meta_char(char *end);
+int				token_quote(char *str, char **end, int *index);
+char			*token_meta_char(char *end, int index);
 void			free_tokens(t_token **tokens);
+bool			token_error(char *prompt, t_data *data);
 
 /*	expanding variables	*/
 bool			expand_variable(t_token *token, t_data *data);
@@ -111,7 +115,7 @@ void			exec_cleaner(t_data *data, char **path);
 void			exec(t_data *data, t_node *node, char **path, char **env);
 void			exec_handler(t_data *data);
 char			**env_transform(t_env *env);
-void			free_matrix_env(char **env);
+void			free_matrix_env(char ***env);
 
 /* path utilities */
 void			path_cleaner(char **path);

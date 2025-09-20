@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/02 17:26:19 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:08:04 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	builtin_handler(t_data *data, t_node *ast)
 		if (ft_strncmp(ast->cmd[0], "cd", 3) == 0)
 			cd(ast->cmd + 1, &data->env);
 		else if (ft_strncmp(ast->cmd[0], "echo", 4) == 0)
-			echo(ast->cmd + 1);
+			echo(ast);
 		else if (ft_strncmp(ast->cmd[0], "env", 3) == 0)
 			env(data->env);
 		else if (ft_strncmp(ast->cmd[0], "exit", 4) == 0)
-			ft_exit(ast->cmd + 1, data);
+			ft_exit(ast, data);
 		else if (ft_strncmp(ast->cmd[0], "export", 6) == 0)
 			export(ast->cmd + 1, &data->env);
 		else if (ft_strncmp(ast->cmd[0], "pwd", 3) == 0)
-			pwd(data->env);
+			pwd(ast, data);
 		else if (ft_strncmp(ast->cmd[0], "unset", 6) == 0)
 			unset(ast->cmd + 1, &data->env);
 	}
@@ -69,10 +69,10 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 			break ;
 		i++;
 	}
-	if (!path[i])
+	if (!path && !path[i])
 		perror("Exec failed");//return_erro("Command not found", 127, data);
 	dupper(node->fd_in, node->fd_out);
-	if (execve(path[i], node->cmd, env) == -1)
+	if (path && execve(path[i], node->cmd, env) == -1)
 		perror("Exec failed");//return_erro("Execution failed", 1, data);
 	exec_cleaner(data, path);
 }

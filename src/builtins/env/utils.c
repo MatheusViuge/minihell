@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 19:14:45 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/26 12:57:16 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 21:13:41 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,21 @@ char	*find_value_env(char *variable, t_env *env)
 	else
 		str = ft_strdup("");
 	return (str);
+}
+
+int	len_env(t_env *head)
+{
+	int		len;
+	t_env	*tmp;
+
+	if (!head)
+		return (0);
+	len = 1;
+	tmp = head->next;
+	while (tmp != head)
+	{
+		len++;
+		tmp = tmp->next;
+	}
+	return (len);
 }

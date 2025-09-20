@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/20 15:17:34 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:38:17 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ bool	token(t_data *data, char *prompt)
 	t_token	*token;
 
 	i = 0;
-	while (prompt[i])
+	while ((i == 0 || prompt[i - 1]) && prompt[i])
 	{
 		curr = prompt + i;
 		end = end_token(curr);
 		if (!end)
-			return (return_erro("Error on tokenization", NULL, -1, data));
+			return (token_error(curr, data));
 		token = create_token(prompt, curr, end, &len);
 		if (!len)
-		{
 			i++;
-			continue ;
+		else
+		{
+			if (!token)
+				return (token_error(curr, data));
+			add_token(&data->tokens, token);
+			i += len;
 		}
-		if (!token)
-			return (return_erro("Error on tokenization", NULL, -1, data));
-		add_token(&data->tokens, token);
-		i += len;
 	}
 	return (true);
 }
@@ -65,49 +65,51 @@ char	*end_token(char *str)
 	char		*end;
 	const char	*meta_char = "|<>";
 
-	res = token_quote(str, &end);
-	if (res == -1)
-		return (NULL);
-	else if (res == 1 && !ft_strchr(meta_char, *(end + 1)))
-		return (end_token((end + 1)));
-	else if (res == 1)
-		return (end);
+	end = str;
 	i = -1;
 	while (str[++i])
 	{
+		res = token_quote(str, &end, &i);
+		if (res == -1)
+			return (NULL);
+		else if (res == 1
+			&& !ft_isspace(*(end + 1)) && !ft_strchr(meta_char, *(end + 1)))
+			return (end_token((end + 1)));
+		else if (res == 1)
+			return (end);
 		end = str + i;
 		if (!ft_strchr(meta_char, *end) && !ft_isspace(*end))
 			continue ;
-		if (ft_isspace(*end) || i > 0)
-			end--;
-		else
-			end = token_meta_char(end);
+		end = token_meta_char(end, i);
 		break ;
 	}
 	return (end);
 }
 
-int	token_quote(char *str, char **end)
+int	token_quote(char *str, char **end, int *index)
 {
 	char	*c;
-	int		res;
 
-	if (str[0] == '\'' || str[0] == '\"')
+	while (str[*index] == '\'' || str[*index] == '\"')
 	{
-		c = ft_strchr(str + 1, (int)str[0]);
+		c = ft_strchr(str + *index + 1, (int)str[*index]);
 		if (!c)
 			return (-1);
 		*end = c;
-		res = token_quote((*end) + 1, end);
-		if (res == -1)
-			return (-1);
-		return (1);
+		*index = *end - str + 1;
 	}
+	if (str + *index != *end)
+		return (1);
 	return (0);
 }
 
-char	*token_meta_char(char *end)
+char	*token_meta_char(char *end, int index)
 {
+	if (ft_isspace(*end) || index > 0)
+	{
+		end--;
+		return (end);
+	}
 	while (*end && *end == *(end + 1))
 		end = end + 1;
 	if (!*end)

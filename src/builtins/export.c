@@ -3,57 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/28 17:02:43 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/16 21:47:01 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 static void	order_env(t_env **list);
-static void	set_env(char **args, t_env **head);
+static bool	set_env(t_env **head, char *arg);
 static bool	print_env_export(t_env *head);
 
 bool	export(char **args, t_env **head)
 {
+	int		i;
+	char	*str;
+	bool	success;
+
 	if (!args || !*args)
 		return (print_env_export(*head));
-	set_env(args, head);
-	return (true);
-}
-
-static void	set_env(char **args, t_env **head)
-{
-	int		i;
-	t_env	*node;
-	t_env	*tmp;
-	char	*str;
-
 	i = -1;
 	while (args[++i])
 	{
-		if (ft_strncmp(args[i], "=", 2))
+		if (!(ft_isalpha(args[i][0]) || args[i][0] == '_'))
 		{
-			str = ft_join_args(3, "\'", args[i],
-					"\' não é um identificador válido\n");
+			str = ft_sprintf("'%s' não é um identificador válido", args[i]);
+			if (!str)
+				return (false);
 			ft_putendl_fd(str, 2);
 			free(str);
 			continue ;
 		}
-		node = find_env(args[i], *head);
-		if (node)
-		{
-			tmp = new_node(*args);
-			free(node->value);
-			node->value = tmp->value;
-			free(node->key);
-			free(node);
-			continue ;
-		}
-		add_env_node(new_node(args[i]), head);
+		success = set_env(head, args[i]);
+		if (!success)
+			return (false);
 	}
+	return (true);
+}
+
+static bool	set_env(t_env **head, char *arg)
+{
+	t_env	*node;
+	char	**tmp;
+
+	tmp = ft_split(arg, '=');
+	if (!tmp)
+		return (false);
+	node = find_env(tmp[0], *head);
+	if (node)
+	{
+		free(node->value);
+		node->value = tmp[1];
+		free(tmp[0]);
+		free(tmp);
+		return (true);
+	}
+	free_split(&tmp);
+	add_env_node(new_node(arg), head);
+	return (false);
 }
 
 static bool	print_env_export(t_env *head)
@@ -110,21 +119,4 @@ static void	order_env(t_env **list)
 				break ;
 		}
 	}
-}
-
-int	len_env(t_env *head)
-{
-	int		len;
-	t_env	*tmp;
-
-	if (!head)
-		return (0);
-	len = 1;
-	tmp = head->next;
-	while (tmp != head)
-	{
-		len++;
-		tmp = tmp->next;
-	}
-	return (len);
 }
