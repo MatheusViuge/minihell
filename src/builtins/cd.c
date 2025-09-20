@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 19:02:44 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:15:49 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	cd(char **args, t_env **env)
 	}
 	ret = chdir(pwd);
 	if (ret == 0)
-		export(strs, env);
+		set_env_array_args(env, strs);
 	else
 		perror("cd");
 	free(pwd);

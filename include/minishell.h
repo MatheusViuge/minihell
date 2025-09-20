@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 16:46:46 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:15:34 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void			*free_env_array(char **env_array);
 int				len_env(t_env *head);
 char			*find_value_env(char *variable, t_env *env);
 t_env			*find_env(char *variable, t_env *env);
+void			set_env_array_args(t_env **head, char **args);
 
 /*  builtins functions */
 void			cd(char **args, t_env **env);

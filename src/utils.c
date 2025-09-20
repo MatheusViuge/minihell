@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:28:27 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 16:25:48 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:18:14 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	env_init(t_data *data)
 	free(str);
 	if (!strs)
 		return ;
-	export(strs, &data->env);
+	set_env_array_args(&data->env, strs);
 	free_split(&strs);
 }
 
@@ -99,4 +99,30 @@ int	atoi_shlvl(t_env *env)
 	}
 	free(str);
 	return (nbr);
+}
+
+void	set_env_array_args(t_env **head, char **args)
+{
+	t_env	*node;
+	char	**tmp;
+	int		i;
+
+	i = -1;
+	while (args[++i])
+	{
+		tmp = ft_split(args[i], '=');
+		if (!tmp)
+			return ;
+		node = find_env(tmp[0], *head);
+		if (node)
+		{
+			free(node->value);
+			node->value = tmp[1];
+			free(tmp[0]);
+			free(tmp);
+			return ;
+		}
+		free_split(&tmp);
+		add_env_node(new_node(args[i]), head);
+	}
 }
