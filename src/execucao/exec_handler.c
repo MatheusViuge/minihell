@@ -6,13 +6,13 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/17 05:32:08 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:32:39 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	ast_fd_closer(t_node *ast)
+void	ast_fd_closer(t_node *ast)
 {
 	if (!ast)
 		return ;
@@ -31,7 +31,9 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	i = 0;
 	if (ast->type == BUILTIN)
 	{
+		free_matrix_env(&env);
 		builtin_handler(data, ast);
+		exec_cleaner(data, path);
 		return ;
 	}
 	while (path && path[i])
