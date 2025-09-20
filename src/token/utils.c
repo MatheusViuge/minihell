@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:56:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/30 15:56:41 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:38:27 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,20 @@ void	add_token(t_token **tokens, t_token *new)
 	last = last_token(*tokens);
 	last->next = new;
 	new->prev = last;
+}
+
+bool		token_error(char *prompt, t_data *data)
+{
+	char	*str;
+
+	str = ft_sprintf("syntax error near unexpected token `%s`\n",
+			prompt);
+	if (!str)
+		return (false);
+	ft_putstr_fd(str, STDERR_FILENO);
+	free(str);
+	data->exit_code = 1;
+	free_tokens(&data->tokens);
+	data->tokens = NULL;
+	return (true);
 }

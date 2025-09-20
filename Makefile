@@ -29,6 +29,7 @@ SRC = main.c \
 		$(DIR_BUILTINS)/unset.c \
 		$(DIR_TOKEN)/token.c \
 		$(DIR_TOKEN)/utils.c \
+		src/signal.c \
 		src/expand/expand.c \
 		src/expand/utils.c \
 		src/utils.c \
@@ -56,7 +57,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ make -C lib
-	@ cp $(LIBFT) .
 	@ cc -Wall -Wextra -Werror -g $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 	@ clear
 	@ echo "$(GREEN)Compilado com sucesso!$(RESET)"

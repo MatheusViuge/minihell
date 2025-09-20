@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/13 19:55:40 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:56:50 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,8 @@ static void	exec_pipe(t_data *data, t_node *ast, char ***env)
 static void	single_exec(t_data *data, t_node *node, char ***env)
 {
 	int		pid;
-	int		status;
 	char	**path;
 
-	status = 0;
 	if (node->type == BUILTIN)
 	{
 		free_matrix_env(env);
@@ -99,10 +97,8 @@ static void	single_exec(t_data *data, t_node *node, char ***env)
 		exec(data, node, path, *env);
 	handle_pid(data, pid);
 	ast_fd_closer(data->ast);
-	data->pids = NULL;
 	pid_wait(data, data->pids);
 	path_cleaner(path);
-	data->exit_code = WEXITSTATUS(status);
 }
 
 void	exec_handler(t_data *data)
