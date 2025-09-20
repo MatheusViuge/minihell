@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 16:33:43 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:46:46 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			unset(char **args, t_env **head);
 void			pwd(t_node *ast, t_data *data);
 void			ft_exit(t_node *ast, t_data *data);
 int				len_args(char **args);
-int				set_fd(t_node *ast);
+int				define_fd(t_node *ast);
 
 /*	token functions	*/
 bool			token(t_data *data, char *prompt);

@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:13:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 16:38:21 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:46:54 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	echo(t_node *ast)
 	int		i;
 	int		fd;
 
-	fd = set_fd(ast);
+	fd = define_fd(ast);
 	flag = false;
 	i = 1;
 	flag = flag_checker(ast->cmd[i]);
@@ -50,7 +50,7 @@ void	echo(t_node *ast)
 		ft_putchar_fd('\n', fd);
 }
 
-int	set_fd(t_node *ast)
+int	define_fd(t_node *ast)
 {
 	int		fd;
 
