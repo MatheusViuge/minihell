@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:32:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 15:57:03 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:44:36 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ void	handle_pid(t_data *data, int pid)
 	}
 }
 
-static void	pid_cleaner(t_pid *pid)
+void	pid_cleaner(t_pid *pid)
 {
 	t_pid	*current;
 	t_pid	*next;
 
+	if (!pid)
+		return ;
 	current = pid;
 	while (current)
 	{

@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 17:35:57 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:44:16 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ bool			ast_error_handler(t_node **ast, t_data *data, char *error_msg);
 int				next_type_token(t_token *token, int count);
 t_type_token	get_node_type(char *cmd);
 t_redir			*new_redir(t_token *token);
+void			ast_fd_closer(t_node *ast);
 
 /*	redirects functions	*/
 void			handle_redirects(t_data *data, t_node *node);
@@ -119,7 +120,7 @@ void			handle_pipes(t_node *node);
 
 /* execution functions */
 void			dupper(int fd_in, int fd_out);
-void			exec_cleaner(t_data *data, char **path);
+void			exec_cleaner(t_data *data, char **path, char ***env);
 void			exec(t_data *data, t_node *node, char **path, char **env);
 void			exec_handler(t_data *data);
 char			**env_transform(t_env *env);
@@ -133,6 +134,7 @@ char			**path_finder(t_env *env, char *cmd);
 /* process ID handling */
 void			handle_pid(t_data *data, int pid);
 void			pid_wait(t_data *data, t_pid *pid);
+void			pid_cleaner(t_pid *pid);
 
 /* data cleanup */
 void			free_data(t_data *data);
