@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:56:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/18 19:38:27 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:09:49 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ int	size_tokens(t_token *tokens)
 	return (i);
 }
 
-t_token	*last_token(t_token *tokens)
-{
-	while (tokens && tokens->next)
-		tokens = tokens->next;
-	return (tokens);
-}
-
 void	add_token(t_token **tokens, t_token *new)
 {
 	t_token	*last;
@@ -74,16 +67,18 @@ void	add_token(t_token **tokens, t_token *new)
 		*tokens = new;
 		return ;
 	}
-	last = last_token(*tokens);
+	last = *tokens;
+	while (last && last->next)
+		last = last->next;
 	last->next = new;
 	new->prev = last;
 }
 
-bool		token_error(char *prompt, t_data *data)
+bool	token_error(char *prompt, t_data *data)
 {
 	char	*str;
 
-	str = ft_sprintf("syntax error near unexpected token `%s`\n",
+	str = ft_sprintf("syntax error near unexpected token `%s'\n",
 			prompt);
 	if (!str)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 15:15:37 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:12:52 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,8 @@ static bool	print_env_export(t_env *head)
 	t_env	**cpy;
 	char	*str;
 
-	if (!head)
-		return (true);
 	len = len_env(head);
-	if (len < 2)
+	if (len == 0)
 		return (true);
 	cpy = ft_calloc(len + 1, sizeof(t_env *));
 	if (!cpy)
