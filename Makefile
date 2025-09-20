@@ -45,7 +45,6 @@ SRC = main.c \
 		$(DIR_PARSER)/ast_handler.c \
 		$(DIR_PARSER)/ast_errors.c \
 		$(DIR_PARSER)/ast_utils.c \
-		$(DIR_PARSER)/testes.c \
 		$(DIR_REDIRECT)/redirect_handler.c \
 		$(DIR_REDIRECT)/pipe_handler.c
 
