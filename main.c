@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:50:25 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:53:13 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	exit_error(t_data *data, t_env **env, char ***env_array)
 	if (static_data->exit_code)
 		exit_code = static_data->exit_code;
 	ft_putendl_fd("Error: malloc failed", 2);
-	path_cleaner(env_array);
+	free_array_args(env_array);
 	free(env);
 	free_data(static_data);
 	exit(exit_code);
