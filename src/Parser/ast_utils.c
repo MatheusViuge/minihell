@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:55:12 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/29 02:49:15 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 20:44:19 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	handle_pipe_node(t_data *data, t_token *token)
 	t_node	*node;
 
 	node = create_node(1, token, 0);
-	if (ast_error_handler(&node, data, "Failed to create node"))
-		return ;
 	link_pipe_node(data, node);
 }
 
@@ -103,7 +101,5 @@ void	handle_command_node(t_data *data, t_token **token)
 			redir_amount += redir_counter(&tmp);
 	}
 	node = create_node(count, *token, redir_amount);
-	if (ast_error_handler(&node, data, "Failed to create node"))
-		return ;
 	link_node(data, node);
 }

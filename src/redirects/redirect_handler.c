@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:02:29 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/20 14:40:42 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:43:28 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	redir_open(t_node *node, t_redir *redir)
 			close(node->fd_in);
 		node->fd_in = open(redir->name, O_RDONLY);
 		if (node->fd_in < 0)
-			perror("Error: on redirects");//return_erro("Failed to open input file", 1, NULL);
+			perror("Error: on redirects");
 	}
 	else if (redir->type == REDIR_OUT)
 	{
@@ -28,7 +28,7 @@ static void	redir_open(t_node *node, t_redir *redir)
 			close(node->fd_in);
 		node->fd_out = open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (node->fd_out < 0)
-			perror("Error: on redirects");//return_erro("Failed to open output file", 1, NULL);
+			perror("Error: on redirects");
 	}
 	else if (redir->type == APPEND)
 	{
@@ -36,7 +36,7 @@ static void	redir_open(t_node *node, t_redir *redir)
 			close(node->fd_in);
 		node->fd_out = open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (node->fd_out < 0)
-			perror("Error: on redirects");//return_erro("Failed to open append file", 1, NULL);
+			perror("Error: on redirects");
 	}
 }
 
@@ -50,7 +50,7 @@ static int	here_doc_handler(t_data *data, char *delimiter)
 	delimiter_size = ft_strlen(delimiter);
 	if (pipe(pipefd) == -1)
 	{
-		perror("Error: on redirects");//return_erro("Failed to create heredoc pipe", 1, data);
+		perror("Error: on redirects");
 		return (-1);
 	}
 	while (1)

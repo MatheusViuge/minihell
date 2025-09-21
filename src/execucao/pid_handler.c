@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:32:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 17:44:36 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:44:06 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	handle_pid(t_data *data, int pid)
 	t_pid	*new_pid;
 	t_pid	*current;
 
-	new_pid = ft_calloc(sizeof(t_pid), 1);
+	new_pid = (t_pid *)ft_calloc(sizeof(t_pid), 1);
 	if (!new_pid)
-		return ;
+		exit_error(NULL, NULL, NULL);
 	new_pid->pid = pid;
 	if (!data->pids)
 		data->pids = new_pid;

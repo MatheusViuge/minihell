@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 16:01:34 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ bool	expand_variable(t_token *token, t_data *data)
 		if ((token->value[i] == '\'' || token->value[i] == '\"'))
 			set_quote(&token->value, &i, &quote, token->value[i]);
 		if (!token->value)
-			return (return_erro("Error", NULL, 2, data));
+			exit_error(NULL, NULL, NULL);
 		if (token->value[i] != '$' || (token->value[i] == '$' && quote == 1))
 			continue ;
 		if (quote != 1)
 			replace_variable(&token->value, &i, data);
 		if (!token->value)
-			return (return_erro("Error", NULL, 2, data));
+			exit_error(NULL, NULL, NULL);
 		if (!token->value[i])
 			break ;
 		if (token->value[i] == '\'' || token->value[i] == '\"')
 			set_quote(&token->value, &i, &quote, token->value[i]);
 		if (!token->value)
-			return (return_erro("Error", NULL, 2, data));
+			exit_error(NULL, NULL, NULL);
 	}
 	return (true);
 }
@@ -50,13 +50,9 @@ void	replace_variable(char **value, int *index, t_data *data)
 	const char	*meta_char = "_?";
 
 	start = *index + 1;
-	if ((*value)[start]
-		&& !(ft_isalpha((*value)[start]) || ft_strchr(meta_char, (*value)[start])))
-	{
-		free(*value);
-		*value = NULL;
-		return ;
-	}
+	if ((*value)[start] && !(ft_isalpha((*value)[start])
+		|| ft_strchr(meta_char, (*value)[start])))
+		exit_error(NULL, NULL, NULL);
 	i = start;
 	if ((*value)[i] && (*value)[i] == '?')
 		i++;
@@ -64,7 +60,11 @@ void	replace_variable(char **value, int *index, t_data *data)
 		&& (ft_isalnum((int)(*value)[i]) || (*value)[i] == '_'))
 		i++;
 	key = ft_substr(*value, start, i - start);
+	if (!key)
+		exit_error(NULL, NULL, NULL);
 	tmp = token_recreate(*value, key, index, data);
+	if (!tmp)
+		exit_error(NULL, NULL, NULL);
 	free(*value);
 	*value = tmp;
 }
@@ -83,17 +83,12 @@ char	*token_recreate(char *str, char *key, int *index, t_data *data)
 		free(expand.prev);
 		free(expand.next);
 		free(expand.new);
-		return (NULL);
+		exit_error(NULL, NULL, NULL);
 	}
 	tmp = ft_join_args(3, expand.prev, expand.new, expand.next);
+	*index = ft_strlen(tmp) - ft_strlen(expand.next);
 	free(expand.prev);
 	free(expand.new);
-	if (!tmp)
-	{
-		free(expand.next);
-		return (NULL);
-	}
-	*index = ft_strlen(tmp) - ft_strlen(expand.next);
 	free(expand.next);
 	return (tmp);
 }
