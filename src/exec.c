@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec.c          /*                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:23:12 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 22:56:30 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exec_cleaner(t_data *data, char **path, char ***env)
 	free_matrix_env(env);
 	exit_code = data->exit_code;
 	ast_fd_closer(data->ast);
-	pid_cleaner(data->pids);
+	pid_cleaner(&data->pids);
 	free_data(data);
 	exit(exit_code);
 }
@@ -68,14 +68,21 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 	i = 0;
 	while (path && path[i])
 	{
-		if (access(path[i], F_OK | X_OK) == 0)
+		if (!access(path[i], F_OK) && !access(path[i], X_OK))
 			break ;
 		i++;
 	}
-	if (!path && (path && !path[i]))
-		perror("Exec failed");
+	if (*node->cmd && (!path || (path && !path[i])))
+	{
+		perror("Command not found");
+		data->exit_code = 127;
+		return	(exec_cleaner(data, path, &env));
+	}
 	dupper(node->fd_in, node->fd_out);
-	if (path && execve(path[i], node->cmd, env) == -1)
+	if (path && node->cmd && execve(path[i], node->cmd, env) == -1)
+	{
 		perror("Exec failed");
+		data->exit_code = 1;
+	}
 	exec_cleaner(data, path, &env);
 }

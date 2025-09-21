@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 20:42:04 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 22:53:44 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 23:53:37 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	free_array_args(char ***array_args)
 {
 	int	i;
 
+	if (!array_args || !*array_args)
+		return ;
 	i = -1;
 	while (*array_args && (*array_args)[++i])
 		free((*array_args)[i]);
