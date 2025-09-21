@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 21:03:06 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	set_env(t_env **head, char *arg)
 	i = ft_strchr_nbr(arg, '=');
 	tmp = ft_substr(arg, 0, i);
 	if (!tmp)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	node = find_env(tmp, *head);
 	free(tmp);
 	if (node)
@@ -59,7 +59,7 @@ static void	set_env(t_env **head, char *arg)
 		free(node->value);
 		node->value = ft_substr(arg, i + 1, ft_strlen(arg));
 		if (!node->value)
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+			exit_error(NULL, NULL, NULL);
 		return ;
 	}
 	add_env_node(new_node(arg), head);
@@ -85,14 +85,14 @@ static void	print_env_export(t_node *ast, t_env *head)
 		if (!value)
 		{
 			free(env_array);
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+			exit_error(NULL, NULL, NULL);
 		}
 		str = ft_sprintf("declare -x %s%s", env_array[len]->key, value);
 		free(value);
 		if (!str)
 		{
 			free(env_array);
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+			exit_error(NULL, NULL, NULL);
 		}
 		ft_putendl_fd(str, fd);
 		free(str);
@@ -112,7 +112,7 @@ static t_env	**create_env_array(t_env *head)
 		return (NULL);
 	cpy = (t_env **)ft_calloc(len + 1, sizeof(t_env *));
 	if (!cpy)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	tmp = head;
 	while (tmp != head->prev && --len >= 0)
 	{

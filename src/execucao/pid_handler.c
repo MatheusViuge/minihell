@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:32:05 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 20:51:09 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_pid(t_data *data, int pid)
 	if (!new_pid)
 	{
 		data->exit_code = 1;
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	}
 	new_pid->pid = pid;
 	if (!data->pids)

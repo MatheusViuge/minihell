@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:56:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:19:20 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*new_token(char *str)
 
 	new = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (!new)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	new->value = str;
 	new->type = type_token(str);
 	new->next = NULL;

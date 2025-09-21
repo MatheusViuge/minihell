@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 19:14:45 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 20:23:21 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*find_value_env(char *variable, t_env *env)
 	else
 		str = ft_strdup("");
 	if (!str)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	return (str);
 }
 

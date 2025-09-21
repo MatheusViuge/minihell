@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:18:41 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:38:57 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	exit_error(&data, NULL, NULL, NULL);
+	exit_error(&data, NULL, NULL);
 	set_signal_handler();
 	loop = true;
 	data.exit_code = 0;
@@ -63,7 +63,7 @@ bool	line_comand(t_data *data)
 	return (true);
 }
 
-void	exit_error(t_data *data, char *msg_error, char **path, char ***env)
+void	exit_error(t_data *data, char **path, char ***env)
 {
 	int				exit_code;
 	static t_data	*static_data = NULL;
@@ -76,8 +76,7 @@ void	exit_error(t_data *data, char *msg_error, char **path, char ***env)
 	exit_code = 1;
 	if (static_data->exit_code)
 		exit_code = static_data->exit_code;
-	ft_putendl_fd(msg_error, 2);
-	free(msg_error);
+	ft_putendl_fd("Error: malloc failed", 2);
 	path_cleaner(path);
 	free_matrix_env(env);
 	free_data(static_data);

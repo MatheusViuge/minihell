@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:08:02 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	remove_quotes(char **value, int *index)
 	{
 		free(tmp);
 		free(prev);
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	}
 	str = ft_join_args(3, prev, tmp, &(*value)[*index + 1]);
 	*index = ft_strlen(prev) + ft_strlen(tmp) - 1;
 	free(prev);
 	free(tmp);
 	if (!str)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	free(*value);
 	*value = str;
 }

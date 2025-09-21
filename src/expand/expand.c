@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:02:08 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:09:58 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ bool	expand_variable(t_token *token, t_data *data)
 		if ((token->value[i] == '\'' || token->value[i] == '\"'))
 			set_quote(&token->value, &i, &quote, token->value[i]);
 		if (!token->value)
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+			exit_error(NULL, NULL, NULL);
 		if (token->value[i] != '$' || (token->value[i] == '$' && quote == 1))
 			continue ;
 		if (quote != 1)
 			replace_variable(&token->value, &i, data);
 		if (!token->value)
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+			exit_error(NULL, NULL, NULL);
 		if (!token->value[i])
 			break ;
 		if (token->value[i] == '\'' || token->value[i] == '\"')
 			set_quote(&token->value, &i, &quote, token->value[i]);
 		if (!token->value)
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+			exit_error(NULL, NULL, NULL);
 	}
 	return (true);
 }
@@ -52,7 +52,7 @@ void	replace_variable(char **value, int *index, t_data *data)
 	start = *index + 1;
 	if ((*value)[start] && !(ft_isalpha((*value)[start])
 		|| ft_strchr(meta_char, (*value)[start])))
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	i = start;
 	if ((*value)[i] && (*value)[i] == '?')
 		i++;
@@ -61,10 +61,10 @@ void	replace_variable(char **value, int *index, t_data *data)
 		i++;
 	key = ft_substr(*value, start, i - start);
 	if (!key)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	tmp = token_recreate(*value, key, index, data);
 	if (!tmp)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	free(*value);
 	*value = tmp;
 }
@@ -83,7 +83,7 @@ char	*token_recreate(char *str, char *key, int *index, t_data *data)
 		free(expand.prev);
 		free(expand.next);
 		free(expand.new);
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	}
 	tmp = ft_join_args(3, expand.prev, expand.new, expand.next);
 	*index = ft_strlen(tmp) - ft_strlen(expand.next);

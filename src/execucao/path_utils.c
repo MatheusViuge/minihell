@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:05:44 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 21:21:41 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	path_join(char **path, char *cmd)
 		else
 			temp = ft_strdup(path[i]);
 		if (!temp)
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, &path);
+			exit_error(NULL, NULL, &path);
 		free(path[i]);
 		path[i] = ft_strjoin(temp, cmd);
 		if (!path[i])
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, &path);
+			exit_error(NULL, NULL, &path);
 		free(temp);
 		i++;
 	}
@@ -58,12 +58,12 @@ static char	**get_single_path(char **path, char *cmd)
 {
 	path = (char **)ft_calloc(sizeof(char *), 2);
 	if (!path)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	path[0] = ft_strdup(cmd);
 	if (!path[0])
 	{
 		free(path);
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	}
 	return (path);
 }
@@ -82,7 +82,7 @@ char	**path_finder(t_env *env, char *cmd)
 	path = ft_split(path_value, ':');
 	free(path_value);
 	if (!path)
-		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+		exit_error(NULL, NULL, NULL);
 	path_join(path, cmd);
 	return (path);
 }
