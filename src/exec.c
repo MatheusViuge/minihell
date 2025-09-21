@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 00:16:31 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/21 00:16:39 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/21 00:30:59 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 	{
 		perror("Command not found");
 		data->exit_code = 127;
-		return	(exec_cleaner(data, path, &env));
+		return (exec_cleaner(data, path, &env));
 	}
 	dupper(node->fd_in, node->fd_out);
 	if (path && node->cmd && execve(path[i], node->cmd, env) == -1)

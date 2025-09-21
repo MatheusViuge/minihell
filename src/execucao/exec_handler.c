@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 23:47:37 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/21 00:31:28 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 	if (!path[i])
 	{
 		perror("Error on Exec_from_pipe");
-		return	(exec_cleaner(data, path, &env));
+		return (exec_cleaner(data, path, &env));
 	}
 	dupper(ast->fd_in, ast->fd_out);
 	ast_fd_closer(data->ast);
