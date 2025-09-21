@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:02:29 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/21 00:34:44 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/21 01:35:00 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static void	redir_open(t_node *node, t_redir *redir, t_data *data)
 	}
 	else if (redir->type == REDIR_OUT)
 	{
-		if (node->fd_in != -1)
-			close(node->fd_in);
+		if (node->fd_out != -1)
+			close(node->fd_out);
 		node->fd_out = open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (node->fd_out < 0)
 			perror_set_exit_code(data);
 	}
 	else if (redir->type == APPEND)
 	{
-		if (node->fd_in != -1)
-			close(node->fd_in);
+		if (node->fd_out != -1)
+			close(node->fd_out);
 		node->fd_out = open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (node->fd_out < 0)
 			perror_set_exit_code(data);
