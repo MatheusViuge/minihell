@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:34:45 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:48:30 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			set_signal_handler(void);
 void			set_exit_code(t_data *data);
 void			env_init(t_data *data);
 int				atoi_shlvl(t_env *env);
-void			exit_error(t_data *data, char **path, char ***env);
+void			exit_error(t_data *data, t_env **env, char ***env_array);
 
 /*	env functions	*/
 t_env			*create_env(char **env);
@@ -51,13 +51,13 @@ void			free_env(t_env **head);
 void			add_env_node(t_env *new_node, t_env **head);
 t_env			*new_node(char *str);
 char			**convert_env(t_env *env);
-void			free_env_array(char **env_array);
 int				len_env(t_env *head);
 char			*find_value_env(char *variable, t_env *env);
 t_env			*find_env(char *variable, t_env *env);
 void			set_env_array_args(t_env **head, char **args);
 
 /*  builtins functions */
+void			builtin_handler(t_data *data, t_node *node);
 void			cd(char **args, t_env **env);
 void			echo(t_node *ast);
 void			export(t_node *ast, t_env **head);
@@ -139,13 +139,5 @@ void			pid_cleaner(t_pid *pid);
 
 /* data cleanup */
 void			free_data(t_data *data);
-
-/* builtins */
-void			builtin_handler(t_data *data, t_node *node);
-
-/*	para apagar	*/
-void			print_tokens(t_token *tokens);
-bool			exec_command(t_data *data, char *command);
-void			print_ast(t_node *n, int depth);
 
 #endif

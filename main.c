@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:20:52 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:38:57 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:50:25 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	line_comand(t_data *data)
 	return (true);
 }
 
-void	exit_error(t_data *data, char **path, char ***env)
+void	exit_error(t_data *data, t_env **env, char ***env_array)
 {
 	int				exit_code;
 	static t_data	*static_data = NULL;
@@ -77,8 +77,8 @@ void	exit_error(t_data *data, char **path, char ***env)
 	if (static_data->exit_code)
 		exit_code = static_data->exit_code;
 	ft_putendl_fd("Error: malloc failed", 2);
-	path_cleaner(path);
-	free_matrix_env(env);
+	path_cleaner(env_array);
+	free(env);
 	free_data(static_data);
 	exit(exit_code);
 }

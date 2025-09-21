@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:51:18 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,15 @@ static void	print_env_export(t_node *ast, t_env *head)
 		else
 			value = ft_strdup("");
 		if (!value)
-		{
-			free(env_array);
-			exit_error(NULL, NULL, NULL);
-		}
+			exit_error(NULL, env_array, NULL);
 		str = ft_sprintf("declare -x %s%s", env_array[len]->key, value);
 		free(value);
 		if (!str)
-		{
-			free(env_array);
-			exit_error(NULL, NULL, NULL);
-		}
+			exit_error(NULL, env_array, NULL);
 		ft_putendl_fd(str, fd);
 		free(str);
 	}
 	free(env_array);
-	return ;
 }
 
 static t_env	**create_env_array(t_env *head)
