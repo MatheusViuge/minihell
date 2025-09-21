@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 19:58:00 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:25:07 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 		i++;
 	}
 	if (!path[i])
-		perror("Error on Exec_from_pipe"); // QUE ??????????????????????????
+		perror("Error on Exec_from_pipe");
 	dupper(ast->fd_in, ast->fd_out);
 	ast_fd_closer(data->ast);
 	if (execve(path[i], ast->cmd, env) == -1)
@@ -92,7 +92,7 @@ static void	single_exec(t_data *data, t_node *node, char ***env)
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("Error: single_exec");//return_erro("Fork failed", 1, data);
+		perror("Error: single_exec");
 		return ;
 	}
 	if (pid == 0)

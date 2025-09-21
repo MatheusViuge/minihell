@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 18:42:07 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:23:12 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 		i++;
 	}
 	if (!path && (path && !path[i]))
-		perror("Exec failed");//return_erro("Command not found", 127, data);
+		perror("Exec failed");
 	dupper(node->fd_in, node->fd_out);
 	if (path && execve(path[i], node->cmd, env) == -1)
-		perror("Exec failed");//return_erro("Execution failed", 1, data);
+		perror("Exec failed");
 	exec_cleaner(data, path, &env);
 }

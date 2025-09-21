@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 03:35:55 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 21:20:48 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:24:30 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,13 @@ char	**env_transform(t_env *env)
 	{
 		temp_str = ft_strjoin(env->key, "=");
 		if (!temp_str)
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, &char_env);
+			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL,
+				&char_env);
 		char_env[i] = ft_strjoin(temp_str, env->value);
 		free(temp_str);
 		if (!char_env[i])
-			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, &char_env);
+			exit_error(NULL, ft_strdup("Error: malloc failed"), NULL,
+				&char_env);
 		env = env->next;
 	}
 	char_env[i] = NULL;
