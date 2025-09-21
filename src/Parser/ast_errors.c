@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:45:04 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/20 15:24:25 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 20:38:14 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_redir	*new_redir(t_token *token)
 
 	redir = (t_redir *)ft_calloc(sizeof(t_redir), 1);
 	if (!redir)
-		return (NULL);
+		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
 	redir->type = token->type;
 	redir->name = ft_strdup(token->next->value);
 	if (!redir->name)
 	{
 		free(redir);
-		return (NULL);
+		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
 	}
 	redir->next = NULL;
 	return (redir);

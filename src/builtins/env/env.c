@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 17:39:44 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 20:46:34 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,23 @@ t_env	*new_node(char *str)
 	t_env	*new;
 	int		i;
 
-	new = malloc(sizeof(t_env));
+	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
-		return (NULL);
+		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
 	i = ft_strchr_nbr(str, '=');
 	new->key = ft_substr(str, 0, i);
 	if (!new->key)
 	{
 		free(new);
-		return (NULL);
+		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
 	}
 	new->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
+	if (!new->value)
+	{
+		free(new->key);
+		free(new);
+		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
+	}
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

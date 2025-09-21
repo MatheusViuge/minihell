@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/18 19:38:17 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:02:36 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	token(t_data *data, char *prompt)
 		else
 		{
 			if (!token)
-				return (token_error(curr, data));
+				exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
 			add_token(&data->tokens, token);
 			i += len;
 		}
@@ -51,10 +51,8 @@ t_token	*create_token(char *prompt, char *start, char *end, size_t *size)
 		return (NULL);
 	str = ft_substr(prompt, start - prompt, *size);
 	if (!str)
-		return (NULL);
+		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
 	token = new_token(str);
-	if (!token)
-		*size = -1;
 	return (token);
 }
 

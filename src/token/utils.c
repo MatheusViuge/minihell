@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:56:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 16:09:49 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:19:20 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_token	*new_token(char *str)
 {
 	t_token	*new;
 
-	new = ft_calloc(1, sizeof(t_token));
+	new = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (!new)
-		return (NULL);
+		exit_error(NULL, ft_strdup("Error: malloc failed"), NULL, NULL);
 	new->value = str;
 	new->type = type_token(str);
 	new->next = NULL;
@@ -80,12 +80,8 @@ bool	token_error(char *prompt, t_data *data)
 
 	str = ft_sprintf("syntax error near unexpected token `%s'\n",
 			prompt);
-	if (!str)
-		return (false);
-	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(str, 2);
 	free(str);
 	data->exit_code = 1;
-	free_tokens(&data->tokens);
-	data->tokens = NULL;
 	return (true);
 }

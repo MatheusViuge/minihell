@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:59:59 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/25 16:28:17 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:15:13 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ bool	parser(t_data *data, char *input)
 	if (!lexer(data))
 		return (false);
 	ast_builder(data);
-	/* print_ast(data->ast, 0); */
 	return (true);
 }

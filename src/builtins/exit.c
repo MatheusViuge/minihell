@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:00:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/19 14:24:40 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:58:22 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	atoi_exit(char *str);
 
 void	ft_exit(t_node *ast, t_data *data)
 {
+	int	exit_code;
+
 	ft_putendl_fd("exit", 1);
 	if (len_args(&ast->cmd[1]) > 1)
 	{
@@ -23,12 +25,12 @@ void	ft_exit(t_node *ast, t_data *data)
 		ft_putendl_fd("too many arguments", 2);
 		return ;
 	}
-	if (ast->cmd[1])
-		data->exit_code = atoi_exit(ast->cmd[1]);
+	if (ast && ast->cmd[1])
+		exit_code = atoi_exit(ast->cmd[1]);
 	else
-		data->exit_code = 0;
+		exit_code = 0;
 	free_data(data);
-	exit(data->exit_code);
+	exit(exit_code);
 }
 
 static int	atoi_exit(char *str)

@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 17:44:16 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:20:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void			set_signal_handler(void);
 void			set_exit_code(t_data *data);
 void			env_init(t_data *data);
 int				atoi_shlvl(t_env *env);
+void			exit_error(t_data *data, char *msg_error, char **path,
+					char ***env);
 
 /*	env functions	*/
 t_env			*create_env(char **env);
@@ -50,7 +52,7 @@ void			free_env(t_env **head);
 void			add_env_node(t_env *new_node, t_env **head);
 t_env			*new_node(char *str);
 char			**convert_env(t_env *env);
-void			*free_env_array(char **env_array);
+void			free_env_array(char **env_array);
 int				len_env(t_env *head);
 char			*find_value_env(char *variable, t_env *env);
 t_env			*find_env(char *variable, t_env *env);

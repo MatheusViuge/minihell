@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:32:33 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/07/20 15:26:10 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:56:33 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	free_data(t_data *data)
 	free_env(&data->env);
 	free_tokens(&data->tokens);
 	free_ast(&data->ast);
+	pid_cleaner(data->pids);
 }
 
 void	free_tokens(t_token **tokens)
