@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/21 00:10:59 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/24 22:09:50 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	*create_pwd(char *arg, t_env *env);
 static char	**create_variables(char **pwd, char *arg, t_env *env);
+static char	*hadle_getcwd_error(char **pwd, t_env *env);
 
 void	cd(char **args, t_env **env)
 {
@@ -50,15 +51,14 @@ static char	**create_variables(char **pwd, char *arg, t_env *env)
 	char	**strs;
 	char	*old_pwd;
 
-	*pwd = create_pwd(arg, env);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
 	{
 		perror("cd");
-		old_pwd = ft_strdup("");
-		if (!old_pwd)
-			exit_error(NULL, NULL, NULL);
+		old_pwd = hadle_getcwd_error(pwd, env);
 	}
+	else
+		*pwd = create_pwd(arg, env);
 	str = ft_sprintf("OLDPWD=%s PWD=%s", old_pwd, *pwd);
 	free(old_pwd);
 	if (!str)
@@ -71,6 +71,20 @@ static char	**create_variables(char **pwd, char *arg, t_env *env)
 		exit_error(NULL, NULL, NULL);
 	}
 	return (strs);
+}
+
+static char	*hadle_getcwd_error(char **pwd, t_env *env)
+{
+	char	*old_pwd;
+
+	old_pwd = ft_strdup("");
+	free(*pwd);
+	*pwd = find_value_env("HOME", env);
+	if (!old_pwd || !*pwd)
+	{
+		free(old_pwd);
+		exit_error(NULL, NULL, pwd);
+	}
 }
 
 static char	*create_pwd(char *arg, t_env *env)
