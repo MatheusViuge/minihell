@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:13:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/24 22:09:50 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/24 22:48:22 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ static char	*hadle_getcwd_error(char **pwd, t_env *env)
 	if (!old_pwd || !*pwd)
 	{
 		free(old_pwd);
-		exit_error(NULL, NULL, pwd);
+		exit_error(NULL, NULL, &pwd);
 	}
+	return (old_pwd);
 }
 
 static char	*create_pwd(char *arg, t_env *env)
