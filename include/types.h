@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:15 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 15:34:24 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/24 22:42:45 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef enum e_type_token
 {
 	WORD,
 	PIPE,
+	AND,
+	OR,
 	REDIR_IN,
 	REDIR_OUT,
 	HEREDOC,
