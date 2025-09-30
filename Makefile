@@ -29,7 +29,9 @@ SRC = main.c \
 		$(DIR_BUILTINS)/unset.c \
 		$(DIR_TOKEN)/token.c \
 		$(DIR_TOKEN)/utils.c \
-		src/expand.c \
+		src/signal.c \
+		src/expand/expand.c \
+		src/expand/utils.c \
 		src/utils.c \
 		src/clear.c \
 		src/exec.c \
@@ -43,7 +45,6 @@ SRC = main.c \
 		$(DIR_PARSER)/ast_handler.c \
 		$(DIR_PARSER)/ast_errors.c \
 		$(DIR_PARSER)/ast_utils.c \
-		$(DIR_PARSER)/testes.c \
 		$(DIR_REDIRECT)/redirect_handler.c \
 		$(DIR_REDIRECT)/pipe_handler.c
 
@@ -67,6 +68,7 @@ $(OBJ_DIR)/%.o: %.c
 	@ mkdir -p $(OBJ_DIR)/$(DIR_LEXER)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_PARSER)
 	@ mkdir -p $(OBJ_DIR)/$(DIR_REDIRECT)
+	@ mkdir -p $(OBJ_DIR)/src/expand
 	@ mkdir -p $(OBJ_DIR)/src/execucao
 	@ clear
 	@ echo "$(YELLOW)Compilando $<"

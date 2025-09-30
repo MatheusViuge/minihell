@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:11:53 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/10 01:21:38 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/16 21:13:03 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "gnl/get_next_line.h"
 # include "printf/ft_printf.h"
+# include "sprintf/ft_sprintf.h"
 
 typedef struct s_list
 {
@@ -72,6 +73,7 @@ void		*ft_memset(void *s, int c, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 long		ft_atol(const char *nptr);
 size_t		ft_strcspn(const char *s, const char *reject);
+void		free_split(char ***split);
 
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);

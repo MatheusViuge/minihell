@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:56:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/04/30 15:56:41 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:42:37 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_token	*new_token(char *str)
 {
 	t_token	*new;
 
-	new = ft_calloc(1, sizeof(t_token));
+	new = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (!new)
-		return (NULL);
+		exit_error(NULL, NULL, NULL);
 	new->value = str;
 	new->type = type_token(str);
 	new->next = NULL;
@@ -56,13 +56,6 @@ int	size_tokens(t_token *tokens)
 	return (i);
 }
 
-t_token	*last_token(t_token *tokens)
-{
-	while (tokens && tokens->next)
-		tokens = tokens->next;
-	return (tokens);
-}
-
 void	add_token(t_token **tokens, t_token *new)
 {
 	t_token	*last;
@@ -74,7 +67,21 @@ void	add_token(t_token **tokens, t_token *new)
 		*tokens = new;
 		return ;
 	}
-	last = last_token(*tokens);
+	last = *tokens;
+	while (last && last->next)
+		last = last->next;
 	last->next = new;
 	new->prev = last;
+}
+
+bool	token_error(char *prompt, t_data *data)
+{
+	char	*str;
+
+	str = ft_sprintf("syntax error near unexpected token `%s'",
+			prompt);
+	ft_putstr_fd(str, 2);
+	free(str);
+	data->exit_code = 1;
+	return (true);
 }

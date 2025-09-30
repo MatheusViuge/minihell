@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 21:28:16 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/02 18:39:45 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**fill_cmd(t_token *token, int number)
 
 	i = 0;
 	cmd = (char **)ft_calloc(sizeof(char *), number + 1);
+	if (!cmd)
+		exit_error(NULL, NULL, NULL);
 	while (i < number && token && token->type != PIPE)
 	{
 		if (token && is_redir(token))
@@ -27,11 +29,7 @@ char	**fill_cmd(t_token *token, int number)
 		{
 			cmd[i] = ft_strdup(token->value);
 			if (!cmd[i])
-			{
-				while (i-- > 0)
-					free(cmd[i]);
-				return (NULL);
-			}
+				exit_error(NULL, NULL, &cmd);
 			i++;
 		}
 		token = token->next;
@@ -45,13 +43,8 @@ t_node	*create_node(int number, t_token *token, int redir_amount)
 
 	node = (t_node *)ft_calloc(sizeof(t_node), 1);
 	if (!node)
-		return (NULL);
+		exit_error(NULL, NULL, NULL);
 	node->cmd = fill_cmd(token, number);
-	if (!node->cmd)
-	{
-		free(node);
-		return (NULL);
-	}
 	get_redirs(&node->redirs, token, redir_amount);
 	if (token->type == PIPE)
 		node->type = PIPE;

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   malloc_hex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/28 20:58:56 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/16 22:31:07 by jesda-si         ###   ########.fr       */
+/*   Created: 2024/10/18 16:35:35 by jessica           #+#    #+#             */
+/*   Updated: 2025/08/24 19:23:05 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "ft_sprintf.h"
 
-void	pwd(t_node *ast, t_data *data)
+char	*malloc_hex(va_list *args, char c)
 {
-	char	*cwd;
-	int		fd;
+	unsigned int	nbr;
+	char			*base;
 
-	if (ast->fd_in != -1)
-		close(ast->fd_in);
-	if (ast->fd_out != -1)
-		fd = ast->fd_out;
+	nbr = (unsigned int)va_arg(*args, unsigned int);
+	if (c == 'x')
+		base = "0123456789abcdef";
 	else
-		fd = STDOUT_FILENO;
-	cwd = getcwd(NULL, 0);
-	ft_putendl_fd(cwd, fd);
-	free(cwd);
-	data->exit_code = 0;
+		base = "0123456789ABCDEF";
+	return (malloc_uns_long_hex(nbr, base));
 }

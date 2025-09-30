@@ -6,82 +6,115 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/20 15:26:50 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:51:18 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	order_env(t_env **list);
-static void	set_env(char **args, t_env **head);
-static bool	print_env_export(t_env *head);
+static void		order_env(t_env **list);
+static void		set_env(t_env **head, char *arg);
+static void		print_env_export(t_node *ast, t_env *head);
+static t_env	**create_env_array(t_env *head);
 
-bool	export(char **args, t_env **head)
-{
-	if (!args || !*args)
-		return (print_env_export(*head));
-	set_env(args, head);
-	return (true);
-}
-
-static void	set_env(char **args, t_env **head)
+void	export(t_node *ast, t_env **head)
 {
 	int		i;
-	t_env	*node;
-	t_env	*tmp;
 	char	*str;
 
-	i = -1;
-	while (args[++i])
+	if (!ast->cmd || !ast->cmd[1])
 	{
-		if (ft_strncmp(args[i], "=", 2))
+		print_env_export(ast, *head);
+		return ;
+	}
+	i = 0;
+	while (ast->cmd[++i])
+	{
+		if (!ft_isalpha(ast->cmd[i][0]) && ast->cmd[i][0] != '_')
 		{
-			str = ft_join_args(3, "\'", args[i],
-					"\' não é um identificador válido\n");
+			str = ft_sprintf("`%s': not a valid identifier", ast->cmd[i]);
 			ft_putendl_fd(str, 2);
 			free(str);
 			continue ;
 		}
-		node = find_env(args[i], *head);
-		if (node)
-		{
-			tmp = new_node(*args);
-			free(node->value);
-			node->value = tmp->value;
-			free(node->key);
-			free(node);
-			continue ;
-		}
-		add_env_node(new_node(args[i]), head);
+		set_env(head, ast->cmd[i]);
 	}
+	return ;
 }
 
-static bool	print_env_export(t_env *head)
+static void	set_env(t_env **head, char *arg)
+{
+	t_env	*node;
+	char	*tmp;
+	int		i;
+
+	i = ft_strchr_nbr(arg, '=');
+	tmp = ft_substr(arg, 0, i);
+	if (!tmp)
+		exit_error(NULL, NULL, NULL);
+	node = find_env(tmp, *head);
+	free(tmp);
+	if (node)
+	{
+		free(node->value);
+		node->value = ft_substr(arg, i + 1, ft_strlen(arg));
+		if (!node->value)
+			exit_error(NULL, NULL, NULL);
+		return ;
+	}
+	add_env_node(new_node(arg), head);
+}
+
+static void	print_env_export(t_node *ast, t_env *head)
+{
+	int		len;
+	char	*str;
+	char	*value;
+	t_env	**env_array;
+	int		fd;
+
+	fd = define_fd(ast);
+	env_array = create_env_array(head);
+	len = -1;
+	while (env_array[++len])
+	{
+		if (ft_strlen(env_array[len]->value))
+			value = ft_sprintf("=\"%s\"", env_array[len]->value);
+		else
+			value = ft_strdup("");
+		if (!value)
+			exit_error(NULL, env_array, NULL);
+		str = ft_sprintf("declare -x %s%s", env_array[len]->key, value);
+		free(value);
+		if (!str)
+			exit_error(NULL, env_array, NULL);
+		ft_putendl_fd(str, fd);
+		free(str);
+	}
+	free(env_array);
+}
+
+static t_env	**create_env_array(t_env *head)
 {
 	int		len;
 	t_env	*tmp;
 	t_env	**cpy;
 
-	if (!head)
-		return (true);
 	len = len_env(head);
-	if (len < 2)
-		return (true);
-	cpy = ft_calloc(len + 1, sizeof(t_env *));
+	if (len == 0)
+		return (NULL);
+	cpy = (t_env **)ft_calloc(len + 1, sizeof(t_env *));
 	if (!cpy)
-		return (false);
+		exit_error(NULL, NULL, NULL);
 	tmp = head;
-	while (tmp != head->prev && --len > 0)
+	while (tmp != head->prev && --len >= 0)
 	{
 		cpy[len] = tmp;
 		tmp = tmp->next;
 	}
-	cpy[len--] = tmp;
+	cpy[--len] = tmp;
 	order_env(cpy);
-	while (cpy[++len])
-		ft_printf("declare -x %s=\"%s\"\n", cpy[len]->key, cpy[len]->value);
-	free(cpy);
-	return (true);
+	return (cpy);
 }
 
 static void	order_env(t_env **list)
@@ -110,21 +143,4 @@ static void	order_env(t_env **list)
 				break ;
 		}
 	}
-}
-
-int	len_env(t_env *head)
-{
-	int		len;
-	t_env	*tmp;
-
-	if (!head)
-		return (0);
-	len = 1;
-	tmp = head->next;
-	while (tmp != head)
-	{
-		len++;
-		tmp = tmp->next;
-	}
-	return (len);
 }

@@ -6,25 +6,38 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:46:23 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/07 18:52:42 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	env(t_env *head)
+void	env(t_env *head, t_node *ast)
 {
 	t_env	*tmp;
+	char	*str;
+	int		fd;
 
 	if (!head)
 		return ;
+	fd = define_fd(ast);
 	tmp = head;
 	while (tmp != head->prev)
 	{
-		ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
+		if (ft_strlen(tmp->value) > 0)
+		{
+			str = ft_sprintf("%s=%s", tmp->key, tmp->value);
+			ft_putendl_fd(str, fd);
+			free(str);
+		}
 		tmp = tmp->next;
 	}
-	ft_printf("%s=\"%s\"\n", tmp->key, tmp->value);
+	if (ft_strlen(tmp->value) > 0)
+	{
+		str = ft_sprintf("%s=%s", tmp->key, tmp->value);
+		ft_putendl_fd(str, fd);
+		free(str);
+	}
 }
 
 t_env	*create_env(char **env)
@@ -75,20 +88,23 @@ t_env	*new_node(char *str)
 	t_env	*new;
 	int		i;
 
-	new = malloc(sizeof(t_env));
+	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
-		return (NULL);
+		exit_error(NULL, NULL, NULL);
 	i = ft_strchr_nbr(str, '=');
 	new->key = ft_substr(str, 0, i);
 	if (!new->key)
 	{
 		free(new);
-		return (NULL);
+		exit_error(NULL, NULL, NULL);
 	}
-	if (str[i])
-		new->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
-	else
-		new->value = NULL;
+	new->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
+	if (!new->value)
+	{
+		free(new->key);
+		free(new);
+		exit_error(NULL, NULL, NULL);
+	}
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:04:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/08/22 15:06:01 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:23:12 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void	builtin_handler(t_data *data, t_node *ast)
 	if (ast->type == BUILTIN)
 	{
 		if (ft_strncmp(ast->cmd[0], "cd", 3) == 0)
-			printf("cd command not implemented\n");//cd_handler(data, ast);
-		else if (ft_strncmp(ast->cmd[0], "echo", 4) == 0)
-			printf("echo command not implemented\n");//echo_handler(data, ast);
-		else if (ft_strncmp(ast->cmd[0], "env", 3) == 0)
-			printf("env command not implemented\n");//env_handler(data, ast);
-		else if (ft_strncmp(ast->cmd[0], "exit", 4) == 0)
-			printf("exit command not implemented\n");//exit_handler(data, ast);
-		else if (ft_strncmp(ast->cmd[0], "export", 6) == 0)
-			printf("export command not implemented\n");//export_handler(data, ast);
-		else if (ft_strncmp(ast->cmd[0], "pwd", 3) == 0)
-			printf("pwd command not implemented\n");//pwd_handler(data, ast);
+			cd(ast->cmd + 1, &data->env);
+		else if (ft_strncmp(ast->cmd[0], "echo", 5) == 0)
+			echo(ast);
+		else if (ft_strncmp(ast->cmd[0], "env", 4) == 0)
+			env(data->env, ast);
+		else if (ft_strncmp(ast->cmd[0], "exit", 5) == 0)
+			ft_exit(ast, data);
+		else if (ft_strncmp(ast->cmd[0], "export", 7) == 0)
+			export(ast, &data->env);
+		else if (ft_strncmp(ast->cmd[0], "pwd", 4) == 0)
+			pwd(ast, data);
 		else if (ft_strncmp(ast->cmd[0], "unset", 6) == 0)
-			printf("unset command not implemented\n");//unset_handler(data, ast);
+			unset(ast->cmd + 1, &data->env);
 	}
 }
 
@@ -48,12 +48,15 @@ void	dupper(int fd_in, int fd_out)
 	}
 }
 
-void	exec_cleaner(t_data *data, char **path)
+void	exec_cleaner(t_data *data, char **path, char ***env)
 {
 	int	exit_code;
 
 	path_cleaner(path);
+	free_matrix_env(env);
 	exit_code = data->exit_code;
+	ast_fd_closer(data->ast);
+	pid_cleaner(data->pids);
 	free_data(data);
 	exit(exit_code);
 }
@@ -69,10 +72,10 @@ void	exec(t_data *data, t_node *node, char **path, char **env)
 			break ;
 		i++;
 	}
-	if (!path[i])
-		perror("Exec failed");//return_erro("Command not found", 127, data);
+	if (!path && (path && !path[i]))
+		perror("Exec failed");
 	dupper(node->fd_in, node->fd_out);
-	if (execve(path[i], node->cmd, env) == -1)
-		perror("Exec failed");//return_erro("Execution failed", 1, data);
-	exec_cleaner(data, path);
+	if (path && execve(path[i], node->cmd, env) == -1)
+		perror("Exec failed");
+	exec_cleaner(data, path, &env);
 }
