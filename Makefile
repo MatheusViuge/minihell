@@ -81,7 +81,7 @@ clean:
 	@ echo "$(RED)Arquivos objeto removidos!$(RESET)"
 
 fclean:
-	@ rm -rf $(OBJ_DIR) $(LIBFT) $(NAME)
+	@ rm -rf $(OBJ_DIR) $(NAME)
 	@ make fclean -C lib
 	@ clear
 	@ echo "$(RED)Arquivos objetos e ./minishell removidos!$(RESET)"
