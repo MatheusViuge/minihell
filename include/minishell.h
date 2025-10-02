@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 23:21:07 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:48:30 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 22:57:33 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char			**path_finder(t_env *env, char *cmd);
 /* process ID handling */
 void			handle_pid(t_data *data, int pid);
 void			pid_wait(t_data *data, t_pid *pid);
-void			pid_cleaner(t_pid *pid);
+void			pid_cleaner(t_pid **pid);
 
 /* data cleanup */
 void			free_data(t_data *data);

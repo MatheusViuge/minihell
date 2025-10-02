@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:56:39 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:42:37 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/24 22:56:36 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 t_type_token	type_token(char *token)
 {
-	const char	*meta_char = "|<>";
+	const char	*meta_char = "|<>&";
 
-	if (*token == meta_char[0])
+	if (token[0] == meta_char[0] && (token[1] && token[1] == meta_char[0]))
+		return (OR);
+	if (token[0] == meta_char[3] && (token[1] && token[1] == meta_char[3]))
+		return (AND);
+	if (token[0] == meta_char[0])
 		return (PIPE);
 	if (token[0] == meta_char[1] && (token[1] && token[1] == meta_char[1]))
 		return (HEREDOC);

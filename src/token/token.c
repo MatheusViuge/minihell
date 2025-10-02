@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:22:13 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 21:37:09 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/24 22:40:32 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*end_token(char *str)
 	int			i;
 	int			res;
 	char		*end;
-	const char	*meta_char = "|<>";
+	const char	*meta_char = "|<>&";
 
 	end = str;
 	i = -1;

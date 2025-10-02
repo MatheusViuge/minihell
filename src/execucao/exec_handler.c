@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:22:27 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/09/20 21:25:07 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 23:47:37 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (ast->type == BUILTIN)
 	{
 		free_matrix_env(&env);
@@ -36,14 +36,16 @@ static void	exec_from_pipe(t_data *data, t_node *ast, char **path, char **env)
 		exec_cleaner(data, path, &env);
 		return ;
 	}
-	while (path && path[i])
+	while (path && path[++i])
 	{
 		if (access(path[i], F_OK | X_OK) == 0)
 			break ;
-		i++;
 	}
 	if (!path[i])
+	{
 		perror("Error on Exec_from_pipe");
+		return	(exec_cleaner(data, path, &env));
+	}
 	dupper(ast->fd_in, ast->fd_out);
 	ast_fd_closer(data->ast);
 	if (execve(path[i], ast->cmd, env) == -1)
@@ -112,6 +114,7 @@ void	exec_handler(t_data *data)
 		return ;
 	handle_redirects(data, data->ast);
 	handle_pipes(data->ast);
+	char_env = NULL;
 	char_env = env_transform(data->env);
 	if (data->ast->type == PIPE)
 		exec_pipe(data, data->ast, &char_env);
