@@ -3,29 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 03:35:55 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/22 15:06:58 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 23:48:43 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_matrix_env(char **env)
+void	free_matrix_env(char ***env)
 {
 	int	i;
 
-	if (!env)
+	if (!env || !*env)
 		return ;
 	i = 0;
-	while (env[i])
+	while ((*env)[i])
 	{
-		free(env[i]);
-		env[i] = NULL;
+		free((*env)[i]);
+		(*env)[i] = NULL;
 		i++;
 	}
-	free(env);
+	free(*env);
+	*env = NULL;
 }
 
 static size_t	get_env_size(t_env *env)
@@ -49,7 +50,6 @@ static size_t	get_env_size(t_env *env)
 char	**env_transform(t_env *env)
 {
 	char	**char_env;
-	char	*temp_str;
 	int		size;
 	int		i;
 
@@ -58,15 +58,14 @@ char	**env_transform(t_env *env)
 	size = get_env_size(env);
 	char_env = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!char_env)
-		return (NULL);
-	i = 0;
-	while (env && i < size - 1)
+		exit_error(NULL, NULL, NULL);
+	i = -1;
+	while (env && ++i < size - 1)
 	{
-		temp_str = ft_strjoin(env->key, "=");
-		char_env[i] = ft_strjoin(temp_str, env->value);
-		free(temp_str);
+		char_env[i] = ft_join_args(3, env->key, "=", env->value);
+		if (!char_env[i])
+			exit_error(NULL, NULL, &char_env);
 		env = env->next;
-		i++;
 	}
 	char_env[i] = NULL;
 	return (char_env);

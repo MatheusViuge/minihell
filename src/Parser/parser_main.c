@@ -6,7 +6,7 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:59:59 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/07/25 16:28:17 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 22:48:00 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ bool	parser(t_data *data, char *input)
 	if (!token(data, input))
 		return (false);
 	if (!lexer(data))
+	{
+		data->exit_code = 2;
 		return (false);
+	}
 	ast_builder(data);
-	/* print_ast(data->ast, 0); */
 	return (true);
 }

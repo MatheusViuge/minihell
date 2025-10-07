@@ -6,13 +6,15 @@
 /*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:02:29 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/20 14:40:42 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/21 01:35:00 by mviana-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	redir_open(t_node *node, t_redir *redir)
+static void	perror_set_exit_code(t_data *data);
+
+static void	redir_open(t_node *node, t_redir *redir, t_data *data)
 {
 	if (redir->type == REDIR_IN)
 	{
@@ -20,24 +22,30 @@ static void	redir_open(t_node *node, t_redir *redir)
 			close(node->fd_in);
 		node->fd_in = open(redir->name, O_RDONLY);
 		if (node->fd_in < 0)
-			perror("Error: on redirects");//return_erro("Failed to open input file", 1, NULL);
+			perror_set_exit_code(data);
 	}
 	else if (redir->type == REDIR_OUT)
 	{
-		if (node->fd_in != -1)
-			close(node->fd_in);
+		if (node->fd_out != -1)
+			close(node->fd_out);
 		node->fd_out = open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (node->fd_out < 0)
-			perror("Error: on redirects");//return_erro("Failed to open output file", 1, NULL);
+			perror_set_exit_code(data);
 	}
 	else if (redir->type == APPEND)
 	{
-		if (node->fd_in != -1)
-			close(node->fd_in);
+		if (node->fd_out != -1)
+			close(node->fd_out);
 		node->fd_out = open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (node->fd_out < 0)
-			perror("Error: on redirects");//return_erro("Failed to open append file", 1, NULL);
+			perror_set_exit_code(data);
 	}
+}
+
+static void	perror_set_exit_code(t_data *data)
+{
+	data->exit_code = 1;
+	perror("Error: on redirects");
 }
 
 static int	here_doc_handler(t_data *data, char *delimiter)
@@ -50,7 +58,7 @@ static int	here_doc_handler(t_data *data, char *delimiter)
 	delimiter_size = ft_strlen(delimiter);
 	if (pipe(pipefd) == -1)
 	{
-		perror("Error: on redirects");//return_erro("Failed to create heredoc pipe", 1, data);
+		perror("Error: on redirects");
 		return (-1);
 	}
 	while (1)
@@ -82,7 +90,7 @@ void	handle_redirects(t_data *data, t_node *node)
 	while (redir)
 	{
 		if (redir->type != HEREDOC)
-			redir_open(node, redir);
+			redir_open(node, redir, data);
 		else
 			node->fd_in = here_doc_handler(data, redir->name);
 		redir = redir->next;

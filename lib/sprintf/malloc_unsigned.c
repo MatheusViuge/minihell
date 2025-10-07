@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   malloc_unsigned.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/28 20:39:32 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/09/20 16:33:55 by jesda-si         ###   ########.fr       */
+/*   Created: 2024/10/18 16:22:59 by jessica           #+#    #+#             */
+/*   Updated: 2025/08/24 19:12:34 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "ft_sprintf.h"
 
-void	unset(char **args, t_env **head)
+char	*malloc_unsigned(va_list *args)
 {
-	t_env	*node;
-	int		i;
+	unsigned int	nbr;
+	char			*str;
+	char			*first;
+	char			*last;
 
-	i = -1;
-	while (args && args[++i])
+	nbr = (unsigned int)va_arg(*args, unsigned int);
+	if (nbr <= 2147483647)
 	{
-		node = find_env(args[i], *head);
-		if (!node)
-			continue ;
-		node->prev->next = node->next;
-		node->next->prev = node->prev;
-		if (node == *head)
-			*head = node->next;
-		free(node->key);
-		free(node->value);
-		free(node);
+		str = ft_itoa(nbr);
+		return (str);
 	}
+	first = ft_itoa(nbr / 1000);
+	last = ft_itoa(nbr % 1000);
+	if (!first || !last)
+		return (NULL);
+	str = ft_strjoin(first, last);
+	free(first);
+	free(last);
+	return (str);
 }

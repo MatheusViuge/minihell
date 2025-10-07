@@ -6,7 +6,7 @@
 /*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:00:17 by jesda-si          #+#    #+#             */
-/*   Updated: 2025/06/29 15:51:42 by jesda-si         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:58:22 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 static int	atoi_exit(char *str);
 
-bool	ft_exit(char **args, t_data *data)
+void	ft_exit(t_node *ast, t_data *data)
 {
+	int	exit_code;
+
 	ft_putendl_fd("exit", 1);
-	if (len_args(args) > 1)
+	if (len_args(&ast->cmd[1]) > 1)
 	{
 		data->exit_code = 2;
-		ft_putendl_fd("número de argumentos excessivos", 2);
-		return (true);
+		ft_putendl_fd("too many arguments", 2);
+		return ;
 	}
-	if (args)
-		data->exit_code = atoi_exit(*args);
+	if (ast && ast->cmd[1])
+		exit_code = atoi_exit(ast->cmd[1]);
 	else
-		data->exit_code = 0;
-	return (false);
+		exit_code = 0;
+	free_data(data);
+	exit(exit_code);
 }
 
 static int	atoi_exit(char *str)
@@ -50,7 +53,7 @@ static int	atoi_exit(char *str)
 		if (!ft_isdigit(str[i]))
 		{
 			ft_putstr_fd(str, 2);
-			ft_putendl_fd(": requer um argumento númerico", 2);
+			ft_putendl_fd(": numeric argument required", 2);
 			return (2);
 		}
 		nbr = (nbr * 10) + (str[i++] - '0');

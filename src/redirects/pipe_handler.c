@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviana-v <mviana-v@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jesda-si <jesda-si@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 22:13:53 by mviana-v          #+#    #+#             */
-/*   Updated: 2025/08/19 18:40:51 by mviana-v         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:44:08 by jesda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handle_pipes(t_node *node)
 		return ;
 	if (pipe(pipefd) == -1)
 	{
-		perror("Error: pipe_handler");//return_erro("Failed to create pipe", 1, NULL);
+		perror("Error: pipe_handler");
 		return ;
 	}
 	set_fd(pipefd[1], &node->left->fd_out);
