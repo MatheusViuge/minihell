@@ -34,11 +34,9 @@ Execute com:
 ./minishell
 ```
 
-Ou use o target pronto:
+Ou use o target pronto (ele executa `clean` após compilar):
 
-```bash
-make run
-```
+    make run
 
 Outros comandos:
 
